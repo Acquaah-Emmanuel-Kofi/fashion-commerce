@@ -1,5 +1,5 @@
-import pro1 from "../product_1.png";
-import pro2 from "../product_2.png";
+import pro1 from "../../assets/images/product_1.png";
+import pro2 from "../../assets/images/product_2.png";
 import Image from "next/image";
 
 const ProductSlider = () => {
