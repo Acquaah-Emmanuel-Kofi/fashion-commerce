@@ -10,6 +10,7 @@ import Image from "next/image";
 import SearchBar from "../shared/components/Searchbar";
 import { useState } from "react";
 import Breadcrumb from "../shared/components/Breadcrumb";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 const products = [
   {
@@ -48,54 +49,78 @@ const breadcrumbItems = [
 ];
 
 const Products = () => {
+  const [toggledFilters, setToggledFilters] = useState<boolean>(false);
+  const [isHidden, setIsHidden] = useState(false);
   const [selectedProductType, setSelectedProductType] = useState<string | null>(
     null
   );
 
   const handleSizeClick = (size: string) => {
     setSelectedProductType(size);
-    console.log("Selected size:", size);
   };
+
+const handleToggleFilter = () => {
+  if (!toggledFilters) {
+    setToggledFilters(true);
+    setTimeout(() => {
+      setIsHidden(true);
+    }, 300); 
+  } else {
+    setIsHidden(false); 
+    setTimeout(() => {
+      setToggledFilters(false); 
+    }, 0); 
+  }
+};
 
   return (
     <Layout showFooter={false}>
       <div className="bg-white">
         <main className="px-6">
           <section aria-labelledby="products-heading" className="pb-24 pt-6">
+            <div className="w-1/4 flex justify-between items-center mb-6">
+              <h2 className="font-semibold text-lg">Filters</h2>
+              <button type="button" onClick={handleToggleFilter} className="block lg:hidden">
+                {toggledFilters ? <IoIosArrowBack /> : <IoIosArrowForward />}
+              </button>
+            </div>
             <div className="flex">
-              <div className="lg:w-1/4 w-full">
-                <Filters filters={filters} />
+              <div
+                className={`lg:w-1/4 w-full relative transition-transform duration-300 ${
+                  toggledFilters ? "-translate-x-full" : "translate-x-0"
+                } ${isHidden ? "hidden" : ""}`}
+              >
+                <div className="sticky top-6">
+                  <Filters filters={filters} />
+                </div>
               </div>
 
-              <div className="border-2 border-red-500 w-full ml-6">
-                <div>
-                  <div>
-                    <Breadcrumb items={breadcrumbItems} />
+              <div className="w-full lg:ml-6">
+                <div className="w-full flex flex-col items-center justify-center mb-3 lg:block">
+                  <Breadcrumb items={breadcrumbItems} />
+                  <h1 className="font-semibold text-2xl">PRODUCTS</h1>
+                </div>
+
+                <div className="flex flex-col lg:flex-row items-center gap-10">
+                  <div className="lg:w-2/5 w-full">
+                    <SearchBar />
                   </div>
 
-                  <h1 className="font-semibold text-xl">PRODUCTS</h1>
-
-                  <div className="flex items-center gap-10">
-                    <div className="w-2/5">
-                      <SearchBar />
-                    </div>
-
-                    <div className=" w-full flex flex-wrap gap-y-[2px] gap-x-4">
-                      {productTypes.map((type) => (
-                        <button
-                          key={type}
-                          type="button"
-                          className={`flex justify-center items-center text-xs w-24 h-5 border border-[#D9D9D9] p-2.5 hover:bg-[#D9D9D9] ${
-                            selectedProductType === type
-                              ? "bg-black text-white"
-                              : "bg-white text-black"
-                          }`}
-                          onClick={() => handleSizeClick(type)}
-                        >
-                          {type}
-                        </button>
-                      ))}
-                    </div>
+                  <div className="w-full flex flex-wrap gap-y-[2px] gap-x-4">
+                    {productTypes.map((type) => (
+                      <button
+                        key={type}
+                        type="button"
+                        className={`flex justify-center items-center text-xs w-24 h-5 border border-[#D9D9D9] p-2.5 hover:bg-[#D9D9D9] ${
+                          selectedProductType === type
+                            ? "bg-black text-white"
+                            : "bg-white text-black"
+                        }`}
+                        onClick={() => handleSizeClick(type)}
+                      >
+                        {type}
+                      </button>
+                    ))}
                   </div>
                 </div>
 
@@ -104,7 +129,7 @@ const Products = () => {
                     {products.map((product) => (
                       <div
                         key={product.id}
-                        className="w-[170px] lg:w-[300px]  bg-white overflow-hidden"
+                        className="w-[170px] lg:w-[300px] bg-white overflow-hidden"
                       >
                         <div className="relative">
                           <Image
