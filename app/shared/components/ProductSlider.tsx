@@ -52,15 +52,17 @@ const ProductSlider = () => {
             {/* Product Details */}
             <div className="p-2 block lg:hidden">
               <h1 className="text-sm lg:text-lg font-bold">{product.title}</h1>
-              <div className="text-gray-600 text-xs lg:text-sm">
-                {product.description}
+              <div className="flex items-center justify-between">
+                <div className="text-gray-600 text-xs lg:text-sm">
+                  {product.description}
+                </div>
+                <label
+                  htmlFor="price"
+                  className="block mt-2 text-black font-semibold lg:text-lg"
+                >
+                  ${product.price}
+                </label>
               </div>
-              <label
-                htmlFor="price"
-                className="block mt-2 text-black font-semibold lg:text-lg"
-              >
-                ${product.price}
-              </label>
             </div>
           </div>
         ))}
