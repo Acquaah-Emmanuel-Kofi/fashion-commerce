@@ -1,6 +1,6 @@
 const Navbar = () => {
   return (
-    <nav className="flex justify-between items-center px-4 py-4">
+    <nav className="flex justify-between items-center px-4 py-4 sticky top-0 z-50 bg-white">
       <div className="flex items-center">
         <button type="button" className="block">
           <svg
@@ -73,7 +73,7 @@ const Navbar = () => {
           />
         </svg>
       </div>
-      
+
       <div className="flex items-center lg:space-x-4 space-x-2">
         <button
           type="button"
