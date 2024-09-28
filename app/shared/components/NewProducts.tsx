@@ -99,6 +99,20 @@ const NewProducts = () => {
         </div>
       </main>
 
+      <div className="flex items-center justify-center gap-3 mt-6">
+        <button
+          type="button"
+          className="flex justify-between items-center border border-[#D9D9D9] hover:bg-[#D9D9D9] p-2.5"
+        >
+          <IoIosArrowBack />
+        </button>
+        <button
+          type="button"
+          className="flex justify-between items-center border border-[#D9D9D9] hover:bg-[#D9D9D9] p-2.5"
+        >
+          <IoIosArrowForward />
+        </button>
+      </div>
     </section>
   );
 };
