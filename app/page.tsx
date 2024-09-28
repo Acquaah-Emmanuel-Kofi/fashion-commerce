@@ -1,13 +1,9 @@
-import { FaBeer } from "react-icons/fa";
+import Navbar from "./shared/components/Navbar";
 
 export default function Home() {
   return (
-    <div>
-      <h1>Hello World!</h1>
-      <h3>
-        {" "}
-        Lets go for a <FaBeer />?{" "}
-      </h3>
+    <div className="min-h-screen">
+      <Navbar />
     </div>
   );
 }
