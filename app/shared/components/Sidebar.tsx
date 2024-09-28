@@ -60,13 +60,13 @@ const Sidebar = () => {
         <div className="flex items-center gap-3">
           <button
             type="button"
-            className="flex justify-between items-center border border-[#D9D9D9] p-2.5"
+            className="flex justify-between items-center border border-[#D9D9D9] p-2.5 hover:bg-[#D9D9D9]"
           >
             <IoIosArrowBack />
           </button>
           <button
             type="button"
-            className="flex justify-between items-center border border-[#D9D9D9] p-2.5"
+            className="flex justify-between items-center border border-[#D9D9D9] p-2.5 hover:bg-[#D9D9D9]"
           >
             <IoIosArrowForward />
           </button>
