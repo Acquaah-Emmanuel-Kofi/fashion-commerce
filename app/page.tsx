@@ -1,4 +1,5 @@
 import Layout from "./shared/components/Layout";
+import NewProducts from "./shared/components/NewProducts";
 import ProductSlider from "./shared/components/ProductSlider";
 import Sidebar from "./shared/components/Sidebar";
 
@@ -11,6 +12,7 @@ export default function Home() {
           <ProductSlider />
         </div>
       </div>
+      <NewProducts />
     </Layout>
   );
 }
