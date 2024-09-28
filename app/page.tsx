@@ -1,9 +1,9 @@
-import Image from "next/image";
+import Navbar from "./shared/components/Navbar";
 
 export default function Home() {
   return (
-    <div>
-      <h1>Hello World!</h1>
+    <div className="min-h-screen">
+      <Navbar />
     </div>
   );
 }
