@@ -40,7 +40,7 @@ const ProductSlider = () => {
         {products.map((product) => (
           <div
             key={product.id}
-            className="w-[170px] h-[280px] lg:w-[366px] lg:h-[376px] bg-white overflow-hidden border-2 border-red-500"
+            className="w-[170px] h-[280px] lg:w-[366px] lg:h-[376px] bg-white overflow-hidden"
           >
             {/* Product Image */}
             <Image
