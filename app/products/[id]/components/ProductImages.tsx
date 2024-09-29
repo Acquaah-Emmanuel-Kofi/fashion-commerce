@@ -19,11 +19,11 @@ const ProductImages: React.FC<IProductImagesProps> = ({
   };
 
   return (
-    <div className="flex flex-col lg:flex-row lg:w-full">
+    <div className="flex flex-col lg:flex-row lg:w-full max-h-[500px]">
       {/* Main image */}
       <div className="w-full lg:w-3/4 mb-4">
         <Image
-          src={selectedImage} // Display the selected image
+          src={selectedImage} 
           alt="Product Image"
           layout="responsive"
           unoptimized
@@ -34,7 +34,7 @@ const ProductImages: React.FC<IProductImagesProps> = ({
       </div>
 
       {/* Thumbnails */}
-      <div className="w-full lg:w-1/4 lg:flex lg:flex-col lg:items-center">
+      <div className="w-full lg:w-1/4 lg:flex lg:flex-col lg:items-center flex space-x-3 overflow-auto scrollbar-none">
         <div className="flex lg:flex-col gap-2">
           {thumbnails?.map((thumb, idx) => (
             <div
@@ -42,7 +42,7 @@ const ProductImages: React.FC<IProductImagesProps> = ({
               className={`w-14 h-16 cursor-pointer ${
                 selectedImage === thumb ? "opacity-100" : "opacity-50"
               } hover:opacity-100 transition-opacity duration-300`}
-              onClick={() => handleThumbnailClick(thumb)} // Set main image on click
+              onClick={() => handleThumbnailClick(thumb)} 
             >
               <Image
                 src={thumb}
