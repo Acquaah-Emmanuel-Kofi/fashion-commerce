@@ -1,6 +1,14 @@
 import { IFilter } from "@/app/products/interfaces/filters.interface";
 
 export const sizeOptions: string[] = ["2L", "6L", "12L", "18L", "20L", "40L"];
+export const colorOptions: string[] = [
+  "#D9D9D9",
+  "#A9A9A9",
+  "#1E1E1E",
+  "#A6D6CA",
+  "#FFFFFF",
+  "#B9C1E8",
+];
 
 export const filters: IFilter[] = [
   {
