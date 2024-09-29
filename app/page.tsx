@@ -1,17 +1,11 @@
 import Layout from "./shared/components/Layout";
-import NewProducts from "./shared/components/NewProducts";
-import ProductSlider from "./shared/components/ProductSlider";
-import Sidebar from "./shared/components/Sidebar";
+import NewProducts from "./homepage/components/NewProducts";
+import Hero from "./homepage/components/Hero";
 
 export default function Home() {
   return (
     <Layout showFooter={true}>
-      <div className="flex flex-col lg:flex-row">
-        <Sidebar />
-        <div className="w-full lg:w-3/4 p-4 lg:p-6 hidden lg:block">
-          <ProductSlider />
-        </div>
-      </div>
+      <Hero />
       <NewProducts />
     </Layout>
   );
