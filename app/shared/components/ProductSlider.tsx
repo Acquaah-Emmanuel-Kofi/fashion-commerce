@@ -35,12 +35,12 @@ const ProductSlider = () => {
   ];
 
   return (
-    <div className="lg:relative overflow-auto scrollbar-none lg:h-[calc(100vh-130px)] w-full">
-      <div className="flex space-x-4 lg:absolute lg:bottom-3 ">
+    <div className="overflow-auto scrollbar-none w-full flex lg:ml-20 lg:h-[320px]">
+      <div className="flex space-x-4">
         {products.map((product) => (
           <div
             key={product.id}
-            className="w-[170px] h-[280px] lg:w-[366px] lg:h-[376px] bg-white overflow-hidden"
+            className="w-[170px] lg:w-[300px] h-full bg-white overflow-hidden"
           >
             {/* Product Image */}
             <Image
@@ -53,15 +53,13 @@ const ProductSlider = () => {
             <div className="p-2 block lg:hidden">
               <h1 className="text-sm lg:text-lg font-bold">{product.title}</h1>
               <div className="flex items-center justify-between">
-                <div className="text-gray-600 text-xs lg:text-sm">
+                <p className="text-gray-600 text-xs lg:text-sm">
                   {product.description}
-                </div>
-                <label
-                  htmlFor="price"
-                  className="block mt-2 text-black font-semibold lg:text-lg"
-                >
+                </p>
+
+                <p className="block mt-2 text-black font-semibold lg:text-lg">
                   ${product.price}
-                </label>
+                </p>
               </div>
             </div>
           </div>
