@@ -1,5 +1,5 @@
-import pro1 from "../../assets/images/product_1.png";
-import pro2 from "../../assets/images/product_2.png";
+import pro1 from "../../../assets/images/product_1.png";
+import pro2 from "../../../assets/images/product_2.png";
 import ProductCard from "@/app/shared/components/ProductCard";
 
 const products = [

@@ -1,6 +1,6 @@
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import pro1 from "../../assets/images/product_1.png";
-import pro2 from "../../assets/images/product_2.png";
+import pro1 from "../../../assets/images/product_1.png";
+import pro2 from "../../../assets/images/product_2.png";
 import Image from "next/image";
 import { HiPlus } from "react-icons/hi";
 

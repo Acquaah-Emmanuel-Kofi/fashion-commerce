@@ -3,8 +3,8 @@
 import AddToCartButton from "@/app/products/[id]/components/AddToCartButton";
 import ProductImages from "@/app/products/[id]/components/ProductImages";
 import ProductInfo from "@/app/products/[id]/components/ProductInfo";
-import img1 from "@/app/assets/images/product_1.png";
-import img2 from "@/app/assets/images/product_2.png";
+import img1 from "@/assets/images/product_1.png";
+import img2 from "@/assets/images/product_2.png";
 import Layout from "@/app/shared/components/Layout";
 
 const thumbnails = [img1, img2];
