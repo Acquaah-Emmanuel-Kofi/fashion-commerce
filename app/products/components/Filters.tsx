@@ -1,6 +1,5 @@
 import { Fragment, useState } from "react";
 import { IoIosArrowForward, IoIosArrowUp } from "react-icons/io";
-import { sizeOptions } from "@/app/shared/helpers/constants.helper";
 import { IFiltersProps } from "../interfaces/filters.interface";
 import SizeFilter from "@/app/shared/components/SizeFilter";
 
