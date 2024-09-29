@@ -39,17 +39,15 @@ const NewProducts = () => {
   return (
     <section>
       <div className="lg:mt-24 mt-12 px-6">
-        <h1 className="text-5xl font-bold mb-2 lg:mb-4 relative lg:w-1/4">
+        <h1 className="text-5xl font-bold">
           NEW <br /> THIS WEEK{" "}
-          <span className="text-[#000E8A] text-2xl font-bold absolute top-7 lg:right-7 right-10">
-            (50)
-          </span>
+          <sup className="text-[#000E8A] text-2xl font-bold">(50)</sup>
         </h1>
       </div>
 
       <main>
         <div className="flex justify-end items-center mb-5 px-6">
-          <button type="button" className="flex">
+          <button type="button" className="flex text-gray-500">
             See all
           </button>
         </div>
