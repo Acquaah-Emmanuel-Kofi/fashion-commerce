@@ -41,7 +41,7 @@ const Hero = () => {
             <div className="lg:mt-[37%] mt-[5%] flex justify-between gap-5 items-center">
               <button
                 type="button"
-                className="flex justify-between items-center bg-[#D9D9D9] py-2.5 px-4 w-full"
+                className="flex justify-between items-center bg-[#D9D9D9] py-2.5 px-4 lg:w-full w-1/2"
               >
                 Go To Shop
                 <svg
@@ -61,7 +61,7 @@ const Hero = () => {
                 </svg>
               </button>
 
-              <div className="flex items-center gap-3">
+              <div className="items-center gap-3 hidden lg:flex">
                 <button
                   type="button"
                   className="flex justify-between items-center border border-[#D9D9D9] p-2.5 hover:bg-[#D9D9D9]"
