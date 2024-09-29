@@ -54,7 +54,7 @@ const NewProducts = () => {
           </button>
         </div>
 
-        <div className="overflow-auto scrollbar-none w-full pl-6">
+        <div className="overflow-auto scrollbar-none w-full pl-6 flex">
           <div className="flex space-x-4">
             {products.map((product) => (
               <div
