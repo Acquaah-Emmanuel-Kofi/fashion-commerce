@@ -4,8 +4,8 @@ export interface IProduct {
   id: string | number;
   title: string;
   description: string;
-  images: string[] | StaticImageData[];
-  thumbnail: string;
+  images?: string[] | StaticImageData[];
+  thumbnail: string | StaticImageData;
   price: number;
 }
 
