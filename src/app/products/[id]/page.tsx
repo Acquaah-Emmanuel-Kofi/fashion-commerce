@@ -1,7 +1,7 @@
 "use client";
 
-import img1 from "@/assets/images/product_1.png";
-import img2 from "@/assets/images/product_2.png";
+import img1 from "../../../../public/images/product_1.png";
+import img2 from "../../../../public/images/product_2.png";
 import ProductImages from "./components/ProductImages";
 import ProductInfo from "./components/ProductInfo";
 import AddToCartButton from "./components/AddToCartButton";
