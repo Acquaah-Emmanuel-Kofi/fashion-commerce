@@ -21,6 +21,7 @@ const ProductCard: React.FC<IProduct> = ({
           className="w-full max-h-[200px] lg:max-h-[400px] object-cover"
           width={300}
           height={376}
+          priority
         />
       </div>
 
