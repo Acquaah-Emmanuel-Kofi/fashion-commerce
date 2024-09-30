@@ -64,7 +64,7 @@ const Hero = () => {
                 <ProductCard
                   key={product.id}
                   id={product.id}
-                  img={product.img}
+                  thumbnail={product.img}
                   title={product.title}
                   description={product.description}
                   price={product.price}
@@ -122,7 +122,7 @@ const Hero = () => {
               <ProductCard
                 key={product.id}
                 id={product.id}
-                img={product.img}
+                thumbnail={product.img}
                 title={product.title}
                 description={product.description}
                 price={product.price}
