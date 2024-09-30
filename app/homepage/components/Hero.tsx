@@ -24,10 +24,6 @@ const Hero = () => {
     }
   };
 
-  const handleAddToCart = (id: number) => {
-    console.log(`Product ${id} added to cart`);
-  };
-
   return (
     <main className="flex flex-col px-6">
       <div className=" w-full lg:w-1/4">
