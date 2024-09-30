@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const Navbar = () => {
   return (
     <nav className="flex justify-between items-center px-4 py-4 sticky top-0 z-50 bg-white">
@@ -33,19 +35,28 @@ const Navbar = () => {
 
         <ul className="hidden lg:flex space-x-6 ml-4">
           <li>
-            <a href="#" className="text-gray-700 font-medium text-base">
+            <Link
+              href="/"
+              className="text-gray-700 font-medium text-base"
+            >
               Home
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="#" className="text-gray-700 font-medium text-base">
+            <Link
+              href="/products"
+              className="text-gray-700 font-medium text-base"
+            >
               Collections
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="#" className="text-gray-700 font-medium text-base">
+            <Link
+              href="#newProducts"
+              className="text-gray-700 font-medium text-base"
+            >
               New
-            </a>
+            </Link>
           </li>
         </ul>
       </div>
