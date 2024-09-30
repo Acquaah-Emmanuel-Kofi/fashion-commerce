@@ -1,43 +1,35 @@
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import pro1 from "../../../assets/images/product_1.png";
-import pro2 from "../../../assets/images/product_2.png";
+"use client";
+
 import Image from "next/image";
 import { HiPlus } from "react-icons/hi";
+import { dummyProducts } from "@/app/shared/helpers/constants.helper";
+import { useState } from "react";
+import Carousel from "@/app/shared/components/carousel/Carousel";
+import CarouselPrevButton from "@/app/shared/components/carousel/CarouselPrevButton";
+import CarouselNextButton from "@/app/shared/components/carousel/CarouselNextButton";
+import Link from "next/link";
 
 const NewProducts = () => {
-  const products = [
-    {
-      id: 1,
-      img: pro1,
-      title: "Cotton T Shirt",
-      description: "Full Sleeve Zipper",
-      price: 199,
-    },
-    {
-      id: 2,
-      img: pro2,
-      title: "Cotton T Shirt",
-      description: "Full Sleeve Zipper",
-      price: 199,
-    },
-    {
-      id: 3,
-      img: pro1,
-      title: "Cotton T Shirt",
-      description: "Full Sleeve Zipper",
-      price: 199,
-    },
-    {
-      id: 4,
-      img: pro2,
-      title: "Cotton T Shirt",
-      description: "Full Sleeve Zipper",
-      price: 199,
-    },
-  ];
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const handleNext = () => {
+    if (currentIndex < dummyProducts.length - 1) {
+      setCurrentIndex(currentIndex + 1);
+    }
+  };
+
+  const handlePrev = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1);
+    }
+  };
+
+  const handleAddToCart = (id: number) => {
+    console.log(`Product ${id} added to cart`);
+  };
 
   return (
-    <section>
+    <section id="newProducts" className="h-[calc(100vh-80px]">
       <div className="lg:mt-24 mt-12 px-6">
         <h1 className="text-5xl font-bold">
           NEW <br /> THIS WEEK{" "}
@@ -47,28 +39,42 @@ const NewProducts = () => {
 
       <main>
         <div className="flex justify-end items-center mb-5 px-6">
-          <button type="button" className="flex text-gray-500">
-            See all
-          </button>
+          <Link href="/products">
+            <button type="button" className="text-gray-500">
+              See all
+            </button>
+          </Link>
         </div>
 
-        <div className="overflow-auto scrollbar-none w-full pl-6 flex">
-          <div className="flex space-x-4">
-            {products.map((product) => (
-              <div
+        <div>
+          <Carousel
+            visibleImages={4}
+            currentIndex={currentIndex}
+            onNext={handleNext}
+            onPrev={handlePrev}
+          >
+            {dummyProducts.map((product) => (
+              <Link
+                href={`/products/${product.id}`}
                 key={product.id}
-                className="w-[170px] lg:w-[366px]  bg-white overflow-hidden"
+                className="w-full max-h-[250px] lg:max-h-[450px] bg-white overflow-hidden"
               >
                 {/* Product Image */}
                 <div className="relative">
                   <Image
                     src={product.img}
                     alt={product.title}
-                    className="w-full h-[175px] lg:h-[376px] object-cover"
+                    className="w-full max-h-[200px] lg:max-h-[400px] object-cover"
+                    width={300}
+                    height={376}
                   />
                   <button
                     type="button"
-                    className="flex justify-between bg-[#DCDCDC70] text-[#0C0C0C] items-center p-2.5 absolute bottom-1 left-2/4 -translate-x-2/4"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleAddToCart(product.id);
+                    }}
+                    className="flex justify-between bg-[#DCDCDC70] text-[#0C0C0C] hover:bg-black hover:text-white transition items-center p-2.5 absolute bottom-1 left-2/4 -translate-x-2/4"
                   >
                     <HiPlus />
                   </button>
@@ -91,25 +97,18 @@ const NewProducts = () => {
                     </label>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
-          </div>
+          </Carousel>
         </div>
       </main>
 
       <div className="flex items-center justify-center gap-3 mt-6">
-        <button
-          type="button"
-          className="flex justify-between items-center border border-[#D9D9D9] hover:bg-[#D9D9D9] p-2.5"
-        >
-          <IoIosArrowBack />
-        </button>
-        <button
-          type="button"
-          className="flex justify-between items-center border border-[#D9D9D9] hover:bg-[#D9D9D9] p-2.5"
-        >
-          <IoIosArrowForward />
-        </button>
+        <CarouselPrevButton onPrev={handlePrev} disabled={currentIndex === 0} />
+        <CarouselNextButton
+          onNext={handleNext}
+          disabled={currentIndex >= dummyProducts.length - 3}
+        />
       </div>
     </section>
   );

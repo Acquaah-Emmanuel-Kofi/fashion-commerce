@@ -1,14 +1,19 @@
 import Image from "next/image";
 import { IProductProps } from "../interfaces/constants.interface";
+import Link from "next/link";
 
 const ProductCard: React.FC<IProductProps> = ({
   img,
   title,
   description,
   price,
+  id
 }) => {
   return (
-    <div className="w-full max-h-[250px] lg:max-h-[450px] bg-white overflow-hidden">
+    <Link
+      href={`/products/${id}`}
+      className="w-full max-h-[250px] lg:max-h-[450px] bg-white overflow-hidden"
+    >
       <div className="relative">
         <Image
           src={img}
@@ -31,7 +36,7 @@ const ProductCard: React.FC<IProductProps> = ({
           </label>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

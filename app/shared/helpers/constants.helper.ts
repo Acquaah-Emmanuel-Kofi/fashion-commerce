@@ -89,3 +89,38 @@ export const productTypes: string[] = [
   "JEANS",
   "JACKETS",
 ];
+
+
+import productImage1 from "@/assets/images/product_1.png";
+import productImage2 from "@/assets/images/product_2.png"; 
+
+export const dummyProducts = [
+  {
+    id: 1,
+    img: productImage1,
+    title: "Cotton T Shirt",
+    description: "Full Sleeve Zipper",
+    price: 199,
+  },
+  {
+    id: 2,
+    img: productImage2,
+    title: "Cotton T Shirt",
+    description: "Full Sleeve Zipper",
+    price: 199,
+  },
+  {
+    id: 3,
+    img: productImage1,
+    title: "Cotton T Shirt",
+    description: "Full Sleeve Zipper",
+    price: 199,
+  },
+  {
+    id: 4,
+    img: productImage2,
+    title: "Cotton T Shirt",
+    description: "Full Sleeve Zipper",
+    price: 199,
+  },
+];
