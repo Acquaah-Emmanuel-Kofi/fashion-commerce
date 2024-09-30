@@ -1,10 +1,11 @@
-import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { RootState, AppDispatch } from "../redux/store";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState, AppDispatch } from "@/redux/store";
 import { fetchProducts } from "@/redux/features/productSlice";
 
 const useProducts = () => {
   const dispatch: AppDispatch = useDispatch();
+  
   const { products, loading, error } = useSelector(
     (state: RootState) => state.products
   );
