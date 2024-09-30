@@ -29,7 +29,7 @@ const NewProducts = () => {
   };
 
   return (
-    <section>
+    <section id="newProducts" className="h-[calc(100vh-80px]">
       <div className="lg:mt-24 mt-12 px-6">
         <h1 className="text-5xl font-bold">
           NEW <br /> THIS WEEK{" "}
@@ -39,9 +39,11 @@ const NewProducts = () => {
 
       <main>
         <div className="flex justify-end items-center mb-5 px-6">
-          <button type="button" className="flex text-gray-500">
-            See all
-          </button>
+          <Link href="/products">
+            <button type="button" className="text-gray-500">
+              See all
+            </button>
+          </Link>
         </div>
 
         <div>
