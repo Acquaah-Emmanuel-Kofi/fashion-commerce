@@ -16,7 +16,6 @@ const FilterProducts = () => {
           title={product.title}
           description={product.description}
           price={product.price}
-          onAddToCart={handleAddToCart}
         />
       ))}
     </div>

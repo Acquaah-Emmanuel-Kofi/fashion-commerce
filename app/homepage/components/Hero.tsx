@@ -72,7 +72,6 @@ const Hero = () => {
                   title={product.title}
                   description={product.description}
                   price={product.price}
-                  onAddToCart={handleAddToCart}
                 />
               ))}
             </Carousel>
@@ -131,7 +130,6 @@ const Hero = () => {
                 title={product.title}
                 description={product.description}
                 price={product.price}
-                onAddToCart={handleAddToCart}
               />
             ))}
           </Carousel>
