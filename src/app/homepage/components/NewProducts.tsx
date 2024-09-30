@@ -2,12 +2,12 @@
 
 import Image from "next/image";
 import { HiPlus } from "react-icons/hi";
-import { dummyProducts } from "@/app/shared/helpers/constants.helper";
 import { useState } from "react";
+import Link from "next/link";
+import { dummyProducts } from "@/app/shared/helpers/constants.helper";
 import Carousel from "@/app/shared/components/carousel/Carousel";
 import CarouselPrevButton from "@/app/shared/components/carousel/CarouselPrevButton";
 import CarouselNextButton from "@/app/shared/components/carousel/CarouselNextButton";
-import Link from "next/link";
 
 const NewProducts = () => {
   const [currentIndex, setCurrentIndex] = useState(0);

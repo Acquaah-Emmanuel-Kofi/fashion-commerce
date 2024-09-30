@@ -1,10 +1,10 @@
 "use client";
 
-import AddToCartButton from "@/app/products/[id]/components/AddToCartButton";
-import ProductImages from "@/app/products/[id]/components/ProductImages";
-import ProductInfo from "@/app/products/[id]/components/ProductInfo";
 import img1 from "@/assets/images/product_1.png";
 import img2 from "@/assets/images/product_2.png";
+import ProductImages from "./components/ProductImages";
+import ProductInfo from "./components/ProductInfo";
+import AddToCartButton from "./components/AddToCartButton";
 import Layout from "@/app/shared/components/Layout";
 
 const thumbnails = [img1, img2];

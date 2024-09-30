@@ -1,13 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import Layout from "../shared/components/Layout";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import Filters from "./components/Filters";
+import FilterProducts from "./components/FilterProducts";
+import Layout from "../shared/components/Layout";
 import { filters, productTypes } from "../shared/helpers/constants.helper";
 import Breadcrumb from "../shared/components/Breadcrumb";
 import SearchBar from "../shared/components/Searchbar";
-import FilterProducts from "./components/FilterProducts";
+
 
 const breadcrumbItems = [
   { label: "Home", href: "/" },

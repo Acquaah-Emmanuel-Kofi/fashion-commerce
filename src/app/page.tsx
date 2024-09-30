@@ -1,6 +1,6 @@
-import Layout from "./shared/components/Layout";
 import NewProducts from "./homepage/components/NewProducts";
 import Hero from "./homepage/components/Hero";
+import Layout from "./shared/components/Layout";
 
 export default function Home() {
   return (

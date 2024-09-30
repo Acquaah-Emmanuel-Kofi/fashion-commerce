@@ -1,6 +1,7 @@
 import ColorFilter from "@/app/shared/components/ColorFilter";
 import SizeFilter from "@/app/shared/components/SizeFilter";
 
+
 const ProductInfo = () => {
   return (
     <div className="">
@@ -20,7 +21,9 @@ const ProductInfo = () => {
         </div>
       </div>
 
-      <p className="text-slate-400 text-xs my-4">FIND YOUR SIZE | MEASUREMENT GUIDE</p>
+      <p className="text-slate-400 text-xs my-4">
+        FIND YOUR SIZE | MEASUREMENT GUIDE
+      </p>
     </div>
   );
 };

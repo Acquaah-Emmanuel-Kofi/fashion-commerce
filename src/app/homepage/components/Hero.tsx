@@ -1,13 +1,13 @@
 "use client";
 
-import SearchBar from "@/app/shared/components/Searchbar";
 import { useState } from "react";
+import Link from "next/link";
+import { dummyProducts } from "@/app/shared/helpers/constants.helper";
+import SearchBar from "@/app/shared/components/Searchbar";
 import Carousel from "@/app/shared/components/carousel/Carousel";
+import ProductCard from "@/app/shared/components/ProductCard";
 import CarouselPrevButton from "@/app/shared/components/carousel/CarouselPrevButton";
 import CarouselNextButton from "@/app/shared/components/carousel/CarouselNextButton";
-import { dummyProducts } from "@/app/shared/helpers/constants.helper";
-import ProductCard from "@/app/shared/components/ProductCard";
-import Link from "next/link";
 
 const Hero = () => {
   const [currentIndex, setCurrentIndex] = useState(0);

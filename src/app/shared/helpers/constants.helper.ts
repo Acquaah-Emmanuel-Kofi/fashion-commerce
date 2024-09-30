@@ -1,4 +1,6 @@
 import { IFilter } from "@/app/products/interfaces/filters.interface";
+import productImage1 from "../../../../public/images/product_1.png";
+import productImage2 from "../../../../public/images/product_2.png";
 
 export const sizeOptions: string[] = ["2L", "6L", "12L", "18L", "20L", "40L"];
 export const colorOptions: string[] = [
@@ -89,10 +91,6 @@ export const productTypes: string[] = [
   "JEANS",
   "JACKETS",
 ];
-
-
-import productImage1 from "@/assets/images/product_1.png";
-import productImage2 from "@/assets/images/product_2.png"; 
 
 export const dummyProducts = [
   {
