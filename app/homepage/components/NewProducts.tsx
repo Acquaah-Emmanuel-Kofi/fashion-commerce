@@ -1,6 +1,5 @@
 "use client";
 
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import Image from "next/image";
 import { HiPlus } from "react-icons/hi";
 import { dummyProducts } from "@/app/shared/helpers/constants.helper";
@@ -8,6 +7,7 @@ import { useState } from "react";
 import Carousel from "@/app/shared/components/carousel/Carousel";
 import CarouselPrevButton from "@/app/shared/components/carousel/CarouselPrevButton";
 import CarouselNextButton from "@/app/shared/components/carousel/CarouselNextButton";
+import Link from "next/link";
 
 const NewProducts = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -52,7 +52,8 @@ const NewProducts = () => {
             onPrev={handlePrev}
           >
             {dummyProducts.map((product) => (
-              <div
+              <Link
+                href={`/products/${product.id}`}
                 key={product.id}
                 className="w-full max-h-[250px] lg:max-h-[450px] bg-white overflow-hidden"
               >
@@ -67,7 +68,10 @@ const NewProducts = () => {
                   />
                   <button
                     type="button"
-                    onClick={() => handleAddToCart(product.id)}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleAddToCart(product.id);
+                    }}
                     className="flex justify-between bg-[#DCDCDC70] text-[#0C0C0C] hover:bg-black hover:text-white transition items-center p-2.5 absolute bottom-1 left-2/4 -translate-x-2/4"
                   >
                     <HiPlus />
@@ -91,7 +95,7 @@ const NewProducts = () => {
                     </label>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </Carousel>
         </div>
