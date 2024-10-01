@@ -4,7 +4,6 @@ import CartItem from "./components/CartItem";
 import CartSummary from "./components/CartSummary";
 import product1 from "../../../public/images/product_1.png";
 import product2 from "../../../public/images/product_2.png";
-import { useState } from "react";
 import Layout from "../shared/components/Layout";
 import AddToFavoriteButton from "../shared/components/AddToFavoriteButton";
 
