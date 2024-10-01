@@ -10,6 +10,17 @@ export interface IProduct {
   quantity: number;
 }
 
+export interface ICartItem {
+  id: string | number;
+  title: string;
+  description: string;
+  thumbnail: StaticImageData;
+  size: string;
+  color: string;
+  price: number;
+  quantity: number;
+}
+
 export interface IProducts {
   products: IProduct[];
 }
