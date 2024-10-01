@@ -32,7 +32,6 @@ const CartPage = () => {
     },
   ];
 
-  const [cartItems, setCartItems] = useState(initialItems);
 
   return (
     <Layout showFooter={false}>
@@ -48,8 +47,8 @@ const CartPage = () => {
         <div className="flex flex-col lg:flex-row justify-between">
           {/* Cart Items */}
           <div className="flex lg:flex-row flex-col gap-10 border-t-2 border-b-2 border-[#C9C9C9] pt-5 pb-8">
-            {cartItems.length > 0 ? (
-              cartItems.map((item) => (
+            {initialItems.length > 0 ? (
+              initialItems.map((item) => (
                 <CartItem
                   key={item.id}
                   id={item.id}
@@ -66,7 +65,7 @@ const CartPage = () => {
           </div>
 
           {/* Cart Summary */}
-          <CartSummary cartItems={cartItems} />
+          <CartSummary cartItems={initialItems} />
         </div>
 
         {/* Clear Cart Button */}
