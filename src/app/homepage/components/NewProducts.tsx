@@ -57,14 +57,14 @@ const NewProducts = () => {
               <Link
                 href={`/products/${product.id}`}
                 key={product.id}
-                className="w-full max-h-[250px] lg:max-h-[450px] bg-white overflow-hidden"
+                className="w-full max-h-[250px] lg:max-h-[450px] bg-white overflow-hidden relative"
               >
                 {/* Product Image */}
                 <div className="relative">
                   <Image
                     src={product.img}
                     alt={product.title}
-                    className="w-full max-h-[200px] lg:max-h-[400px] object-cover"
+                    className="w-full max-h-[200px] lg:max-h-[400px] object-cover border-2 border-[#D9D9D9]"
                     width={300}
                     height={376}
                   />
@@ -80,21 +80,20 @@ const NewProducts = () => {
                   </button>
                 </div>
 
+                <div className="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-10 transition-opacity duration-200 ease-in-out"></div>
+
                 {/* Product Details */}
                 <div className="p-2">
-                  <h1 className="text-sm lg:text-lg font-bold">
+                  <h1 className="text-gray-600 text-sm lg:text-base line-clamp-1">
                     {product.title}
                   </h1>
                   <div className="flex items-center justify-between">
-                    <div className="text-gray-600 text-xs lg:text-sm">
+                    <p className="text-base lg:text-lg font-bold line-clamp-1">
                       {product.description}
-                    </div>
-                    <label
-                      htmlFor="price"
-                      className="block mt-2 text-black font-semibold lg:text-lg"
-                    >
+                    </p>
+                    <p className="block mt-2 text-black font-semibold lg:text-lg">
                       ${product.price}
-                    </label>
+                    </p>
                   </div>
                 </div>
               </Link>
@@ -107,7 +106,7 @@ const NewProducts = () => {
         <CarouselPrevButton onPrev={handlePrev} disabled={currentIndex === 0} />
         <CarouselNextButton
           onNext={handleNext}
-          disabled={currentIndex >= dummyProducts.length - 3}
+          disabled={currentIndex >= dummyProducts.length - 4}
         />
       </div>
     </section>
