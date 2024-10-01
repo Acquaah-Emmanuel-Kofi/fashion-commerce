@@ -1,7 +1,7 @@
-import { IProduct } from "@/modules/interfaces/products.interface";
+import { ICartItem } from "@/modules/interfaces/products.interface";
 
 interface CartSummaryProps {
-  cartItems: IProduct[];
+  cartItems: ICartItem[];
 }
 
 const CartSummary = ({ cartItems }: CartSummaryProps) => {
@@ -11,7 +11,7 @@ const CartSummary = ({ cartItems }: CartSummaryProps) => {
   );
 
   return (
-    <div className="lg:w-1/3 bg-gray-50 lg:p-6 rounded-lg">
+    <div className="lg:w-1/3 bg-gray-50 lg:p-6">
       <h2 className="text-xl font-bold mb-4 uppercase">Order Summary</h2>
       <div className="flex justify-between mb-2">
         <p>Subtotal</p>

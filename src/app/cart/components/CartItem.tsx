@@ -2,24 +2,33 @@
 
 import Image from "next/image";
 import { FiX } from "react-icons/fi";
-import { IProduct } from "@/modules/interfaces/products.interface";
+import { ICartItem } from "@/modules/interfaces/products.interface";
 import AddToFavoriteButton from "@/app/shared/components/AddToFavoriteButton";
 import { FaMinus, FaPlus } from "react-icons/fa6";
 import Link from "next/link";
 
-const CartItem = ({ thumbnail, title, description, price, id, quantity }: IProduct) => {
+const CartItem = ({
+  thumbnail,
+  title,
+  description,
+  price,
+  id,
+  quantity,
+  size,
+  color,
+}: ICartItem) => {
   return (
-    <Link
-      href={`/products/${id}`}
-      className="flex justify-between relative lg:w-[350px]"
-    >
+    <div className="flex justify-between relative lg:w-[350px]">
       <button
         type="button"
         className="absolute top-0 right-0 text-gray-600 hover:text-gray-800"
       >
         <FiX size={20} />
       </button>
-      <div className="w-[300px] max-h-[350px] lg:max-h-[450px] bg-white overflow-hidden cursor-pointer">
+      <Link
+        href={`/products/${id}`}
+        className="w-[300px] max-h-[350px] lg:max-h-[450px] bg-white overflow-hidden cursor-pointer"
+      >
         <div className="relative">
           <Image
             src={thumbnail}
@@ -47,12 +56,12 @@ const CartItem = ({ thumbnail, title, description, price, id, quantity }: IProdu
             </p>
           </div>
         </div>
-      </div>
+      </Link>
 
       <div className="flex flex-col justify-center gap-4">
-        <p className="text-sm font-bold text-black">L</p>
+        <p className="text-sm font-bold text-black">{size}</p>
 
-        <div className="w-7 h-7" style={{ background: "black" }}></div>
+        <div className="w-7 h-7" style={{ background: color }}></div>
 
         <div className="flex flex-col items-center">
           <button className="w-7 h-7 flex text-xs items-center justify-center border border-[#8A8A8A] hover:bg-gray-200 disabled:text-[#8A8A8A]">
@@ -66,7 +75,7 @@ const CartItem = ({ thumbnail, title, description, price, id, quantity }: IProdu
           </button>
         </div>
       </div>
-    </Link>
+    </div>
   );
 };
 
