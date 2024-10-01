@@ -34,25 +34,6 @@ const CartPage = () => {
 
   const [cartItems, setCartItems] = useState(initialItems);
 
-  // Update item quantity in cart
-  const handleUpdateQuantity = (id: number, newQuantity: number) => {
-    setCartItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === id ? { ...item, quantity: newQuantity } : item
-      )
-    );
-  };
-
-  // Remove individual item from cart
-  const handleRemoveItem = (id: number) => {
-    setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
-  };
-
-  // Remove all items from cart
-  const handleClearCart = () => {
-    setCartItems([]);
-  };
-
   return (
     <Layout showFooter={false}>
       <div className="container mx-auto px-4 py-8">
