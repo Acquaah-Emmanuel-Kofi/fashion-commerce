@@ -7,7 +7,6 @@ export interface IProduct {
   images?: string[] | StaticImageData[];
   thumbnail: string | StaticImageData;
   price: number;
-  quantity: number;
 }
 
 export interface ICartItem {
