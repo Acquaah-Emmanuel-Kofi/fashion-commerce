@@ -1,12 +1,13 @@
 import { StaticImageData } from "next/image";
+import { ICommonResponse } from "./common.interface";
 
 export interface IProduct {
   id: string | number;
-  title: string;
+  name: string;
   description: string;
-  images?: string[] | StaticImageData[];
+  images: string[] | StaticImageData[];
   thumbnail: string | StaticImageData;
-  price: number;
+  price: string;
 }
 
 export interface ICartItem {
@@ -20,6 +21,7 @@ export interface ICartItem {
   quantity: number;
 }
 
-export interface IProducts {
-  products: IProduct[];
+
+export interface IProducts extends ICommonResponse {
+  data: IProduct[];
 }
