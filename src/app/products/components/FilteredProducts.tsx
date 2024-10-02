@@ -9,7 +9,7 @@ const FilteredProducts = () => {
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error}</p>;
 
-    const productList = products.products ?? [];
+    const productList = products ?? [];
     
 
   return (
@@ -19,7 +19,8 @@ const FilteredProducts = () => {
           key={product.id}
           id={product.id}
           thumbnail={product.thumbnail}
-          title={product.title}
+          images={product.images}
+          name={product.name}
           description={product.description}
           price={product.price}
         />
