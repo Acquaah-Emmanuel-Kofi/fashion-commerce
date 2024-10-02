@@ -7,21 +7,14 @@ import Carousel from "@/app/shared/components/carousel/Carousel";
 import ProductCard from "@/app/shared/components/ProductCard";
 import CarouselPrevButton from "@/app/shared/components/carousel/CarouselPrevButton";
 import CarouselNextButton from "@/app/shared/components/carousel/CarouselNextButton";
-import { IProducts } from "@/modules/interfaces/products.interface";
-import { fetchDataFromApi } from "@/services/api";
+import { IProduct } from "@/modules/interfaces/products.interface";
 
-export default async function Hero() {
+interface HeroProps {
+  products: IProduct[];
+}
+
+export default async function Hero({ products }: HeroProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
-
-  const response: IProducts = await fetchDataFromApi(
-    `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/product/new-collection`
-  );
-
-  const products = response.data;
-
-  if (!response) {
-    return <div>Error fetching data.</div>;
-  }
 
   const handleNext = () => {
     if (currentIndex < products.length - 1) {
