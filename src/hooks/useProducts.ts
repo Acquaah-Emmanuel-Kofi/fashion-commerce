@@ -11,10 +11,10 @@ const useProducts = () => {
   );
 
   useEffect(() => {
-    if (products.products.length === 0) {
+    if (products.length === 0) {
       dispatch(fetchProducts());
     }
-  }, [dispatch, products.products.length]);
+  }, [dispatch, products.length]);
 
   return { products, loading, error };
 };

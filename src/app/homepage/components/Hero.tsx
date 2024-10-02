@@ -2,18 +2,22 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { dummyProducts } from "@/app/shared/helpers/constants.helper";
 import SearchBar from "@/app/shared/components/Searchbar";
 import Carousel from "@/app/shared/components/carousel/Carousel";
 import ProductCard from "@/app/shared/components/ProductCard";
 import CarouselPrevButton from "@/app/shared/components/carousel/CarouselPrevButton";
 import CarouselNextButton from "@/app/shared/components/carousel/CarouselNextButton";
+import { IProduct } from "@/modules/interfaces/products.interface";
 
-const Hero = () => {
+interface HeroProps {
+  products: IProduct[];
+}
+
+export default async function Hero({ products }: HeroProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const handleNext = () => {
-    if (currentIndex < dummyProducts.length - 1) {
+    if (currentIndex < products.length - 1) {
       setCurrentIndex(currentIndex + 1);
     }
   };
@@ -60,12 +64,13 @@ const Hero = () => {
               onNext={handleNext}
               onPrev={handlePrev}
             >
-              {dummyProducts.map((product) => (
+              {products?.map((product) => (
                 <ProductCard
                   key={product.id}
                   id={product.id}
-                  thumbnail={product.img}
-                  title={product.title}
+                  thumbnail={product.thumbnail}
+                  images={product.images}
+                  name={product.name}
                   description={product.description}
                   price={product.price}
                 />
@@ -105,7 +110,7 @@ const Hero = () => {
               />
               <CarouselNextButton
                 onNext={handleNext}
-                disabled={currentIndex >= dummyProducts.length - 3}
+                disabled={currentIndex >= products.length - 3}
               />
             </div>
           </div>
@@ -118,14 +123,16 @@ const Hero = () => {
             onNext={handleNext}
             onPrev={handlePrev}
           >
-            {dummyProducts.map((product) => (
+            {products.map((product) => (
               <ProductCard
                 key={product.id}
                 id={product.id}
-                thumbnail={product.img}
-                title={product.title}
+                images={product.images}
+                thumbnail={product.images[0]}
+                name={product.name}
                 description={product.description}
                 price={product.price}
+                showProductDetails={false}
               />
             ))}
           </Carousel>
@@ -133,6 +140,4 @@ const Hero = () => {
       </div>
     </main>
   );
-};
-
-export default Hero;
+}
