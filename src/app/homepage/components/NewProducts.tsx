@@ -4,16 +4,20 @@ import Image from "next/image";
 import { HiPlus } from "react-icons/hi";
 import { useState } from "react";
 import Link from "next/link";
-import { dummyProducts } from "@/app/shared/helpers/constants.helper";
 import Carousel from "@/app/shared/components/carousel/Carousel";
 import CarouselPrevButton from "@/app/shared/components/carousel/CarouselPrevButton";
 import CarouselNextButton from "@/app/shared/components/carousel/CarouselNextButton";
+import { IProduct } from "@/modules/interfaces/products.interface";
 
-const NewProducts = () => {
+interface HeroProps {
+  products: IProduct[];
+}
+
+const NewProducts = ({ products }: HeroProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const handleNext = () => {
-    if (currentIndex < dummyProducts.length - 1) {
+    if (currentIndex < products.length - 1) {
       setCurrentIndex(currentIndex + 1);
     }
   };
@@ -24,9 +28,13 @@ const NewProducts = () => {
     }
   };
 
-  const handleAddToCart = (id: number) => {
+  const handleAddToCart = (id: string) => {
     console.log(`Product ${id} added to cart`);
   };
+
+  if (!products) {
+    return <div>No Products</div>;
+  }
 
   return (
     <section id="newProducts" className="h-[calc(100vh-80px]">
@@ -53,7 +61,7 @@ const NewProducts = () => {
             onNext={handleNext}
             onPrev={handlePrev}
           >
-            {dummyProducts.map((product) => (
+            {products?.map((product) => (
               <Link
                 href={`/products/${product.id}`}
                 key={product.id}
@@ -62,8 +70,8 @@ const NewProducts = () => {
                 {/* Product Image */}
                 <div className="relative">
                   <Image
-                    src={product.img}
-                    alt={product.title}
+                    src={product.thumbnail}
+                    alt={product.name}
                     className="w-full max-h-[200px] lg:max-h-[400px] object-cover border-2 border-[#D9D9D9]"
                     width={300}
                     height={376}
@@ -85,7 +93,7 @@ const NewProducts = () => {
                 {/* Product Details */}
                 <div className="p-2">
                   <h1 className="text-gray-600 text-sm lg:text-base line-clamp-1">
-                    {product.title}
+                    {product.name}
                   </h1>
                   <div className="flex items-center justify-between">
                     <p className="text-base lg:text-lg font-bold line-clamp-1">
@@ -106,7 +114,7 @@ const NewProducts = () => {
         <CarouselPrevButton onPrev={handlePrev} disabled={currentIndex === 0} />
         <CarouselNextButton
           onNext={handleNext}
-          disabled={currentIndex >= dummyProducts.length - 4}
+          disabled={currentIndex >= products.length - 4}
         />
       </div>
     </section>
