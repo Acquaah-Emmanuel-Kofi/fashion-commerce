@@ -70,7 +70,7 @@ const NewProducts = ({ products }: HeroProps) => {
                 {/* Product Image */}
                 <div className="relative">
                   <Image
-                    src={product.thumbnail}
+                    src={product.images[0]}
                     alt={product.name}
                     className="w-full max-h-[200px] lg:max-h-[400px] object-cover border-2 border-[#D9D9D9]"
                     width={300}
