@@ -28,6 +28,10 @@ export default async function Hero({ products }: HeroProps) {
     }
   };
 
+  if (!products) {
+    return <div>No Products</div>;
+  }
+
   return (
     <main className="flex flex-col px-6">
       <div className=" w-full lg:w-1/4">
