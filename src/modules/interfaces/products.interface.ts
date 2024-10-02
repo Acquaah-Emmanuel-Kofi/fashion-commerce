@@ -2,7 +2,7 @@ import { StaticImageData } from "next/image";
 import { ICommonResponse } from "./common.interface";
 
 export interface IProduct {
-  id: string | number;
+  id: string;
   name: string;
   description: string;
   images: string[] | StaticImageData[];
