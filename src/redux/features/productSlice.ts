@@ -2,14 +2,14 @@ import { IProduct, IProducts } from "@/modules/interfaces/products.interface";
 import { fetchDataFromApi } from "@/services/api";
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 
-interface ProductState {
-  products: IProducts;
+type ProductState = {
+  products: IProduct[];
   loading: boolean;
   error: string | null;
-}
+};
 
 const initialState: ProductState = {
-  products: { products: [] },
+  products: [],
   loading: false,
   error: null,
 };
@@ -18,7 +18,7 @@ export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
   async () => {
     const data = await fetchDataFromApi("https://dummyjson.com/products");
-    return data.products;
+    return data;
   }
 );
 
@@ -35,7 +35,7 @@ const productSlice = createSlice({
         fetchProducts.fulfilled,
         (state, action: PayloadAction<IProduct[]>) => {
           state.loading = false;
-          state.products.products = action.payload;
+          state.products = action.payload;
         }
       )
       .addCase(fetchProducts.rejected, (state, action) => {
