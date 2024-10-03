@@ -13,7 +13,7 @@ interface HeroProps {
   products: IProduct[];
 }
 
-export default async function Hero({ products }: HeroProps) {
+export default function Hero({ products }: HeroProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const handleNext = () => {
