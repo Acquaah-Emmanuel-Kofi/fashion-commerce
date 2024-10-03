@@ -4,7 +4,7 @@ import { ICommonResponse } from "./common.interface";
 export interface IProduct {
   id: string;
   name: string;
-  description: string;
+  type: string;
   images: string[] | StaticImageData[];
   thumbnail: string | StaticImageData;
   price: string;
