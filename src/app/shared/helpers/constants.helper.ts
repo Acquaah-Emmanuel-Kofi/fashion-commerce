@@ -92,6 +92,13 @@ export const productTypes: string[] = [
   "JACKETS",
 ];
 
+export const lastYearCollectionsFilterButtons: string[] = [
+  "All",
+  "Men",
+  "Women",
+  "KID",
+];
+
 export const dummyProducts = [
   {
     id: 1,
