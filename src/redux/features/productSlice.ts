@@ -1,4 +1,4 @@
-import { IProduct, IProducts } from "@/modules/interfaces/products.interface";
+import { IProduct } from "@/modules/interfaces/products.interface";
 import { fetchDataFromApi } from "@/services/api";
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 

@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type FilterState = {
   selectedType: string;
-  otherFilters: Record<string, any>;
+  otherFilters: Record<string, string>;
 };
 
 const initialState: FilterState = {
