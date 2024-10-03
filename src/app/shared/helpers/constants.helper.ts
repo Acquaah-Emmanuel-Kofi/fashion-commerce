@@ -1,16 +1,4 @@
 import { IFilter } from "@/app/products/interfaces/filters.interface";
-import productImage1 from "../../../../public/images/product_1.png";
-import productImage2 from "../../../../public/images/product_2.png";
-
-export const sizeOptions: string[] = ["2L", "6L", "12L", "18L", "20L", "40L"];
-export const colorOptions: string[] = [
-  "#D9D9D9",
-  "#A9A9A9",
-  "#1E1E1E",
-  "#A6D6CA",
-  "#FFFFFF",
-  "#B9C1E8",
-];
 
 export const filters: IFilter[] = [
   {
@@ -82,35 +70,4 @@ export const lastYearCollectionsFilterButtons: string[] = [
   "Men",
   "Women",
   "KID",
-];
-
-export const dummyProducts = [
-  {
-    id: 1,
-    img: productImage1,
-    title: "Cotton T Shirt",
-    description: "Full Sleeve Zipper",
-    price: 199,
-  },
-  {
-    id: 2,
-    img: productImage2,
-    title: "Cotton T Shirt",
-    description: "Full Sleeve Zipper",
-    price: 199,
-  },
-  {
-    id: 3,
-    img: productImage1,
-    title: "Cotton T Shirt",
-    description: "Full Sleeve Zipper",
-    price: 199,
-  },
-  {
-    id: 4,
-    img: productImage2,
-    title: "Cotton T Shirt",
-    description: "Full Sleeve Zipper",
-    price: 199,
-  },
 ];
