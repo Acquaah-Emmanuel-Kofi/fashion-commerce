@@ -22,7 +22,7 @@ export default function LastYearCollections() {
     const fetchCollections = async () => {
       setError(false);
       try {
-        const data = await getLastYearCollections(gender === "all", gender);
+        const data = await getLastYearCollections(true, gender);
         setProducts(data);
       } catch (error) {
         setProducts([]);
