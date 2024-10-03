@@ -1,15 +1,21 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import Filters from "./components/Filters";
 import Layout from "../shared/components/Layout";
-import { filters, productTypes } from "../shared/helpers/constants.helper";
+import { filters } from "../shared/helpers/constants.helper";
 import Breadcrumb from "../shared/components/Breadcrumb";
 import SearchBar from "../shared/components/Searchbar";
 import { Provider } from "react-redux";
 import store from "@/redux/store";
 import FilteredProducts from "./components/FilteredProducts";
+import { getButtonTypes } from "@/services/products/api";
+
+type ProductTypes = {
+  id: string;
+  name: string;
+};
 
 const breadcrumbItems = [
   { label: "Home", href: "/" },
@@ -18,12 +24,13 @@ const breadcrumbItems = [
 
 export default function Products() {
   const [toggledFilters, setToggledFilters] = useState<boolean>(false);
+  const [productTypes, setProductTypes] = useState<ProductTypes[]>([]);
   const [isHidden, setIsHidden] = useState(false);
   const [selectedProductType, setSelectedProductType] = useState<string | null>(
     null
   );
 
-  const handleSizeClick = (size: string) => {
+  const handleTypeClick = (size: string) => {
     setSelectedProductType(size);
   };
 
@@ -40,6 +47,19 @@ export default function Products() {
       }, 0);
     }
   };
+
+  useEffect(() => {
+    const fetchButtonTypes = async () => {
+      try {
+        const types = await getButtonTypes();
+        setProductTypes(types);
+      } catch (error) {
+        console.error("Error fetching products button types:", error);
+      }
+    };
+
+    fetchButtonTypes();
+  }, []);
 
   return (
     <Provider store={store}>
@@ -82,16 +102,16 @@ export default function Products() {
                     <div className="w-full h-full grid grid-rows-2 grid-flow-col overflow-x-auto scrollbar-none gap-y-[2px] gap-x-4">
                       {productTypes.map((type) => (
                         <button
-                          key={type}
+                          key={type.id}
                           type="button"
-                          className={`flex justify-center items-center text-xs  w-24 h-5 border border-[#D9D9D9] p-2.5 hover:bg-[#D9D9D9] ${
-                            selectedProductType === type
+                          className={`flex justify-center items-center text-xs  h-5 border border-[#D9D9D9] p-2.5 hover:bg-[#D9D9D9] ${
+                            selectedProductType === type.name
                               ? "bg-black text-white"
                               : "bg-white text-black"
                           }`}
-                          onClick={() => handleSizeClick(type)}
+                          onClick={() => handleTypeClick(type.name)}
                         >
-                          {type}
+                          {type.name}
                         </button>
                       ))}
                     </div>
