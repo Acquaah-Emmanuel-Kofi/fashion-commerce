@@ -1,7 +1,10 @@
 import { Fragment, useState } from "react";
-import { colorOptions } from "../helpers/constants.helper";
 
-const ColorFilter = () => {
+interface IColors {
+  colors: string[]
+}
+
+const ColorFilter: React.FC<IColors> = ({ colors }) => {
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
 
   const handleColorClick = (color: string) => {
@@ -14,13 +17,13 @@ const ColorFilter = () => {
         Color
       </label>
       <div className="flex space-x-1">
-        {colorOptions.map((color) => (
+        {colors?.map((color) => (
           <button
             key={color}
             type="button"
-            style={{ background: color }}
+            style={{ background: color.toLowerCase().trim() }}
             className={`flex justify-center items-center w-11 h-11 p-2.5 hover:bg-[#D9D9D9] ${
-              selectedColor === color
+              selectedColor?.toLowerCase()?.trim() === color?.toLowerCase()?.trim()
                 ? "bg-black text-white"
                 : "bg-white text-black"
             }`}
