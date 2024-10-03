@@ -17,7 +17,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   return (
     <Link
       href={`/products/${id}`}
-      className="relative w-full max-h-[250px] lg:max-h-[450px] bg-white overflow-hidden cursor-pointer"
+      className="relative w-full max-h-[300px] lg:max-h-[500px] bg-white overflow-hidden cursor-pointer"
     >
       {thumbnail && (
         <Image
