@@ -13,7 +13,7 @@ interface HeroProps {
   products: IProduct[];
 }
 
-export default async function Hero({ products }: HeroProps) {
+export default function Hero({ products }: HeroProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const handleNext = () => {
@@ -72,7 +72,7 @@ export default async function Hero({ products }: HeroProps) {
                 <ProductCard
                   key={product.id}
                   id={product.id}
-                  thumbnail={product.thumbnail}
+                  thumbnail={product.images[0]}
                   images={product.images}
                   name={product.name}
                   description={product.description}

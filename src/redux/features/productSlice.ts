@@ -1,4 +1,4 @@
-import { IProduct } from "@/modules/interfaces/products.interface";
+import { IProduct, IProducts } from "@/modules/interfaces/products.interface";
 import { fetchDataFromApi } from "@/services/api";
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 
@@ -17,8 +17,8 @@ const initialState: ProductState = {
 export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
   async () => {
-    const data = await fetchDataFromApi("https://dummyjson.com/products");
-    return data;
+    const response: IProducts = await fetchDataFromApi("/product/all");
+    return response.data; 
   }
 );
 

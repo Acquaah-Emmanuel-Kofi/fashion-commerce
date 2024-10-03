@@ -9,11 +9,11 @@ import CarouselPrevButton from "@/app/shared/components/carousel/CarouselPrevBut
 import CarouselNextButton from "@/app/shared/components/carousel/CarouselNextButton";
 import { IProduct } from "@/modules/interfaces/products.interface";
 
-interface HeroProps {
+interface ThisWeekProductsProps {
   products: IProduct[];
 }
 
-const NewProducts = ({ products }: HeroProps) => {
+export default function NewProducts ({ products }: ThisWeekProductsProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const handleNext = () => {
@@ -32,16 +32,18 @@ const NewProducts = ({ products }: HeroProps) => {
     console.log(`Product ${id} added to cart`);
   };
 
-  if (!products) {
-    return <div>No Products</div>;
-  }
+    if (!products) {
+      return <div>No Products</div>;
+    }
 
   return (
-    <section id="newProducts" className="h-[calc(100vh-80px]">
+    <section id="new-this-week" className="">
       <div className="lg:mt-24 mt-12 px-6">
         <h1 className="text-5xl font-bold">
           NEW <br /> THIS WEEK{" "}
-          <sup className="text-[#000E8A] text-2xl font-bold">(50)</sup>
+          <sup className="text-[#000E8A] text-2xl font-bold">
+            ({products.length})
+          </sup>
         </h1>
       </div>
 
@@ -70,7 +72,7 @@ const NewProducts = ({ products }: HeroProps) => {
                 {/* Product Image */}
                 <div className="relative">
                   <Image
-                    src={product.thumbnail}
+                    src={product.images[0]}
                     alt={product.name}
                     className="w-full max-h-[200px] lg:max-h-[400px] object-cover border-2 border-[#D9D9D9]"
                     width={300}
@@ -120,5 +122,3 @@ const NewProducts = ({ products }: HeroProps) => {
     </section>
   );
 };
-
-export default NewProducts;
