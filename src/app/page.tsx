@@ -1,4 +1,4 @@
-import LandingPage from "./(homepage)/page";
+import LandingPage from "./home/page";
 import Layout from "./shared/components/Layout";
 
 export default async function Home() {
