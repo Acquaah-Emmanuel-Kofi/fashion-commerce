@@ -23,13 +23,13 @@ const ProductImages: React.FC<IProductImagesProps> = ({
       {/* Main image */}
       <div className="w-full lg:w-3/4 mb-4">
         <Image
-          src={selectedImage} 
+          src={selectedImage}
           alt="Product Image"
-          layout="responsive"
           unoptimized
           width={900}
           height={200}
-          className="w-full object-cover"
+          priority
+          className="w-full object-contain max-h-[200px] lg:max-h-[450px]"
         />
       </div>
 
@@ -42,12 +42,14 @@ const ProductImages: React.FC<IProductImagesProps> = ({
               className={`w-14 h-16 cursor-pointer ${
                 selectedImage === thumb ? "opacity-100" : "opacity-50"
               } hover:opacity-100 transition-opacity duration-300`}
-              onClick={() => handleThumbnailClick(thumb)} 
+              onClick={() => handleThumbnailClick(thumb)}
             >
               <Image
                 src={thumb}
                 alt={`Thumbnail ${idx}`}
                 className="w-full h-full object-cover"
+                width={56}
+                height={64}
               />
             </div>
           ))}

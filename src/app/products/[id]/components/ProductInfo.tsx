@@ -1,23 +1,41 @@
 import ColorFilter from "@/app/shared/components/ColorFilter";
 import SizeFilter from "@/app/shared/components/SizeFilter";
+import React from "react";
 
+interface ProductInfo {
+  name: string;
+  price: string;
+  description: string;
+  type: string;
+  colors: string[];
+  sizes: string[];
+}
 
-const ProductInfo = () => {
+const ProductInfo: React.FC<ProductInfo> = ({
+  name,
+  price,
+  description,
+  type,
+  colors,
+  sizes,
+}) => {
   return (
     <div className="">
-      <h1 className="text-sm font-bold">ABSTRACT PRINT SHIRT</h1>
-      <p className="text-sm font-bold">$99</p>
-      <p className="text-gray-600 text-xs">MRP incl. of all taxes</p>
+      <h1 className="text-sm font-bold">{name ?? "Product Name"}</h1>
+
+      <p className="text-sm font-bold">${price ?? "N/A"}</p>
+      <p className="text-gray-600 text-xs">{type ?? "N/A"}</p>
+
       <p className="text-xs font-semibold mt-9">
-        Relaxed-fit shirt. Camp collar and short sleeves. Button-up front.
+        {description ?? "No description available"}
       </p>
 
       <div className="space-y-5 mt-16">
         <div>
-          <ColorFilter />
+          <ColorFilter colors={colors} />
         </div>
         <div>
-          <SizeFilter />
+          <SizeFilter sizes={sizes} />
         </div>
       </div>
 

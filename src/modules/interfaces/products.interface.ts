@@ -25,3 +25,18 @@ export interface ICartItem {
 export interface IProducts extends ICommonResponse {
   data: IProduct[];
 }
+
+export interface IProductDetails extends IProduct {
+  description: string;
+  available: boolean;
+  categories: string[]; 
+  colors: string[];
+  sizes: string[];
+  createdAt: string; 
+  updatedAt: string; 
+}
+
+export interface IProductDetailsResponse extends ICommonResponse {
+  data: IProductDetails[];
+}
+

@@ -15,7 +15,7 @@ const Filters: React.FC<IFiltersProps> = ({ filters }) => {
   return (
     <Fragment>
       <div className="border-b border-dashed border-gray-200 pb-5 mb-2 mt-3">
-        <SizeFilter />
+        <SizeFilter sizes={[]} />
       </div>
       <div className="space-y-2">
         {filters.map((filter) => (
