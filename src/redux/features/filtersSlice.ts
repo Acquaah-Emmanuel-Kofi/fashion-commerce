@@ -17,7 +17,7 @@ const filtersSlice = createSlice({
     setSelectedType: (state, action: PayloadAction<string>) => {
       state.selectedType = action.payload;
     },
-    setOtherFilters: (state, action: PayloadAction<Record<string, any>>) => {
+    setOtherFilters: (state, action: PayloadAction<Record<string, string>>) => {
       state.otherFilters = action.payload;
     },
     clearFilters: (state) => {
