@@ -18,7 +18,7 @@ const FilteredProducts = () => {
         <ProductCard
           key={product.id}
           id={product.id}
-          thumbnail={product.thumbnail}
+          thumbnail={product.images[0]}
           images={product.images}
           name={product.name}
           description={product.description}
