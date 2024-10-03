@@ -41,7 +41,7 @@ const Navbar = () => {
           </li>
           <li>
             <Link
-              href="/products"
+              href="#collections"
               className="text-gray-700 font-medium text-base"
             >
               Collections
@@ -49,7 +49,7 @@ const Navbar = () => {
           </li>
           <li>
             <Link
-              href="#newProducts"
+              href="#new-this-week"
               className="text-gray-700 font-medium text-base"
             >
               New
