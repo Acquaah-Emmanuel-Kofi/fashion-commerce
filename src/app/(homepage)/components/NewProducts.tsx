@@ -32,6 +32,10 @@ export default function NewProducts ({ products }: ThisWeekProductsProps) {
     console.log(`Product ${id} added to cart`);
   };
 
+    if (!products) {
+      return <div>No Products</div>;
+    }
+
   return (
     <section id="new-this-week" className="">
       <div className="lg:mt-24 mt-12 px-6">

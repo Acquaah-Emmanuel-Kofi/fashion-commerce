@@ -38,6 +38,10 @@ export default function LastYearCollections() {
     setGender(newGender);
   };
 
+    if (!products) {
+      return <div>No Products</div>;
+    }
+
   return (
     <section id="collections" className="mt-20 px-6">
       <div>

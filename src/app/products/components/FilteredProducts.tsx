@@ -1,3 +1,5 @@
+"use client";
+
 import ProductCard from "@/app/shared/components/ProductCard";
 import useProducts from "@/hooks/useProducts";
 
@@ -9,6 +11,10 @@ const FilteredProducts = () => {
 
   const productList = products ?? [];
 
+  if (!products) {
+    return <div>No Products</div>;
+  }
+  
   return (
     <div className="grid lg:grid-cols-3 grid-cols-2 gap-10">
       {productList.map((product) => (
