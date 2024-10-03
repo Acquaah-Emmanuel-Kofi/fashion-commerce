@@ -13,6 +13,8 @@ const ProductDetails = ({ params }: { params: { id: string } }) => {
     `/product/${params.id}`
   );
 
+  if (error) return <div>Error occured {error}</div>;
+
   if (loading) return <div>Loading...</div>;
 
   return (
