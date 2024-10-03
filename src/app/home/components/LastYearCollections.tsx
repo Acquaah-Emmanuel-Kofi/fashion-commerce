@@ -35,7 +35,7 @@ export default function LastYearCollections() {
   };
 
   const handleGenderChange = (newGender: string) => {
-    setGender(newGender);
+    setGender(newGender.toLowerCase());
   };
 
     if (!products) {
@@ -84,7 +84,7 @@ export default function LastYearCollections() {
             <Link
               href={`/products/${product.id}`}
               key={product.id}
-              className="w-full max-h-[250px] lg:max-h-[450px] bg-white overflow-hidden relative"
+              className="w-full max-h-[300px] lg:max-h-[500px] bg-white overflow-hidden relative"
             >
               {/* Product Image */}
               <div className="relative">
