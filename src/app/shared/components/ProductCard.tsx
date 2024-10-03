@@ -9,7 +9,7 @@ interface ProductCardProps extends IProduct {
 const ProductCard: React.FC<ProductCardProps> = ({
   thumbnail,
   name,
-  description,
+  type,
   price,
   id,
   showProductDetails = true,
@@ -23,7 +23,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
         <Image
           src={thumbnail}
           alt={name}
-          className="w-full max-h-[200px] lg:max-h-[400px] object-cover border-2 border-[#D9D9D9]"
+          className="w-full max-h-[250px] lg:max-h-[350px] object-cover border-2 border-[#D9D9D9]"
           width={300}
           height={376}
           priority
@@ -35,11 +35,11 @@ const ProductCard: React.FC<ProductCardProps> = ({
       {showProductDetails && (
         <div className="p-2">
           <h1 className="text-gray-600 text-sm lg:text-base line-clamp-1">
-            {name}
+            {type}
           </h1>
           <div className="flex items-center justify-between">
             <p className="text-base lg:text-lg font-bold line-clamp-1">
-              {description}
+              {name}
             </p>
             <p className="block mt-2 text-black font-semibold lg:text-lg">
               ${price}

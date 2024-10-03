@@ -5,7 +5,7 @@ import { fetchProducts } from "@/redux/features/productSlice";
 
 const useProducts = () => {
   const dispatch: AppDispatch = useDispatch();
-  
+
   const { products, loading, error } = useSelector(
     (state: RootState) => state.products
   );
@@ -16,7 +16,11 @@ const useProducts = () => {
     }
   }, [dispatch, products.length]);
 
-  return { products, loading, error };
+  return {
+    products,
+    loading,
+    error,
+  };
 };
 
 export default useProducts;

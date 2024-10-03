@@ -77,21 +77,6 @@ export const filters: IFilter[] = [
   },
 ];
 
-export const productTypes: string[] = [
-  "New",
-  "SHIRTS",
-  "POLO SHIRTS",
-  "SHORTS",
-  "JEANS",
-  "JACKETS",
-  "New",
-  "SHIRTS",
-  "POLO SHIRTS",
-  "SHORTS",
-  "JEANS",
-  "JACKETS",
-];
-
 export const lastYearCollectionsFilterButtons: string[] = [
   "All",
   "Men",
