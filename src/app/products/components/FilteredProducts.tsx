@@ -9,25 +9,25 @@ const FilteredProducts = () => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
 
-  const productList = products ?? [];
-
-  if (!products) {
-    return <div>No Products</div>;
+  if (!products || !Array.isArray(products) || products.length === 0) {
+    return <div>No Products Available</div>;
   }
-  
+
   return (
-    <div className="grid lg:grid-cols-3 grid-cols-2 gap-10">
-      {productList.map((product) => (
-        <ProductCard
-          key={product.id}
-          id={product.id}
-          thumbnail={product.images[0]}
-          images={product.images}
-          name={product.name}
-          description={product.description}
-          price={product.price}
-        />
-      ))}
+    <div>
+      <div className="grid lg:grid-cols-3 grid-cols-2 gap-10">
+        {products.map((product) => (
+          <ProductCard
+            key={product.id}
+            id={product.id}
+            thumbnail={product.images?.[0]}
+            images={product.images}
+            name={product.name}
+            description={product.description}
+            price={product.price}
+          />
+        ))}
+      </div>
     </div>
   );
 };
