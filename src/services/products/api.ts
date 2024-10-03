@@ -28,3 +28,9 @@ export const getLastYearCollections = async (
 
   return response.data;
 };
+
+export const getButtonTypes = async () => {
+  const response: IProducts = await fetchDataFromApi("/product-type");
+
+  return response.data;
+};
