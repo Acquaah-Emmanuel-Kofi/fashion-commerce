@@ -17,7 +17,7 @@ const initialState: ProductState = {
 export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
   async () => {
-    const data = await fetchDataFromApi("https://dummyjson.com/products");
+    const data = await fetchDataFromApi("/product");
     return data;
   }
 );
