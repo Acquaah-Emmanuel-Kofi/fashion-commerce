@@ -12,3 +12,19 @@ export const getNewThisWeek = async () => {
 
   return response.data;
 };
+
+export const getLastYearCollections = async (
+  getAll: boolean,
+  gender: string
+) => {
+  const params = new URLSearchParams({
+    all: getAll.toString(),
+    gender,
+  });
+
+  const response: IProducts = await fetchDataFromApi(
+    `/product/filter/all?${params.toString()}`
+  );
+
+  return response.data;
+};
