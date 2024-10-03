@@ -44,8 +44,8 @@ export default function ProductsPage() {
     <section className="bg-white">
       <main className={`${toggledFilters ? "px-6" : ""}`}>
         <section aria-labelledby="products-heading" className="pb-24 pt-6">
-          <div className="flex justify-between items-center px-6">
-            <div className="lg:w-1/4 w-1/6 flex justify-between items-center mb-6">
+          <div className="flex justify-between items-center px-6 mb-6">
+            <div className="lg:w-1/4 w-1/6 flex justify-between gap-4 items-center">
               <h2 className="font-semibold text-lg">Filters</h2>
               <button
                 type="button"
