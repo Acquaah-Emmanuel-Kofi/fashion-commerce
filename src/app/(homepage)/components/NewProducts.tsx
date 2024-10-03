@@ -13,7 +13,7 @@ interface ThisWeekProductsProps {
   products: IProduct[];
 }
 
-const NewProducts = ({ products }: ThisWeekProductsProps) => {
+export default function NewProducts ({ products }: ThisWeekProductsProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const handleNext = () => {
@@ -118,5 +118,3 @@ const NewProducts = ({ products }: ThisWeekProductsProps) => {
     </section>
   );
 };
-
-export default NewProducts;
