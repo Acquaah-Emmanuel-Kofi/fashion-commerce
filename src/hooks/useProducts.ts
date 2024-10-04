@@ -10,9 +10,13 @@ const useProducts = () => {
     (state: RootState) => state.products
   );
 
+  const refetch = () => {
+    dispatch(fetchProducts());
+  };
+
   useEffect(() => {
     if (products.length === 0) {
-      dispatch(fetchProducts());
+      refetch();
     }
   }, [dispatch, products.length]);
 
@@ -20,6 +24,7 @@ const useProducts = () => {
     products,
     loading,
     error,
+    refetch,
   };
 };
 
