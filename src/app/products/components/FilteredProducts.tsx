@@ -17,11 +17,15 @@ const FilteredProducts = () => {
   const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
 
   useEffect(() => {
+    if (!products || products.length === 0) return;
+
     let filtered = products;
 
     if (keyword) {
-      filtered = filtered.filter((product) =>
-        product.name.toLowerCase().includes(keyword.toLowerCase())
+      filtered = filtered.filter(
+        (product) =>
+          product.name.toLowerCase().includes(keyword.toLowerCase()) ||
+          product.type.toLowerCase().includes(keyword.toLowerCase())
       );
     }
 
@@ -44,6 +48,17 @@ const FilteredProducts = () => {
           .map((_, index) => (
             <ProductCardSkeleton key={index} />
           ))}
+      </div>
+    );
+  }
+
+  if (filteredProducts.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center h-[300px] lg:h-[500px] bg-gray-100 border-2 border-gray-300 rounded-lg">
+        <h2 className="text-xl font-bold">No products available</h2>
+        <p className="text-gray-600">
+          Sorry, we couldn't find any products matching your search criteria.
+        </p>
       </div>
     );
   }
