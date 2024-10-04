@@ -1,9 +1,9 @@
 import { getNewCollections, getNewThisWeek } from "@/services/products/api";
 import Hero from "./components/Hero";
-import NewProducts from "./components/NewProducts";
 import LastYearCollections from "./components/LastYearCollections";
 import { Fragment, Suspense } from "react";
 import ApproachSection from "./components/ApproachSection";
+import NewThisWeek from "./components/NewThisWeek";
 
 export default async function LandingPage() {
   const newCollections = await getNewCollections();
@@ -13,7 +13,7 @@ export default async function LandingPage() {
     <Fragment>
       <Hero products={newCollections} />
       <Suspense fallback={<div>Loading...</div>}>
-        <NewProducts products={newThisWeek} />
+        <NewThisWeek products={newThisWeek} />
       </Suspense>
       <LastYearCollections />
       <ApproachSection />

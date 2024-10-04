@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import SearchBar from "@/app/shared/components/Searchbar";
 import Carousel from "@/app/shared/components/carousel/Carousel";
@@ -15,6 +15,28 @@ interface HeroProps {
 
 export default function Hero({ products }: HeroProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+
+  useEffect(() => {
+    // Only execute this code on the client side
+    if (typeof window !== "undefined") {
+      const checkScreenWidth = () => {
+        const width = window.innerWidth;
+        setIsMobile(width < 768); // Update state based on screen width
+      };
+
+      // Initial check
+      checkScreenWidth();
+
+      // Add event listener for window resize
+      window.addEventListener("resize", checkScreenWidth);
+
+      // Cleanup function to remove event listener when component unmounts
+      return () => {
+        window.removeEventListener("resize", checkScreenWidth);
+      };
+    }
+  }, []);
 
   const handleNext = () => {
     if (currentIndex < products.length - 1) {
@@ -65,7 +87,7 @@ export default function Hero({ products }: HeroProps) {
 
           <div className="block mt-[10%] lg:hidden">
             <Carousel
-              visibleImages={3}
+              visibleImages={isMobile ? 2 : 3}
               currentIndex={currentIndex}
               onNext={handleNext}
               onPrev={handlePrev}
@@ -116,7 +138,7 @@ export default function Hero({ products }: HeroProps) {
               />
               <CarouselNextButton
                 onNext={handleNext}
-                disabled={currentIndex >= products.length - 3}
+                disabled={currentIndex >= products.length - (isMobile ? 2 : 3)}
               />
             </div>
           </div>
