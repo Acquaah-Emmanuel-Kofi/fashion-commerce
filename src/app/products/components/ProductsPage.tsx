@@ -42,9 +42,9 @@ export default function ProductsPage() {
 
   return (
     <section className="bg-white">
-      <main className={`${toggledFilters ? "px-6" : ""}`}>
+      <main>
         <section aria-labelledby="products-heading" className="pb-24 pt-6">
-          <div className="flex justify-between items-center px-6 mb-6">
+          <div className="flex justify-between items-center lg:px-6 px-2 mb-6">
             <div className="lg:w-1/4 w-1/6 flex justify-between gap-4 items-center">
               <h2 className="font-semibold text-lg font-beatrice">Filters</h2>
               <button
@@ -52,7 +52,7 @@ export default function ProductsPage() {
                 onClick={handleToggleFilter}
                 className="block lg:hidden"
               >
-                {toggledFilters ? <IoIosArrowBack /> : <IoIosArrowForward />}
+                {toggledFilters ? <IoIosArrowForward /> : <IoIosArrowBack />}
               </button>
             </div>
             <div>
@@ -62,7 +62,7 @@ export default function ProductsPage() {
             </div>
           </div>
 
-          <div className="flex pl-6">
+          <div className="flex w-[95%] lg:w-full mx-auto lg:pl-6">
             <div
               className={`lg:w-1/4 w-full relative transition-transform duration-300 ${
                 toggledFilters ? "-translate-x-full" : "translate-x-0"
@@ -73,7 +73,7 @@ export default function ProductsPage() {
               </div>
             </div>
 
-            <div className="w-full lg:ml-6 overflow-hidden">
+            <div className="w-full lg:ml-6 overflow-hidden ">
               <div className="w-full flex flex-col items-center justify-center mb-3 lg:block">
                 <Breadcrumb items={breadcrumbItems} />
                 <h1 className="font-semibold text-2xl font-beatrice mt-3">
