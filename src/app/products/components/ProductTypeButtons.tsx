@@ -31,12 +31,12 @@ const ProductTypeButtons = () => {
   };
 
   return (
-    <div className="w-full h-full grid grid-rows-2 grid-flow-col overflow-x-auto scrollbar-none gap-y-[2px] gap-x-4">
+    <div className="w-full h-full grid xs:grid-rows-1 lg:grid-rows-2 grid-flow-col overflow-x-auto scrollbar-none gap-y-[2px] gap-x-4">
       {productTypes.map((type) => (
         <button
           key={type.id}
           type="button"
-          className={`flex justify-center items-center text-xs h-5 bg-white border border-[#D9D9D9] p-2.5 hover:bg-[#D9D9D9] ${
+          className={`flex justify-center items-center text-xs w-[130px] lg:w-auto h-5 bg-white border border-[#D9D9D9] p-2.5 hover:bg-[#D9D9D9] ${
             selectedProductType === type.name ? "text-black" : "text-[#5E5E5E]"
           }`}
           onClick={() => handleProductTypeChange(type.name)}
