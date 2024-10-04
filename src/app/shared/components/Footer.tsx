@@ -44,7 +44,7 @@ export default function Footer() {
           </h2>
           <div className="flex flex-col lg:flex-row items-center gap-4">
             <h1 className="text-7xl tracking-wider font-extrabold text-black">
-              VR <br />
+              <span className="text-gray-200">VR</span> <br />
               XIV <br />
               QR
             </h1>
