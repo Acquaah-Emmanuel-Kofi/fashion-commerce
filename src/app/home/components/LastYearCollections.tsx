@@ -120,10 +120,10 @@ export default function LastYearCollections() {
                       {product.type}
                     </h1>
                     <div className="flex items-center justify-between">
-                      <p className="text-base lg:text-lg font-semibold line-clamp-1 font-beatrice">
+                      <p className="text-base lg:text-lg font-medium line-clamp-1 font-beatrice">
                         {product.name}
                       </p>
-                      <p className="block mt-2 text-black font-semibold lg:text-lg">
+                      <p className="block mt-2 text-black font-medium lg:text-lg">
                         ${product.price}
                       </p>
                     </div>
