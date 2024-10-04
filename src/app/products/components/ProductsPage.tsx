@@ -10,6 +10,7 @@ import ProductTypeButtons from "./ProductTypeButtons";
 import FilteredProducts from "./FilteredProducts";
 import { useAppDispatch } from "@/redux/store";
 import { clearFilters } from "@/redux/features/filtersSlice";
+import { MdClear } from "react-icons/md";
 
 const breadcrumbItems = [
   { label: "Home", href: "/" },
@@ -56,7 +57,8 @@ export default function ProductsPage() {
               </button>
             </div>
             <div>
-              <button type="button" onClick={() => handleClearFilters()}>
+              <button type="button" onClick={() => handleClearFilters()} className="flex items-center gap-1">
+                <MdClear size={25} />
                 Clear filters
               </button>
             </div>
