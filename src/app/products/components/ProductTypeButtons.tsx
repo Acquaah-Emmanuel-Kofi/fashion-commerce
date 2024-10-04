@@ -6,7 +6,6 @@ import { useAppDispatch } from "@/redux/store";
 import { getButtonTypes } from "@/services/products/api";
 import { useEffect, useState } from "react";
 
-
 const ProductTypeButtons = () => {
   const [productTypes, setProductTypes] = useState<ProductTypeButton[]>([]);
 
@@ -37,10 +36,8 @@ const ProductTypeButtons = () => {
         <button
           key={type.id}
           type="button"
-          className={`flex justify-center items-center text-xs h-5 border border-[#D9D9D9] p-2.5 hover:bg-[#D9D9D9] ${
-            selectedProductType === type.name
-              ? "bg-black text-white"
-              : "bg-white text-black"
+          className={`flex justify-center items-center text-xs h-5 bg-white border border-[#D9D9D9] p-2.5 hover:bg-[#D9D9D9] ${
+            selectedProductType === type.name ? "text-black" : "text-[#5E5E5E]"
           }`}
           onClick={() => handleProductTypeChange(type.name)}
         >
