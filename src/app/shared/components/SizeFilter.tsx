@@ -1,13 +1,15 @@
 import { Fragment, useState } from "react";
 
-interface ISizes {
+interface SizeFilterProps {
   sizes: string[];
+  onSelect: (size: string) => void; 
 }
 
-const SizeFilter: React.FC<ISizes> = ({ sizes }) => {
+const SizeFilter: React.FC<SizeFilterProps> = ({ sizes, onSelect }) => {
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
 
   const handleSizeClick = (size: string) => {
+    onSelect(size);
     setSelectedSize(size);
   };
 
