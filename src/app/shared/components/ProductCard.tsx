@@ -17,7 +17,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   return (
     <Link
       href={`/products/${id}`}
-      className="relative w-full max-h-[300px] lg:max-h-[500px] bg-white overflow-hidden cursor-pointer"
+      className="w-full max-h-[300px] lg:max-h-[500px] bg-white overflow-hidden cursor-pointer hover:shadow-lg"
     >
       {thumbnail && (
         <Image
@@ -29,8 +29,6 @@ const ProductCard: React.FC<ProductCardProps> = ({
           priority
         />
       )}
-
-      <div className="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-10 transition-opacity duration-200 ease-in-out"></div>
 
       {showProductDetails && (
         <div className="p-2">
