@@ -20,7 +20,7 @@ const ProductInfo: React.FC<IProducts> = ({ products }) => {
         ...products,
         size: selectedSize,
         color: selectedColor,
-        quantity: 0,
+        quantity: 1,
       };
       addItem(cartItem);
     } else {
