@@ -18,6 +18,7 @@ export default function LastYearCollections() {
   const [products, setProducts] = useState<IProduct[]>([]);
   const [gender, setGender] = useState<string>("all");
   const [error, setError] = useState<boolean>(false);
+  const [visibleCount, setVisibleCount] = useState<number>(3); // Show 3 products initially
 
   useEffect(() => {
     const fetchCollections = async () => {
@@ -41,10 +42,15 @@ export default function LastYearCollections() {
 
   const handleGenderChange = (newGender: string) => {
     setGender(newGender.toLowerCase());
+    setVisibleCount(3); // Reset visible count when changing gender
+  };
+
+  const handleLoadMore = () => {
+    setVisibleCount((prevCount) => prevCount + 3); // Load 3 more products on click
   };
 
   return (
-    <section id="collections" className="mt-20 px-6">
+    <section id="collections" className="my-20 px-6">
       <div>
         <h1 className="text-5xl font-bold font-beatrice">
           XIV <br /> COLLECTIONS <br /> {lastYear.toString().slice(-2)} -{" "}
@@ -87,11 +93,18 @@ export default function LastYearCollections() {
         ) : (
           <div className="grid lg:grid-cols-3 grid-cols-1 gap-10">
             {products ? (
-              products.slice(0, 3).map((product) => (
+              products.slice(0, visibleCount).map((product, index) => (
                 <Link
                   href={`/products/${product.id}`}
                   key={product.id}
-                  className="w-full bg-white overflow-hidden hover:shadow-lg"
+                  className={`w-full bg-white overflow-hidden hover:shadow-lg transition-opacity duration-700 ease-in-out ${
+                    index >= visibleCount - 3 && index < visibleCount
+                      ? "opacity-100 translate-y-10"
+                      : "opacity-100 translate-y-0"
+                  }`}
+                  style={{
+                    transition: "opacity 0.7s ease, transform 0.7s ease",
+                  }}
                 >
                   {/* Product Image */}
                   <div className="relative">
@@ -140,17 +153,21 @@ export default function LastYearCollections() {
           </div>
         )}
 
-        <div className="flex justify-center items-center w-full mt-6">
-          <button
-            type="button"
-            className="flex flex-col justify-center items-center gap-1"
-          >
-            <span className="text-[#8A8A8A] text-base">More</span>
-            <span className="animate-bounce">
-              <IoChevronDownOutline size={25} />
-            </span>
-          </button>
-        </div>
+        {/* "More" Button */}
+        {visibleCount < products.length && ( // Only show button if there are more products to show
+          <div className="flex justify-center items-center w-full mt-[15%] lg:mt-[5%]">
+            <button
+              type="button"
+              onClick={handleLoadMore}
+              className="flex flex-col justify-center items-center gap-1"
+            >
+              <span className="text-[#8A8A8A] text-base">More</span>
+              <span className="animate-bounce">
+                <IoChevronDownOutline size={25} />
+              </span>
+            </button>
+          </div>
+        )}
       </main>
     </section>
   );
