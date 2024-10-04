@@ -28,10 +28,21 @@ const cartSlice = createSlice({
 
       state.totalAmount += parseFloat(newItem.price) * newItem.quantity;
     },
+    removeFromCart: (state, action: PayloadAction<string>) => {
+      const id = action.payload;
+      const itemToRemove = state.items.find((item) => item.id === id);
+
+      if (itemToRemove) {
+        state.totalAmount -=
+          parseFloat(itemToRemove.price) * itemToRemove.quantity;
+        state.items = state.items.filter((item) => item.id !== id);
+      }
+    },
+
   },
 });
 
-export const { addToCart } =
+export const { addToCart, removeFromCart } =
   cartSlice.actions;
 
 export default cartSlice.reducer;
