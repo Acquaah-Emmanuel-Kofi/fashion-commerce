@@ -81,7 +81,7 @@ const FilteredProducts = () => {
   const displayProducts =
     filteredProducts.length > 0 ? filteredProducts : products;
 
-  if (!products || products.length === 0) {
+  if (!displayProducts || displayProducts.length === 0) {
     return (
       <NotAvailable
         title="There Is No Products"
