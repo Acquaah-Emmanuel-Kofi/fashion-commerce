@@ -3,6 +3,7 @@ import Hero from "./components/Hero";
 import NewProducts from "./components/NewProducts";
 import LastYearCollections from "./components/LastYearCollections";
 import { Fragment, Suspense } from "react";
+import ApproachSection from "./components/ApproachSection";
 
 export default async function LandingPage() {
   const newCollections = await getNewCollections();
@@ -15,6 +16,7 @@ export default async function LandingPage() {
         <NewProducts products={newThisWeek} />
       </Suspense>
       <LastYearCollections />
+      <ApproachSection />
     </Fragment>
   );
 }
