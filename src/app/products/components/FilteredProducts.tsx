@@ -23,7 +23,7 @@ const FilteredProducts = () => {
 
     if (keyword) {
       filtered = filtered.filter(
-        (product) =>
+        (product: IProduct) =>
           product.name.toLowerCase().includes(keyword.toLowerCase()) ||
           product.type.toLowerCase().includes(keyword.toLowerCase())
       );
@@ -31,7 +31,7 @@ const FilteredProducts = () => {
 
     if (selectedType) {
       filtered = filtered.filter(
-        (product) =>
+        (product: IProduct) =>
           product.type.toLowerCase().trim() ===
           selectedType.toLowerCase().trim()
       );
