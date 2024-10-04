@@ -10,27 +10,30 @@ import AddToFavoriteButton from "../shared/components/AddToFavoriteButton";
 const CartPage = () => {
   const initialItems = [
     {
-      id: 1,
-      title: "T Shirt",
+      id: "1",
+      name: "T Sasdhirt",
       description: "Abstract Print T-Shirt",
       thumbnail: product1,
+      images: [product1, product2],
       size: "M",
       color: "red",
-      price: 50,
+      price: "50",
       quantity: 1,
+      type: "World",
     },
     {
-      id: 2,
-      title: "T Shirt",
+      id: "2",
+      name: "T Shirt",
       description: "Embroidered Shirt",
       thumbnail: product2,
+      images: [product1, product2],
       size: "L",
       color: "green",
-      price: 70,
+      price: "70",
       quantity: 2,
+      type: "Hello",
     },
   ];
-
 
   return (
     <Layout showFooter={false}>
@@ -51,13 +54,15 @@ const CartPage = () => {
                 <CartItem
                   key={item.id}
                   id={item.id}
-                  thumbnail={item.thumbnail!}
-                  title={item.title}
+                  thumbnail={item.images[0]}
+                  images={item.images}
+                  name={item.name}
                   description={item.description}
                   price={item.price}
                   quantity={item.quantity}
                   size={item.size}
                   color={item.color}
+                  type={item.type}
                 />
               ))
             ) : (

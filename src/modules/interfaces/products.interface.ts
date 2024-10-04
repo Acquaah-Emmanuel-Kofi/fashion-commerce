@@ -10,14 +10,10 @@ export interface IProduct {
   price: string;
 }
 
-export interface ICartItem {
-  id: string | number;
-  title: string;
+export interface ICartItem extends IProduct {
   description: string;
-  thumbnail: StaticImageData;
   size: string;
   color: string;
-  price: number;
   quantity: number;
 }
 

@@ -14,9 +14,7 @@ export default async function LandingPage() {
       <Suspense fallback={<div>Loading...</div>}>
         <NewProducts products={newThisWeek} />
       </Suspense>
-      <Suspense fallback={<div>Loading...</div>}>
-        <LastYearCollections />
-      </Suspense>
+      <LastYearCollections />
     </Fragment>
   );
 }

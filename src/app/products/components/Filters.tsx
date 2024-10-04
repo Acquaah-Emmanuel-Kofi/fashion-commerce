@@ -26,7 +26,7 @@ const Filters: React.FC<IFiltersProps> = ({ filters }) => {
             <button
               type="button"
               onClick={() => toggleFilter(filter.id)}
-              className="flex justify-between w-full items-center text-gray-700 font-bold py-3"
+              className="flex justify-between w-full items-center text-gray-700 font-bold py-3 font-beatrice"
             >
               {filter.name}
               {openFilters[filter.id] ? (
@@ -49,11 +49,11 @@ const Filters: React.FC<IFiltersProps> = ({ filters }) => {
                       name={`${filter.id}[]`}
                       type="checkbox"
                       defaultChecked={option.checked}
-                      className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                      className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 accent-black"
                     />
                     <label
                       htmlFor={`filter-${filter.id}-${idx}`}
-                      className="ml-3 text-sm text-gray-600"
+                      className="ml-3 text-sm text-gray-600 font-beatrice"
                     >
                       {option.label}
                     </label>

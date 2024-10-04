@@ -34,20 +34,20 @@ export default function Hero({ products }: HeroProps) {
 
   return (
     <main className="flex flex-col px-6">
-      <div className=" w-full lg:w-1/4">
+      <div className=" w-full lg:w-1/4 font-beatrice">
         <ul>
           <li>
-            <h3 className="text-gray-700 uppercase">Men</h3>
+            <h3 className="text-gray-700">MEN</h3>
           </li>
           <li>
-            <h3 className="text-gray-700 uppercase">Women</h3>
+            <h3 className="text-gray-700">WOMEN</h3>
           </li>
           <li>
-            <h3 className="text-gray-700 uppercase">Kids</h3>
+            <h3 className="text-gray-700">KIDS</h3>
           </li>
         </ul>
 
-        <div className="mt-6">
+        <div className="mt-4">
           <SearchBar />
         </div>
       </div>
@@ -55,8 +55,10 @@ export default function Hero({ products }: HeroProps) {
       <div className="flex items-end">
         <div className="w-full lg:w-1/4">
           <div className="lg:mt-18 mt-[20%]">
-            <h1 className="text-5xl font-bold mb-2 lg:mb-4">NEW COLLECTION</h1>
-            <p>
+            <h1 className="text-5xl font-bold lg:mb-4 font-beatrice">
+              NEW COLLECTION
+            </h1>
+            <p className="font-beatrice text-base">
               Summer <br /> 2024
             </p>
           </div>
@@ -86,7 +88,7 @@ export default function Hero({ products }: HeroProps) {
             <Link href="/products" className="lg:w-full w-1/2">
               <button
                 type="button"
-                className="flex justify-between items-center bg-[#D9D9D9] py-2.5 px-4 w-full"
+                className="flex justify-between items-center bg-[#D9D9D9] py-2.5 px-4 w-full font-beatrice text-sm lg:text-base"
               >
                 Go To Shop
                 <svg

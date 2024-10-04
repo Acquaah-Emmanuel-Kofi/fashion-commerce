@@ -46,7 +46,7 @@ export default function LastYearCollections() {
   return (
     <section id="collections" className="mt-20 px-6">
       <div>
-        <h1 className="text-5xl font-bold">
+        <h1 className="text-5xl font-bold font-beatrice">
           XIV <br /> COLLECTIONS <br /> {lastYear.toString().slice(-2)} -{" "}
           {year.toString().slice(-2)}
         </h1>
@@ -85,20 +85,20 @@ export default function LastYearCollections() {
             Error fetching {gender} collections
           </div>
         ) : (
-          <div className="grid lg:grid-cols-3 grid-cols-1 gap-4">
+          <div className="grid lg:grid-cols-3 grid-cols-1 gap-10">
             {products ? (
               products.slice(0, 3).map((product) => (
                 <Link
                   href={`/products/${product.id}`}
                   key={product.id}
-                  className="w-full max-h-[300px] lg:max-h-[500px] bg-white overflow-hidden hover:shadow-lg"
+                  className="w-full bg-white overflow-hidden hover:shadow-lg"
                 >
                   {/* Product Image */}
                   <div className="relative">
                     <Image
                       src={product.images[0]}
                       alt={product.name}
-                      className="w-full max-h-[200px] lg:max-h-[400px] object-cover border-2 border-[#D9D9D9]"
+                      className="w-full max-h-[250px] lg:max-h-[350px] object-cover border-2 border-[#D9D9D9]"
                       width={300}
                       height={376}
                     />
@@ -116,14 +116,14 @@ export default function LastYearCollections() {
 
                   {/* Product Details */}
                   <div className="p-2">
-                    <h1 className="text-gray-600 text-sm lg:text-base line-clamp-1">
+                    <h1 className="text-gray-600 text-sm lg:text-base line-clamp-1 font-beatrice">
                       {product.type}
                     </h1>
                     <div className="flex items-center justify-between">
-                      <p className="text-base lg:text-lg font-bold line-clamp-1">
+                      <p className="text-base lg:text-lg font-medium line-clamp-1 font-beatrice">
                         {product.name}
                       </p>
-                      <p className="block mt-2 text-black font-semibold lg:text-lg">
+                      <p className="block mt-2 text-black font-medium lg:text-lg">
                         ${product.price}
                       </p>
                     </div>

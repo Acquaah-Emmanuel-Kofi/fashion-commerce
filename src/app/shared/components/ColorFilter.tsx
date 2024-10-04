@@ -13,7 +13,7 @@ const ColorFilter: React.FC<IColors> = ({ colors }) => {
 
   return (
     <Fragment>
-      <label htmlFor="color" className="font-semibold">
+      <label htmlFor="color" className="font-medium font-beatrice">
         Color
       </label>
       <div className="flex space-x-1">
@@ -23,7 +23,8 @@ const ColorFilter: React.FC<IColors> = ({ colors }) => {
             type="button"
             style={{ background: color.toLowerCase().trim() }}
             className={`flex justify-center items-center w-11 h-11 p-2.5 hover:bg-[#D9D9D9] ${
-              selectedColor?.toLowerCase()?.trim() === color?.toLowerCase()?.trim()
+              selectedColor?.toLowerCase()?.trim() ===
+              color?.toLowerCase()?.trim()
                 ? "bg-black text-white"
                 : "bg-white text-black"
             }`}

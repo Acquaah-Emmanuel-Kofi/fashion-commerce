@@ -4,14 +4,43 @@ import "./globals.css";
 import StoreProvider from "./shared/components/StoreProvider";
 
 const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
+  src: "../../public/fonts/GeistVF.woff",
   variable: "--font-geist-sans",
   weight: "100 900",
 });
+
 const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
+  src: "../../public/fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
   weight: "100 900",
+});
+
+const beatriceDeck = localFont({
+  src: [
+    {
+      path: "../../public/fonts/BeatriceDeck-Bold.woff",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/BeatriceDeck-Regular.woff",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/BeatriceDeck-Medium.woff",
+      weight: "300",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/BeatriceDeck-Light.woff",
+      weight: "200",
+      style: "normal",
+    },
+  ],
+  variable: "--font-beatrice",
+  weight: "100 900",
+  preload: true,
 });
 
 export const metadata: Metadata = {
@@ -28,7 +57,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${beatriceDeck.variable} antialiased`}
       >
         <StoreProvider>{children}</StoreProvider>
       </body>
