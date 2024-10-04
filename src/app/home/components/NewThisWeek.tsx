@@ -13,7 +13,7 @@ interface ThisWeekProductsProps {
   products: IProduct[];
 }
 
-export default function NewProducts({ products }: ThisWeekProductsProps) {
+export default function NewThisWeek({ products }: ThisWeekProductsProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isMobile, setIsMobile] = useState<boolean>(false);
 
