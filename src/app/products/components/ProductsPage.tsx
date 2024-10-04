@@ -89,7 +89,7 @@ export default function ProductsPage() {
                 <ProductTypeButtons />
               </div>
 
-              <div className="mt-6 w-[95%]">
+              <div className="mt-6 lg:w-[95%]">
                 <FilteredProducts />
               </div>
             </div>

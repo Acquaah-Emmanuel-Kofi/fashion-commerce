@@ -38,7 +38,7 @@ const FilteredProducts = () => {
 
   if (loading) {
     return (
-      <div className="grid lg:grid-cols-3 grid-cols-2 gap-10">
+      <div className="grid grid-cols-1 lg:grid-cols-3 lg:gap-10 gap-5">
         {Array(6)
           .fill(0)
           .map((_, index) => (
@@ -63,7 +63,7 @@ const FilteredProducts = () => {
   }
 
   return (
-    <div className="grid lg:grid-cols-3 grid-cols-2 gap-10">
+    <div className="grid grid-cols-2 lg:grid-cols-3 lg:gap-10 gap-5">
       {displayProducts.map((product: IProduct) => (
         <ProductCard
           key={product.id}
