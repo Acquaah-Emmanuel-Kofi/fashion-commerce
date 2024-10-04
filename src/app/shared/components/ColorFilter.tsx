@@ -1,13 +1,15 @@
 import { Fragment, useState } from "react";
 
-interface IColors {
-  colors: string[]
+interface ColorFilterProps {
+  colors: string[];
+  onSelect: (color: string) => void;
 }
 
-const ColorFilter: React.FC<IColors> = ({ colors }) => {
+const ColorFilter: React.FC<ColorFilterProps> = ({ colors, onSelect }) => {
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
 
   const handleColorClick = (color: string) => {
+    onSelect(color);
     setSelectedColor(color);
   };
 
