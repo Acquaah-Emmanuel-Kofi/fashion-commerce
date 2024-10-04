@@ -46,7 +46,7 @@ export default function LastYearCollections() {
   return (
     <section id="collections" className="mt-20 px-6">
       <div>
-        <h1 className="text-5xl font-bold">
+        <h1 className="text-5xl font-bold font-beatrice">
           XIV <br /> COLLECTIONS <br /> {lastYear.toString().slice(-2)} -{" "}
           {year.toString().slice(-2)}
         </h1>
@@ -116,11 +116,11 @@ export default function LastYearCollections() {
 
                   {/* Product Details */}
                   <div className="p-2">
-                    <h1 className="text-gray-600 text-sm lg:text-base line-clamp-1">
+                    <h1 className="text-gray-600 text-sm lg:text-base line-clamp-1 font-beatrice">
                       {product.type}
                     </h1>
                     <div className="flex items-center justify-between">
-                      <p className="text-base lg:text-lg font-bold line-clamp-1">
+                      <p className="text-base lg:text-lg font-semibold line-clamp-1 font-beatrice">
                         {product.name}
                       </p>
                       <p className="block mt-2 text-black font-semibold lg:text-lg">
