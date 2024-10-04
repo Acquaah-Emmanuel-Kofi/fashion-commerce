@@ -13,7 +13,7 @@ interface ThisWeekProductsProps {
   products: IProduct[];
 }
 
-export default function NewProducts ({ products }: ThisWeekProductsProps) {
+export default function NewProducts({ products }: ThisWeekProductsProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const handleNext = () => {
@@ -32,16 +32,16 @@ export default function NewProducts ({ products }: ThisWeekProductsProps) {
     console.log(`Product ${id} added to cart`);
   };
 
-    if (!products) {
-      return <div>No Products</div>;
-    }
+  if (!products) {
+    return <div>No Products</div>;
+  }
 
   return (
     <section id="new-this-week" className="">
       <div className="lg:mt-24 mt-12 px-6">
-        <h1 className="text-5xl font-bold">
+        <h1 className="text-5xl font-bold font-beatrice">
           NEW <br /> THIS WEEK{" "}
-          <sup className="text-[#000E8A] text-2xl font-bold">
+          <sup className="text-[#000E8A] text-2xl font-bold font-sans">
             ({products.length})
           </sup>
         </h1>
@@ -92,11 +92,11 @@ export default function NewProducts ({ products }: ThisWeekProductsProps) {
 
                 {/* Product Details */}
                 <div className="p-2">
-                  <h1 className="text-gray-600 text-sm lg:text-base line-clamp-1">
+                  <h1 className="text-gray-600 text-sm lg:text-base line-clamp-1 font-beatrice">
                     {product.type}
                   </h1>
                   <div className="flex items-center justify-between">
-                    <p className="text-base lg:text-lg font-bold line-clamp-1">
+                    <p className="text-base lg:text-lg font-semibold line-clamp-1 font-beatrice">
                       {product.name}
                     </p>
                     <p className="block mt-2 text-black font-semibold lg:text-lg">
@@ -119,4 +119,4 @@ export default function NewProducts ({ products }: ThisWeekProductsProps) {
       </div>
     </section>
   );
-};
+}
