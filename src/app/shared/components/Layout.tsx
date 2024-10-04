@@ -1,3 +1,4 @@
+import Footer from "./Footer";
 import Navbar from "./Navbar";
 
 const Layout = ({
@@ -8,7 +9,7 @@ const Layout = ({
     <div className="min-h-screen flex flex-col">
       <Navbar />
       <main className="flex-grow">{children}</main>
-      {showFooter}
+      {showFooter && <Footer />}
     </div>
   );
 };
