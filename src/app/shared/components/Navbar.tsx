@@ -1,6 +1,12 @@
+"use client";
+
+import { selectCartItemCount } from "@/redux/features/cartSlice";
+import { useAppSelector } from "@/redux/store";
 import Link from "next/link";
 
 const Navbar = () => {
+  const cartItemCount = useAppSelector(selectCartItemCount);
+
   return (
     <nav className="flex justify-between items-center px-4 py-4 sticky top-0 z-50 bg-white">
       <div className="flex items-center">
@@ -100,7 +106,7 @@ const Navbar = () => {
           </svg>
         </button>
 
-        <div className="flex items-center">
+        <div className="flex items-center relative">
           <Link
             href={`/cart`}
             className="bg-black text-white -mr-1 w-14 text-xs h-10 rounded-full justify-center items-center lg:flex hidden"
@@ -134,6 +140,12 @@ const Navbar = () => {
               </svg>
             </button>
           </Link>
+
+          {cartItemCount > 0 && (
+            <span className="absolute -top-1 -right-2 bg-red-500 text-white text-xs rounded-full px-1">
+              {cartItemCount}
+            </span>
+          )}
         </div>
 
         <button
