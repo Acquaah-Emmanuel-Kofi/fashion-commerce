@@ -88,7 +88,7 @@ export default function Hero({ products }: HeroProps) {
             <Link href="/products" className="lg:w-full w-1/2">
               <button
                 type="button"
-                className="flex justify-between items-center bg-[#D9D9D9] py-2.5 px-4 w-full font-beatrice text-base"
+                className="flex justify-between items-center bg-[#D9D9D9] py-2.5 px-4 w-full font-beatrice text-sm lg:text-base"
               >
                 Go To Shop
                 <svg
