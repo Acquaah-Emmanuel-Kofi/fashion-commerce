@@ -2,38 +2,36 @@
 
 import CartItem from "./components/CartItem";
 import CartSummary from "./components/CartSummary";
-import product1 from "../../../public/images/product_1.png";
-import product2 from "../../../public/images/product_2.png";
 import Layout from "../shared/components/Layout";
-import AddToFavoriteButton from "../shared/components/AddToFavoriteButton";
+import useCart from "@/hooks/useCart";
+import Carousel from "../shared/components/carousel/Carousel";
+import { useState } from "react";
+import CarouselPrevButton from "../shared/components/carousel/CarouselPrevButton";
+import CarouselNextButton from "../shared/components/carousel/CarouselNextButton";
 
 const CartPage = () => {
-  const initialItems = [
-    {
-      id: "1",
-      name: "T Sasdhirt",
-      description: "Abstract Print T-Shirt",
-      thumbnail: product1,
-      images: [product1, product2],
-      size: "M",
-      color: "red",
-      price: "50",
-      quantity: 1,
-      type: "World",
-    },
-    {
-      id: "2",
-      name: "T Shirt",
-      description: "Embroidered Shirt",
-      thumbnail: product2,
-      images: [product1, product2],
-      size: "L",
-      color: "green",
-      price: "70",
-      quantity: 2,
-      type: "Hello",
-    },
-  ];
+  const {
+    items,
+    totalAmount,
+    removeItem,
+    increaseQuantity,
+    decreaseQuantity,
+    clear,
+  } = useCart();
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const handleNext = () => {
+    if (currentIndex < items.length - 1) {
+      setCurrentIndex(currentIndex + 1);
+    }
+  };
+
+  const handlePrev = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1);
+    }
+  };
 
   return (
     <Layout showFooter={false}>
@@ -41,45 +39,84 @@ const CartPage = () => {
         <div className="mb-8 flex items-center gap-10">
           <h1 className="lg:text-2xl text-lg font-bold">SHOPPING BAG</h1>
           <div className="flex items-center gap-2">
-            <AddToFavoriteButton />
+            {/* <AddToFavoriteButton /> */}
             <h1 className="text-lg text-gray-600 font-semibold">FAVOURITES</h1>
           </div>
+          {/* Clear Cart Button */}
+          {items.length > 0 && (
+            <button type="button" onClick={clear}>
+              Clear Cart
+            </button>
+          )}
         </div>
 
         <div className="flex flex-col lg:flex-row justify-between">
           {/* Cart Items */}
-          <div className="flex lg:flex-row flex-col gap-10 border-t-2 border-b-2 border-[#C9C9C9] pt-5 pb-8">
-            {initialItems.length > 0 ? (
-              initialItems.map((item) => (
-                <CartItem
-                  key={item.id}
-                  id={item.id}
-                  thumbnail={item.images[0]}
-                  images={item.images}
-                  name={item.name}
-                  description={item.description}
-                  price={item.price}
-                  quantity={item.quantity}
-                  size={item.size}
-                  color={item.color}
-                  type={item.type}
-                />
-              ))
+          <div className="flex border-t-2 border-b-2 border-[#C9C9C9] pt-5 pb-8 lg:w-[60%] ">
+            {items.length === 0 ? (
+              <div className="w-full min-h-[350px] flex justify-center items-center flex-col">
+                <p className="text-lg font-semibold flex items-center gap-2">
+                  <span>
+                    <svg
+                      width="16"
+                      height="15"
+                      viewBox="0 0 16 15"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M1.58287 12.8256C2.51504 14 4.24996 14 7.7198 14H8.2802C11.75 14 13.485 14 14.4171 12.8256M1.58287 12.8256C0.650708 11.6511 0.970433 9.86813 1.60989 6.30212C2.06463 3.76617 2.292 2.49819 3.15523 1.74909M1.58287 12.8256C1.58287 12.8256 1.58287 12.8256 1.58287 12.8256ZM14.4171 12.8256C15.3493 11.6511 15.0296 9.86813 14.3901 6.30213C13.9354 3.76617 13.708 2.49819 12.8448 1.74909M14.4171 12.8256C14.4171 12.8256 14.4171 12.8256 14.4171 12.8256ZM12.8448 1.74909C11.9816 1 10.7478 1 8.2802 1H7.7198C5.25223 1 4.01845 1 3.15523 1.74909M12.8448 1.74909C12.8448 1.7491 12.8448 1.74909 12.8448 1.74909ZM3.15523 1.74909C3.15523 1.7491 3.15523 1.74909 3.15523 1.74909Z"
+                        stroke="black"
+                        strokeWidth="1.5"
+                      />
+                      <path
+                        d="M6 4C6.29112 5.16519 7.07665 6 8 6C8.92335 6 9.70888 5.16519 10 4"
+                        stroke="black"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                  </span>
+                  Your cart is empty!
+                </p>
+                <p>Explore our products and add them to your cart!</p>
+              </div>
             ) : (
-              <p>Your cart is empty.</p>
+              <Carousel
+                visibleImages={2}
+                currentIndex={currentIndex}
+                onNext={handleNext}
+                onPrev={handlePrev}
+              >
+                {items.map((item) => (
+                  <CartItem
+                    key={item.id}
+                    item={item}
+                    removeItem={removeItem}
+                    increaseQuantity={increaseQuantity}
+                    decreaseQuantity={decreaseQuantity}
+                  />
+                ))}
+              </Carousel>
             )}
           </div>
 
           {/* Cart Summary */}
-          <CartSummary cartItems={initialItems} />
+          <CartSummary totalAmount={totalAmount} />
         </div>
 
-        {/* Clear Cart Button */}
-        {/* {cartItems.length > 0 && (
-          <button type="button" onClick={handleClearCart}>
-            Clear Cart
-          </button>
-        )} */}
+        {items.length > 0 && (
+          <div className="items-center gap-3 hidden lg:flex mt-[3%]">
+            <CarouselPrevButton
+              onPrev={handlePrev}
+              disabled={currentIndex === 0}
+            />
+            <CarouselNextButton
+              onNext={handleNext}
+              disabled={currentIndex >= items.length - 2}
+            />
+          </div>
+        )}
       </div>
     </Layout>
   );
