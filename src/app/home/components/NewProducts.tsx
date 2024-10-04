@@ -67,14 +67,14 @@ export default function NewProducts({ products }: ThisWeekProductsProps) {
               <Link
                 href={`/products/${product.id}`}
                 key={product.id}
-                className="w-full max-h-[250px] lg:max-h-[450px] bg-white overflow-hidden hover:shadow-lg"
+                className="w-full bg-white overflow-hidden hover:shadow-lg"
               >
                 {/* Product Image */}
                 <div className="relative">
                   <Image
                     src={product.images[0]}
                     alt={product.name}
-                    className="w-full max-h-[200px] lg:max-h-[400px] object-cover border-2 border-[#D9D9D9]"
+                    className="w-full max-h-[300px] lg:max-h-[350px] object-cover border-2 border-[#D9D9D9]"
                     width={300}
                     height={376}
                   />

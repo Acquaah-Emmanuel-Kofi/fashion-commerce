@@ -17,13 +17,13 @@ const ProductCard: React.FC<ProductCardProps> = ({
   return (
     <Link
       href={`/products/${id}`}
-      className="w-full max-h-[300px] lg:max-h-[500px] bg-white overflow-hidden cursor-pointer hover:shadow-lg"
+      className="w-full bg-white overflow-hidden cursor-pointer hover:shadow-lg"
     >
       {thumbnail && (
         <Image
           src={thumbnail}
           alt={name}
-          className="w-full max-h-[250px] lg:max-h-[350px] object-cover border-2 border-[#D9D9D9]"
+          className="w-full max-h-[300px] lg:max-h-[350px] object-cover border-2 border-[#D9D9D9]"
           width={300}
           height={376}
           priority

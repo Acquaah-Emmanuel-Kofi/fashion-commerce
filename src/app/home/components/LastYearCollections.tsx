@@ -85,20 +85,20 @@ export default function LastYearCollections() {
             Error fetching {gender} collections
           </div>
         ) : (
-          <div className="grid lg:grid-cols-3 grid-cols-1 gap-4">
+          <div className="grid lg:grid-cols-3 grid-cols-1 gap-10">
             {products ? (
               products.slice(0, 3).map((product) => (
                 <Link
                   href={`/products/${product.id}`}
                   key={product.id}
-                  className="w-full max-h-[300px] lg:max-h-[500px] bg-white overflow-hidden hover:shadow-lg"
+                  className="w-full bg-white overflow-hidden hover:shadow-lg"
                 >
                   {/* Product Image */}
                   <div className="relative">
                     <Image
                       src={product.images[0]}
                       alt={product.name}
-                      className="w-full max-h-[200px] lg:max-h-[400px] object-cover border-2 border-[#D9D9D9]"
+                      className="w-full max-h-[300px] lg:max-h-[400px]  object-cover border-2 border-[#D9D9D9]"
                       width={300}
                       height={376}
                     />
