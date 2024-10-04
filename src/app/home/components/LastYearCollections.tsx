@@ -8,7 +8,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { HiPlus } from "react-icons/hi";
 import { IoChevronDownOutline } from "react-icons/io5";
-import ProductPlaceholder from "./ProductPlaceholder";
+import ProductPlaceholder from "../placeholders/ProductPlaceholder";
 
 const date = new Date();
 const year = date.getFullYear();
@@ -145,9 +145,9 @@ export default function LastYearCollections() {
               ))
             ) : (
               <div className="grid lg:grid-cols-3 grid-cols-1 gap-4">
-                <ProductPlaceholder />
-                <ProductPlaceholder />
-                <ProductPlaceholder />
+                {Array.from({ length: 3 }).map((_, index) => (
+                  <ProductPlaceholder />
+                ))}
               </div>
             )}
           </div>
