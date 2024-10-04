@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { HiPlus } from "react-icons/hi";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Carousel from "@/app/shared/components/carousel/Carousel";
 import CarouselPrevButton from "@/app/shared/components/carousel/CarouselPrevButton";
@@ -15,6 +15,28 @@ interface ThisWeekProductsProps {
 
 export default function NewProducts({ products }: ThisWeekProductsProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+
+  useEffect(() => {
+    // Only execute this code on the client side
+    if (typeof window !== "undefined") {
+      const checkScreenWidth = () => {
+        const width = window.innerWidth;
+        setIsMobile(width < 768); // Update state based on screen width
+      };
+
+      // Initial check
+      checkScreenWidth();
+
+      // Add event listener for window resize
+      window.addEventListener("resize", checkScreenWidth);
+
+      // Cleanup function to remove event listener when component unmounts
+      return () => {
+        window.removeEventListener("resize", checkScreenWidth);
+      };
+    }
+  }, []);
 
   const handleNext = () => {
     if (currentIndex < products.length - 1) {
@@ -58,7 +80,7 @@ export default function NewProducts({ products }: ThisWeekProductsProps) {
 
         <div>
           <Carousel
-            visibleImages={4}
+            visibleImages={isMobile ? 2 : 4}
             currentIndex={currentIndex}
             onNext={handleNext}
             onPrev={handlePrev}
@@ -74,7 +96,7 @@ export default function NewProducts({ products }: ThisWeekProductsProps) {
                   <Image
                     src={product.images[0]}
                     alt={product.name}
-                    className="w-full max-h-[250px] lg:max-h-[350px] object-cover border-2 border-[#D9D9D9]"
+                    className="w-full h-[200px] lg:h-[350px] object-cover border-2 border-[#D9D9D9]"
                     width={300}
                     height={376}
                   />
@@ -114,7 +136,7 @@ export default function NewProducts({ products }: ThisWeekProductsProps) {
         <CarouselPrevButton onPrev={handlePrev} disabled={currentIndex === 0} />
         <CarouselNextButton
           onNext={handleNext}
-          disabled={currentIndex >= products.length - 4}
+          disabled={currentIndex >= products.length - (isMobile ? 2 : 4)}
         />
       </div>
     </section>
