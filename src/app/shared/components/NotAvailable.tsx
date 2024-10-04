@@ -21,7 +21,7 @@ const NotAvailable: React.FC<Infomation> = ({ title, subTitle }) => {
         />
       </svg>
       <p className="text-gray-600 text-lg">{title}</p>
-      <p className="text-gray-500 text-sm">{subTitle}</p>
+      <p className="text-gray-500 text-sm max-w-[90%] mx-auto text-center">{subTitle}</p>
     </div>
   );
 };
