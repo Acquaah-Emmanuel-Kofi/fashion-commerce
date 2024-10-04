@@ -145,8 +145,8 @@ export default function LastYearCollections() {
               ))
             ) : (
               <div className="grid lg:grid-cols-3 grid-cols-1 gap-4">
-                {Array.from({ length: 3 }).map((_, index) => (
-                  <ProductPlaceholder />
+                {Array.from({ length: 3 }).map((item, index) => (
+                  <ProductPlaceholder key={`${Number(item) + index}`} />
                 ))}
               </div>
             )}
