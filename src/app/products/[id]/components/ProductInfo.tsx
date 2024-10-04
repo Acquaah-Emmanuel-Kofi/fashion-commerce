@@ -1,6 +1,6 @@
 import ColorFilter from "@/app/shared/components/ColorFilter";
 import SizeFilter from "@/app/shared/components/SizeFilter";
-import React from "react";
+import React, { Fragment } from "react";
 
 interface ProductInfo {
   name: string;
@@ -20,7 +20,7 @@ const ProductInfo: React.FC<ProductInfo> = ({
   sizes,
 }) => {
   return (
-    <div className="">
+    <Fragment>
       <h1 className="text-sm font-bold">{name ?? "Product Name"}</h1>
 
       <p className="text-sm font-bold">${price ?? "N/A"}</p>
@@ -42,7 +42,7 @@ const ProductInfo: React.FC<ProductInfo> = ({
       <p className="text-slate-400 text-xs my-4">
         FIND YOUR SIZE | MEASUREMENT GUIDE
       </p>
-    </div>
+    </Fragment>
   );
 };
 
