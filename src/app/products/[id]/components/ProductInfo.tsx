@@ -21,12 +21,14 @@ const ProductInfo: React.FC<ProductInfo> = ({
 }) => {
   return (
     <Fragment>
-      <h1 className="text-sm font-bold">{name ?? "Product Name"}</h1>
+      <h1 className="text-sm font-bold font-beatrice">
+        {name ?? "Product Name"}
+      </h1>
 
       <p className="text-sm font-bold">${price ?? "N/A"}</p>
-      <p className="text-gray-600 text-xs">{type ?? "N/A"}</p>
+      <p className="text-gray-600 text-xs font-beatrice">{type ?? "N/A"}</p>
 
-      <p className="text-xs font-semibold mt-9">
+      <p className="text-xs font-semibold mt-9 font-beatrice">
         {description ?? "No description available"}
       </p>
 
