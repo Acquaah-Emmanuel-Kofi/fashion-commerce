@@ -8,6 +8,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { HiPlus } from "react-icons/hi";
 import { IoChevronDownOutline } from "react-icons/io5";
+import ProductPlaceholder from "./ProductPlaceholder";
 
 const date = new Date();
 const year = date.getFullYear();
@@ -43,7 +44,13 @@ export default function LastYearCollections() {
   };
 
   if (!products) {
-    return <div>No Products</div>;
+    return (
+      <div className="grid lg:grid-cols-3 grid-cols-1 gap-4">
+        <ProductPlaceholder />
+        <ProductPlaceholder />
+        <ProductPlaceholder />
+      </div>
+    );
   }
 
   return (
@@ -93,7 +100,7 @@ export default function LastYearCollections() {
               <Link
                 href={`/products/${product.id}`}
                 key={product.id}
-                className="w-full max-h-[300px] lg:max-h-[500px] bg-white overflow-hidden relative"
+                className="w-full max-h-[300px] lg:max-h-[500px] bg-white overflow-hidden hover:shadow-lg"
               >
                 {/* Product Image */}
                 <div className="relative">
@@ -115,8 +122,6 @@ export default function LastYearCollections() {
                     <HiPlus />
                   </button>
                 </div>
-
-                <div className="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-10 transition-opacity duration-200 ease-in-out"></div>
 
                 {/* Product Details */}
                 <div className="p-2">
