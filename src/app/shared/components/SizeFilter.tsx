@@ -1,10 +1,10 @@
 import { Fragment, useState } from "react";
 
 interface ISizes {
-  sizes: string[]
+  sizes: string[];
 }
 
-const SizeFilter: React.FC<ISizes> = ({sizes}) => {
+const SizeFilter: React.FC<ISizes> = ({ sizes }) => {
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
 
   const handleSizeClick = (size: string) => {
@@ -13,7 +13,7 @@ const SizeFilter: React.FC<ISizes> = ({sizes}) => {
 
   return (
     <Fragment>
-      <label htmlFor="size" className="font-semibold">
+      <label htmlFor="size" className="font-semibold font-beatrice">
         Size
       </label>
       <div className="flex space-x-1 ">
@@ -21,8 +21,9 @@ const SizeFilter: React.FC<ISizes> = ({sizes}) => {
           <button
             key={size}
             type="button"
-            className={`flex justify-center items-center w-11 h-11 border border-[#D9D9D9] p-2.5 hover:bg-[#D9D9D9] ${
-              selectedSize?.toLowerCase()?.trim() === size?.toLowerCase()?.trim()
+            className={`flex justify-center items-center w-11 h-11 border border-[#D9D9D9] p-2.5 hover:bg-[#D9D9D9] font-beatrice ${
+              selectedSize?.toLowerCase()?.trim() ===
+              size?.toLowerCase()?.trim()
                 ? "bg-black text-white"
                 : "bg-white text-black"
             }`}
