@@ -8,6 +8,7 @@ import Carousel from "@/app/shared/components/carousel/Carousel";
 import CarouselPrevButton from "@/app/shared/components/carousel/CarouselPrevButton";
 import CarouselNextButton from "@/app/shared/components/carousel/CarouselNextButton";
 import { IProduct } from "@/modules/interfaces/products.interface";
+import NewThisWeekPlaceholder from "../placeholders/NewThisWeekPlaceholder";
 
 interface ThisWeekProductsProps {
   products: IProduct[];
@@ -55,7 +56,7 @@ export default function NewThisWeek({ products }: ThisWeekProductsProps) {
   };
 
   if (!products) {
-    return <div>No Products</div>;
+    return <NewThisWeekPlaceholder />;
   }
 
   return (
