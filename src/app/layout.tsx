@@ -8,9 +8,37 @@ const geistSans = localFont({
   variable: "--font-geist-sans",
   weight: "100 900",
 });
+
 const geistMono = localFont({
   src: "./fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
+  weight: "100 900",
+});
+
+const beatriceDeck = localFont({
+  src: [
+    {
+      path: "./fonts/BeatriceDeck-Bold.woff",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "./fonts/BeatriceDeck-Regular.woff",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "./fonts/BeatriceDeck-Medium.woff",
+      weight: "300",
+      style: "normal",
+    },
+    {
+      path: "./fonts/BeatriceDeck-Light.woff",
+      weight: "200",
+      style: "normal",
+    },
+  ],
+  variable: "--font-beatrice",
   weight: "100 900",
 });
 
@@ -28,7 +56,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${beatriceDeck.variable} antialiased`}
       >
         <StoreProvider>{children}</StoreProvider>
       </body>
