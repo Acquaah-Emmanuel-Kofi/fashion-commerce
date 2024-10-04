@@ -1,6 +1,8 @@
 "use client";
 
+import NoProductsAvailable from "@/app/shared/components/NoProductsAvailable";
 import ProductCard from "@/app/shared/components/ProductCard";
+import ProductCardSkeleton from "@/app/shared/components/ProductCardSkeleton";
 import useProducts from "@/hooks/useProducts";
 import { IProduct } from "@/modules/interfaces/products.interface";
 import { useAppSelector } from "@/redux/store";
@@ -34,14 +36,30 @@ const FilteredProducts = () => {
     setFilteredProducts(filtered);
   }, [keyword, selectedType, products]);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
+  if (loading) {
+    return (
+      <div className="grid lg:grid-cols-3 grid-cols-2 gap-10">
+        {Array(6)
+          .fill(0)
+          .map((_, index) => (
+            <ProductCardSkeleton key={index} />
+          ))}
+      </div>
+    );
+  }
+
+  if (error)
+    return (
+      <div className="flex flex-col items-center justify-center h-[300px] lg:h-[500px] bg-gray-100 border-2 border-gray-300 rounded-lg">
+        Error: {error}
+      </div>
+    );
 
   const displayProducts =
     filteredProducts.length > 0 ? filteredProducts : products;
 
   if (!displayProducts || displayProducts.length === 0) {
-    return <div>No Products Available</div>;
+    return <NoProductsAvailable />;
   }
 
   return (

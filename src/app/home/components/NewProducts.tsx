@@ -67,7 +67,7 @@ export default function NewProducts ({ products }: ThisWeekProductsProps) {
               <Link
                 href={`/products/${product.id}`}
                 key={product.id}
-                className="w-full max-h-[250px] lg:max-h-[450px] bg-white overflow-hidden relative"
+                className="w-full max-h-[250px] lg:max-h-[450px] bg-white overflow-hidden hover:shadow-lg"
               >
                 {/* Product Image */}
                 <div className="relative">
@@ -89,8 +89,6 @@ export default function NewProducts ({ products }: ThisWeekProductsProps) {
                     <HiPlus />
                   </button>
                 </div>
-
-                <div className="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-10 transition-opacity duration-200 ease-in-out"></div>
 
                 {/* Product Details */}
                 <div className="p-2">
