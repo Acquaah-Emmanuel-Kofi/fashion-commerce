@@ -1,6 +1,6 @@
 "use client";
 
-import NoProductsAvailable from "@/app/shared/components/NoProductsAvailable";
+import NotAvailable from "@/app/shared/components/NotAvailable";
 import ProductCard from "@/app/shared/components/ProductCard";
 import ProductCardSkeleton from "@/app/shared/components/ProductCardSkeleton";
 import useProducts from "@/hooks/useProducts";
@@ -84,7 +84,12 @@ const FilteredProducts = () => {
     filteredProducts.length > 0 ? filteredProducts : products;
 
   if (!displayProducts || displayProducts.length === 0) {
-    return <NoProductsAvailable />;
+    return (
+      <NotAvailable
+        title="No Products Found"
+        subTitle="Please try again later or adjust your filters."
+      />
+    );
   }
 
   return (
