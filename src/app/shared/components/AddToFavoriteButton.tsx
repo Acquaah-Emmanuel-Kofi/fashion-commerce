@@ -26,3 +26,5 @@ const AddToFavoriteButton: React.FC<AddToCartButtonProps> = ({
     </button>
   );
 };
+
+export default AddToFavoriteButton;
