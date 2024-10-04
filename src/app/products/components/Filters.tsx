@@ -12,10 +12,14 @@ const Filters: React.FC<IFiltersProps> = ({ filters }) => {
     setOpenFilters((prev) => ({ ...prev, [id]: !prev[id] }));
   };
 
+  const handleSizeSelect = () => {
+    setOpenFilters((prev) => ({ ...prev, size: !prev.size }));
+  }
+
   return (
     <Fragment>
       <div className="border-b border-dashed border-gray-200 pb-5 mb-2 mt-3">
-        <SizeFilter sizes={[]} />
+        <SizeFilter sizes={[]} onSelect={handleSizeSelect} />
       </div>
       <div className="space-y-2">
         {filters.map((filter) => (

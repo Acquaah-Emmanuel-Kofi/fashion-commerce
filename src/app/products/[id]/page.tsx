@@ -2,9 +2,7 @@
 
 import ProductImages from "./components/ProductImages";
 import ProductInfo from "./components/ProductInfo";
-import AddToCartButton from "./components/AddToCartButton";
 import Layout from "@/app/shared/components/Layout";
-import AddToFavoriteButton from "@/app/shared/components/AddToFavoriteButton";
 import useFetch from "@/hooks/useFetch";
 import { IProductDetails } from "@/modules/interfaces/products.interface";
 import ProductCardSkeleton from "@/app/shared/components/ProductCardSkeleton";
@@ -35,22 +33,11 @@ const ProductDetails = ({ params }: { params: { id: string } }) => {
 
               <div className="lg:w-[30%] w-full lg:p-6 lg:pt-10 pt-10 py-6 px-4 mt-6 lg:mt-0 relative border-2 border-[#D9D9D9]">
                 <div className="absolute top-0 right-0">
-                  <AddToFavoriteButton />
+                  {/* <AddToFavoriteButton /> */}
                 </div>
 
-                {data && (
-                  <ProductInfo
-                    key={data.id}
-                    name={data.name}
-                    price={data.price}
-                    description={data.description}
-                    colors={data.colors}
-                    sizes={data.sizes}
-                    type={data.type}
-                  />
-                )}
+                {data && <ProductInfo key={data.id} products={data} />}
 
-                <AddToCartButton productId={params.id} />
               </div>
             </div>
           </div>
