@@ -3,12 +3,18 @@
 import { selectCartItemCount } from "@/redux/features/cartSlice";
 import { useAppSelector } from "@/redux/store";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Fragment, useState } from "react";
 import { IoMdClose } from "react-icons/io";
+import GoBackButton from "./GoBack";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
   const cartItemCount = useAppSelector(selectCartItemCount);
+
+  const isProductPage =
+    pathname === "/products" || pathname.startsWith("/products/");
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -17,60 +23,66 @@ const Navbar = () => {
   return (
     <Fragment>
       <nav className="flex justify-between items-center px-4 py-4 sticky top-0 z-50 bg-white">
-        <div className="flex items-center">
-          <button type="button" onClick={toggleSidebar} className="block">
-            <svg
-              width="28"
-              height="18"
-              viewBox="0 0 28 18"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M27 1L1 1"
-                stroke="black"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-              />
-              <path
-                d="M19 9L1 9"
-                stroke="black"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-              />
-              <path
-                d="M14 17H1"
-                stroke="black"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-              />
-            </svg>
-          </button>
-
-          <ul className="hidden lg:flex space-x-6 ml-4">
-            <li>
-              <Link href="/" className="text-gray-700 font-medium text-base">
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="#collections"
-                className="text-gray-700 font-medium text-base"
+        {isProductPage ? (
+          <div>
+            <GoBackButton />
+          </div>
+        ) : (
+          <div className="flex items-center">
+            <button type="button" onClick={toggleSidebar} className="block">
+              <svg
+                width="28"
+                height="18"
+                viewBox="0 0 28 18"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
               >
-                Collections
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="#new-this-week"
-                className="text-gray-700 font-medium text-base"
-              >
-                New
-              </Link>
-            </li>
-          </ul>
-        </div>
+                <path
+                  d="M27 1L1 1"
+                  stroke="black"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                />
+                <path
+                  d="M19 9L1 9"
+                  stroke="black"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                />
+                <path
+                  d="M14 17H1"
+                  stroke="black"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                />
+              </svg>
+            </button>
+            
+            <ul className="hidden lg:flex space-x-6 ml-4">
+              <li>
+                <Link href="/" className="text-gray-700 font-medium text-base">
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="#collections"
+                  className="text-gray-700 font-medium text-base"
+                >
+                  Collections
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="#new-this-week"
+                  className="text-gray-700 font-medium text-base"
+                >
+                  New
+                </Link>
+              </li>
+            </ul>
+          </div>
+        )}
 
         <div className="w-3/12 lg:w-auto flex justify-end">
           <Link href="/">
