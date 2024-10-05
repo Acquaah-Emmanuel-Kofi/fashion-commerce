@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 
-const ProductInfoSkeleton = () => {
+const ProductInfoPlaceholder = () => {
   return (
     <Fragment>
       {/* Product Name Skeleton */}
@@ -36,4 +36,4 @@ const ProductInfoSkeleton = () => {
   );
 };
 
-export default ProductInfoSkeleton;
+export default ProductInfoPlaceholder;
