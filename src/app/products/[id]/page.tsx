@@ -5,9 +5,9 @@ import ProductInfo from "./components/ProductInfo";
 import Layout from "@/app/shared/components/Layout";
 import useFetch from "@/hooks/useFetch";
 import { IProductDetails } from "@/modules/interfaces/products.interface";
-import ProductCardSkeleton from "@/app/shared/components/ProductCardSkeleton";
 import ProductInfoSkeleton from "./components/ProductInfoSkeleton";
 import { Fragment } from "react";
+import ProductImagesPlaceholder from "./placeholders/ProductImagesPlaceholder";
 
 const ProductDetails = ({ params }: { params: { id: string } }) => {
   const { data, loading, error } = useFetch<IProductDetails>(
@@ -37,7 +37,6 @@ const ProductDetails = ({ params }: { params: { id: string } }) => {
                 </div>
 
                 {data && <ProductInfo key={data.id} products={data} />}
-
               </div>
             </div>
           </div>
@@ -47,7 +46,7 @@ const ProductDetails = ({ params }: { params: { id: string } }) => {
           <div className="container mx-auto lg:w-[80%] py-[5%]">
             <div className="flex flex-col lg:flex-row lg:justify-center lg:gap-[3%] items-start">
               <div className="flex flex-col lg:flex-row lg:w-2/4 w-full lg:p-6">
-                <ProductCardSkeleton />
+                <ProductImagesPlaceholder />
               </div>
 
               <div className="lg:w-[30%] w-full lg:p-6 lg:pt-10 pt-10 py-6 px-4 mt-6 lg:mt-0 border-2 border-[#D9D9D9]">
