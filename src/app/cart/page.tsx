@@ -5,7 +5,7 @@ import CartSummary from "./components/CartSummary";
 import Layout from "../shared/components/Layout";
 import useCart from "@/hooks/useCart";
 import Carousel from "../shared/components/carousel/Carousel";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CarouselPrevButton from "../shared/components/carousel/CarouselPrevButton";
 import CarouselNextButton from "../shared/components/carousel/CarouselNextButton";
 
@@ -20,6 +20,28 @@ const CartPage = () => {
   } = useCart();
 
   const [currentIndex, setCurrentIndex] = useState(0);
+    const [isMobile, setIsMobile] = useState<boolean>(false);
+
+    useEffect(() => {
+      // Only execute this code on the client side
+      if (typeof window !== "undefined") {
+        const checkScreenWidth = () => {
+          const width = window.innerWidth;
+          setIsMobile(width < 768); // Update state based on screen width
+        };
+
+        // Initial check
+        checkScreenWidth();
+
+        // Add event listener for window resize
+        window.addEventListener("resize", checkScreenWidth);
+
+        // Cleanup function to remove event listener when component unmounts
+        return () => {
+          window.removeEventListener("resize", checkScreenWidth);
+        };
+      }
+    }, []);
 
   const handleNext = () => {
     if (currentIndex < items.length - 1) {
@@ -40,11 +62,13 @@ const CartPage = () => {
           <h1 className="lg:text-2xl text-lg font-bold">SHOPPING BAG</h1>
           <div className="flex items-center gap-2">
             {/* <AddToFavoriteButton /> */}
-            <h1 className="text-lg text-gray-600 font-semibold">FAVOURITES</h1>
+            <h1 className="lg:text-2xl text-lg text-gray-600 font-semibold">
+              FAVOURITES
+            </h1>
           </div>
           {/* Clear Cart Button */}
           {items.length > 0 && (
-            <button type="button" onClick={clear}>
+            <button type="button" onClick={clear} className="text-sm">
               Clear Cart
             </button>
           )}
@@ -83,7 +107,7 @@ const CartPage = () => {
               </div>
             ) : (
               <Carousel
-                visibleImages={2}
+                visibleImages={isMobile ? 1 : 2}
                 currentIndex={currentIndex}
                 onNext={handleNext}
                 onPrev={handlePrev}
@@ -113,7 +137,7 @@ const CartPage = () => {
             />
             <CarouselNextButton
               onNext={handleNext}
-              disabled={currentIndex >= items.length - 2}
+              disabled={currentIndex >= items.length - (isMobile ? 1 : 2)}
             />
           </div>
         )}
