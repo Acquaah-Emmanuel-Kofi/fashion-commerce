@@ -8,6 +8,7 @@ import Carousel from "../shared/components/carousel/Carousel";
 import { useEffect, useState } from "react";
 import CarouselPrevButton from "../shared/components/carousel/CarouselPrevButton";
 import CarouselNextButton from "../shared/components/carousel/CarouselNextButton";
+import { ICartItem } from "@/modules/interfaces/products.interface";
 
 const CartPage = () => {
   const {
@@ -112,7 +113,7 @@ const CartPage = () => {
                 onNext={handleNext}
                 onPrev={handlePrev}
               >
-                {items.map((item) => (
+                {items.map((item: ICartItem) => (
                   <CartItem
                     key={item.id}
                     item={item}
