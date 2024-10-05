@@ -5,9 +5,9 @@ import ProductInfo from "./components/ProductInfo";
 import Layout from "@/app/shared/components/Layout";
 import useFetch from "@/hooks/useFetch";
 import { IProductDetails } from "@/modules/interfaces/products.interface";
-import ProductInfoSkeleton from "./components/ProductInfoSkeleton";
 import { Fragment } from "react";
 import ProductImagesPlaceholder from "./placeholders/ProductImagesPlaceholder";
+import ProductInfoPlaceholder from "./placeholders/ProductInfoSkeleton";
 
 const ProductDetails = ({ params }: { params: { id: string } }) => {
   const { data, loading, error } = useFetch<IProductDetails>(
@@ -50,7 +50,7 @@ const ProductDetails = ({ params }: { params: { id: string } }) => {
               </div>
 
               <div className="lg:w-[30%] w-full lg:p-6 lg:pt-10 pt-10 py-6 px-4 mt-6 lg:mt-0 border-2 border-[#D9D9D9]">
-                <ProductInfoSkeleton />
+                <ProductInfoPlaceholder />
               </div>
             </div>
           </div>
