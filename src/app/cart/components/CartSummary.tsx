@@ -8,7 +8,7 @@ const CartSummary: React.FC<CartSummaryProps> = ({ totalAmount }) => {
       <h2 className="text-xl font-bold mb-4 font-beatrice">ORDER SUMMARY</h2>
       <div className="flex justify-between mb-2">
         <p>Subtotal</p>
-        <p>$0</p>
+        <p>${totalAmount.toFixed(2)}</p>
       </div>
       <div className="flex justify-between mb-6">
         <p>Shipping</p>
@@ -16,7 +16,7 @@ const CartSummary: React.FC<CartSummaryProps> = ({ totalAmount }) => {
       </div>
       <div className="flex justify-between font-bold text-lg mb-16 pt-10 border-t-2 border-[#D9D9D9]">
         <p className="uppercase">Total</p>
-        <p>${totalAmount}</p>
+        <p>${totalAmount.toFixed(2)}</p>
       </div>
 
       <div className="space-y-4">
