@@ -52,17 +52,7 @@ const FilteredProducts = () => {
     );
   }
 
-  if (filteredProducts.length === 0) {
-    return (
-      <NotAvailable
-        title={`There was no results for: ${keyword || selectedType}`}
-        subTitle="Sorry, we couldn't find any products matching your search
-          criteria."
-      />
-    );
-  }
-
-  if (error)
+  if (error) {
     return (
       <div className="flex flex-col items-center justify-center h-[300px] lg:h-[500px] bg-gray-100 border-2 border-gray-300 rounded-lg">
         <h2 className="text-xl font-bold">Oops! Something went wrong.</h2>
@@ -77,22 +67,31 @@ const FilteredProducts = () => {
         </button>
       </div>
     );
+  }
 
-  const displayProducts =
-    filteredProducts.length > 0 ? filteredProducts : products;
-
-  if (!displayProducts || displayProducts.length === 0) {
+  // Check if there are no products at all
+  if (!products || products.length === 0) {
     return (
       <NotAvailable
-        title="There Is No Products"
+        title="There Are No Products Available"
         subTitle="Please try again later or adjust your filters."
+      />
+    );
+  }
+
+  // Check if filtered products are empty
+  if (filteredProducts.length === 0) {
+    return (
+      <NotAvailable
+        title={`No results for: ${keyword || selectedType}`}
+        subTitle="Sorry, we couldn't find any products matching your search criteria."
       />
     );
   }
 
   return (
     <div className="grid grid-cols-2 lg:grid-cols-3 lg:gap-10 gap-5">
-      {displayProducts.map((product: IProduct) => (
+      {filteredProducts.map((product: IProduct) => (
         <ProductCard
           key={product.id}
           id={product.id}
