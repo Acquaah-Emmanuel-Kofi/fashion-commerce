@@ -18,7 +18,7 @@ const CartItem = ({
   decreaseQuantity: (id: string) => void;
 }) => {
   return (
-    <div className="flex justify-between relative lg:w-[350px]">
+    <div className="flex justify-between relative lg:w-[350px] w-[300px]">
       <button
         type="button"
         className="absolute top-0 right-0 text-gray-600 hover:text-gray-800"
@@ -34,7 +34,7 @@ const CartItem = ({
           <Image
             src={item.images[0]}
             alt={item.name}
-            className="w-full max-h-[250px] lg:max-h-[350px] object-contain border-2 border-[#D9D9D9]"
+            className="lg:w-full w-[90%] max-h-[250px] lg:max-h-[350px] object-contain border-2 border-[#D9D9D9]"
             width={300}
             height={376}
             priority
