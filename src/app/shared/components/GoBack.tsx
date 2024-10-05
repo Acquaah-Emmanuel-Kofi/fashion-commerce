@@ -8,7 +8,11 @@ const GoBackButton = () => {
   const pathname = usePathname();
 
   const handleGoBack = useCallback(() => {
-    pathname !== "/" ? router.back() : router.push("/");
+    if (pathname !== "/") {
+      router.back();
+    } else {
+      router.push("/");
+    }
   }, [router, pathname]);
 
   return (
