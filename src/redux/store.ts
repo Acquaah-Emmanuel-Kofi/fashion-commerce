@@ -3,6 +3,7 @@ import productReducer from "@/redux/features/productSlice";
 import cartReducer from "@/redux/features/cartSlice";
 import searchReducer from "@/redux/features/searchSlice";
 import filtersReducer from "@/redux/features/filtersSlice";
+import collectionSlice from "@/redux/features/collectionSlice";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
 const rootReducer = combineReducers({
@@ -10,6 +11,7 @@ const rootReducer = combineReducers({
   cart: cartReducer,
   search: searchReducer,
   filters: filtersReducer,
+  collections: collectionSlice,
 });
 
 export const store = configureStore({
