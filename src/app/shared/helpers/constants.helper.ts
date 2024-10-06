@@ -69,5 +69,5 @@ export const lastYearCollectionsFilterButtons: string[] = [
   "All",
   "Men",
   "Women",
-  "KID",
+  "KIDS",
 ];
