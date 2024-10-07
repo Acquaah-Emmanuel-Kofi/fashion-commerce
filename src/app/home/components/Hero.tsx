@@ -113,6 +113,10 @@ export default function Hero({ products }: HeroProps) {
                   name={product.name}
                   type={product.type}
                   price={product.price}
+                  description={product.description}
+                  size={product.size}
+                  color={product.color}
+                  quantity={1}
                 />
               ))}
             </Carousel>
@@ -173,6 +177,10 @@ export default function Hero({ products }: HeroProps) {
                 type={product.type}
                 price={product.price}
                 showProductDetails={false}
+                description={product.description}
+                size={product.size}
+                color={product.color}
+                quantity={1}
               />
             ))}
           </Carousel>
