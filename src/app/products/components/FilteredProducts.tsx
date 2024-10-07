@@ -100,6 +100,10 @@ const FilteredProducts = () => {
           name={product.name}
           type={product.type}
           price={product.price}
+          description={product.description}
+          size={product.size}
+          color={product.color}
+          quantity={1}
         />
       ))}
     </div>
