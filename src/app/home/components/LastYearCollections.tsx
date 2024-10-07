@@ -18,7 +18,7 @@ export default function LastYearCollections() {
   const [products, setProducts] = useState<IProduct[]>([]);
   const [gender, setGender] = useState<string>("all");
   const [error, setError] = useState<boolean>(false);
-  const [visibleCount, setVisibleCount] = useState<number>(3); // Show 3 products initially
+  const [visibleCount, setVisibleCount] = useState<number>(3);
 
   useEffect(() => {
     const fetchCollections = async () => {
@@ -42,11 +42,11 @@ export default function LastYearCollections() {
 
   const handleGenderChange = (newGender: string) => {
     setGender(newGender.toLowerCase());
-    setVisibleCount(3); // Reset visible count when changing gender
+    setVisibleCount(3);
   };
 
   const handleLoadMore = () => {
-    setVisibleCount((prevCount) => prevCount + 3); // Load 3 more products on click
+    setVisibleCount((prevCount) => prevCount + 3);
   };
 
   return (
@@ -68,7 +68,7 @@ export default function LastYearCollections() {
                   onClick={() => handleGenderChange(button)}
                   className={`text-sm ${
                     gender === button.toLowerCase()
-                      ? "font-bold border-brackets"
+                      ? "font-bold"
                       : "text-[#8A8A8A]"
                   }`}
                 >
