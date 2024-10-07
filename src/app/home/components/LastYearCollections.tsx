@@ -6,9 +6,9 @@ import { getLastYearCollections } from "@/services/products/api";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { HiPlus } from "react-icons/hi";
 import { IoChevronDownOutline } from "react-icons/io5";
 import ProductPlaceholder from "../placeholders/ProductPlaceholder";
+import AddToCartPlusButton from "./AddToCartPlusButton";
 
 const date = new Date();
 const year = date.getFullYear();
@@ -115,16 +115,9 @@ export default function LastYearCollections() {
                       width={300}
                       height={376}
                     />
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleAddToCart(product.id);
-                      }}
-                      className="flex justify-between bg-[#DCDCDC70] text-[#0C0C0C] hover:bg-black hover:text-white transition items-center p-2.5 absolute bottom-1 left-2/4 -translate-x-2/4"
-                    >
-                      <HiPlus />
-                    </button>
+                    <div className="absolute bottom-1 left-2/4 -translate-x-2/4">
+                      <AddToCartPlusButton products={product} />
+                    </div>
                   </div>
 
                   {/* Product Details */}
