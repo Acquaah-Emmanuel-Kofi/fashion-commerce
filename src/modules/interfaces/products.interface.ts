@@ -8,15 +8,11 @@ export interface IProduct {
   images: string[] | StaticImageData[];
   thumbnail: string | StaticImageData;
   price: string;
-}
-
-export interface ICartItem extends IProduct {
   description: string;
   size: string;
   color: string;
   quantity: number;
 }
-
 
 export interface IProducts extends ICommonResponse {
   data: IProduct[];

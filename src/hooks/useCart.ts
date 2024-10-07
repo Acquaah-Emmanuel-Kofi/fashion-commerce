@@ -1,6 +1,6 @@
+import { IProduct } from "@/modules/interfaces/products.interface";
 import { RootState, AppDispatch, useAppSelector, useAppDispatch } from "../redux/store";
 import { addToCart, clearCart, removeFromCart, updateCartQuantity } from "@/redux/features/cartSlice";
-import { ICartItem } from "@/modules/interfaces/products.interface";
 
 
 const useCart = () => {
@@ -9,7 +9,7 @@ const useCart = () => {
     (state: RootState) => state.cart
   );
 
-  const addItem = (product: ICartItem) => dispatch(addToCart(product));
+  const addItem = (product: IProduct) => dispatch(addToCart(product));
   const removeItem = (id: string) => dispatch(removeFromCart(id));
 
   const increaseQuantity = (id: string) => {
