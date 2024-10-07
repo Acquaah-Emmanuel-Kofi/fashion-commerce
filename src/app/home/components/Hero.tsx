@@ -4,18 +4,26 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import SearchBar from "@/app/shared/components/Searchbar";
 import Carousel from "@/app/shared/components/carousel/Carousel";
-import ProductCard from "@/app/shared/components/ProductCard";
 import CarouselPrevButton from "@/app/shared/components/carousel/CarouselPrevButton";
 import CarouselNextButton from "@/app/shared/components/carousel/CarouselNextButton";
 import { IProduct } from "@/modules/interfaces/products.interface";
+import { useAppDispatch } from "@/redux/store";
+import { setSelectedCollection } from "@/redux/features/collectionSlice";
+import { lastYearCollectionsFilterButtons } from "@/app/shared/helpers/constants.helper";
+import ProductCard from "@/app/shared/components/ProductCard";
 
 interface HeroProps {
   products: IProduct[];
 }
 
 export default function Hero({ products }: HeroProps) {
+  const dispatch = useAppDispatch();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isMobile, setIsMobile] = useState<boolean>(false);
+
+  const handleCollectionChange = (type: string) => {
+    dispatch(setSelectedCollection(type));
+  };
 
   useEffect(() => {
     // Only execute this code on the client side
@@ -58,15 +66,19 @@ export default function Hero({ products }: HeroProps) {
     <main className="flex flex-col px-6">
       <div className=" w-full lg:w-1/4 font-beatrice">
         <ul>
-          <li>
-            <h3 className="text-gray-700">MEN</h3>
-          </li>
-          <li>
-            <h3 className="text-gray-700">WOMEN</h3>
-          </li>
-          <li>
-            <h3 className="text-gray-700">KIDS</h3>
-          </li>
+          {lastYearCollectionsFilterButtons
+            .slice(1, 4)
+            .map((button: string, index: number) => (
+              <li key={index}>
+                <Link
+                  href="#collections"
+                  className="text-gray-700 uppercase"
+                  onClick={() => handleCollectionChange(button.toLowerCase())}
+                >
+                  {button}
+                </Link>
+              </li>
+            ))}
         </ul>
 
         <div className="mt-4">

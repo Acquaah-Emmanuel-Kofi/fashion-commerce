@@ -8,6 +8,8 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { IoChevronDownOutline } from "react-icons/io5";
 import ProductPlaceholder from "../placeholders/ProductPlaceholder";
+import { useAppDispatch, useAppSelector } from "@/redux/store";
+import { setSelectedCollection } from "@/redux/features/collectionSlice";
 import AddToCartPlusButton from "./AddToCartPlusButton";
 
 const date = new Date();
@@ -16,15 +18,17 @@ const lastYear = year - 1;
 
 export default function LastYearCollections() {
   const [products, setProducts] = useState<IProduct[]>([]);
-  const [gender, setGender] = useState<string>("all");
   const [error, setError] = useState<boolean>(false);
-  const [visibleCount, setVisibleCount] = useState<number>(3);
+  const [visibleCount, setVisibleCount] = useState<number>(3); 
+
+  const dispatch = useAppDispatch()
+  const collection = useAppSelector((state) => state.collections.collection)
 
   useEffect(() => {
     const fetchCollections = async () => {
       setError(false);
       try {
-        const data = await getLastYearCollections(true, gender);
+        const data = await getLastYearCollections(true, collection.toLowerCase());
         setProducts(data);
       } catch (error) {
         setProducts([]);
@@ -34,19 +38,19 @@ export default function LastYearCollections() {
     };
 
     fetchCollections();
-  }, [gender]);
+  }, [collection]);
 
   const handleAddToCart = (id: string) => {
     console.log(`Product ${id} added to cart`);
   };
 
   const handleGenderChange = (newGender: string) => {
-    setGender(newGender.toLowerCase());
-    setVisibleCount(3);
+    dispatch(setSelectedCollection(newGender.toLowerCase()))
+    setVisibleCount(3); 
   };
 
   const handleLoadMore = () => {
-    setVisibleCount((prevCount) => prevCount + 3);
+    setVisibleCount((prevCount) => prevCount + 3); // Load 3 more products on click
   };
 
   return (
@@ -61,18 +65,18 @@ export default function LastYearCollections() {
       <main>
         <div className="flex justify-between items-center mb-5 border-b-2 border-[#DFDFDF] pb-4 my-6">
           <ul className="flex items-center gap-7">
-            {lastYearCollectionsFilterButtons.map((button) => (
+            {lastYearCollectionsFilterButtons.map((button: string) => (
               <li key={button}>
                 <button
                   type="button"
-                  onClick={() => handleGenderChange(button)}
+                  onClick={() => handleGenderChange(button.toLowerCase())}
                   className={`text-sm ${
-                    gender === button.toLowerCase()
-                      ? "font-bold"
+                    collection === button.toLowerCase()
+                      ? "font-bold border-brackets"
                       : "text-[#8A8A8A]"
                   }`}
                 >
-                  {gender === button.toLowerCase() ? `(${button})` : button}
+                  {collection === button.toLowerCase() ? `(${button})` : button}
                 </button>
               </li>
             ))}
@@ -88,7 +92,7 @@ export default function LastYearCollections() {
 
         {error ? (
           <div className="text-red-500 text-center text-lg mt-10">
-            Error fetching {gender} collections
+            Error fetching {collection} collections
           </div>
         ) : (
           <div className="grid lg:grid-cols-3 grid-cols-1 gap-10">
