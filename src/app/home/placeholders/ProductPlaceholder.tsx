@@ -1,6 +1,6 @@
 const ProductPlaceholder = () => {
   return (
-    <div className="w-full max-h-[300px] lg:max-h-[500px] bg-white overflow-hidden relative animate-pulse">
+    <div className="w-full bg-white overflow-hidden relative animate-pulse">
       {/* Skeleton for Product Image */}
       <div className="w-full h-[200px] lg:h-[400px] bg-gray-300 border-2 border-[#D9D9D9]"></div>
 
