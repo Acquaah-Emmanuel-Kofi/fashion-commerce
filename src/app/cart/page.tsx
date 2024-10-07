@@ -8,7 +8,7 @@ import Carousel from "../shared/components/carousel/Carousel";
 import { useEffect, useState } from "react";
 import CarouselPrevButton from "../shared/components/carousel/CarouselPrevButton";
 import CarouselNextButton from "../shared/components/carousel/CarouselNextButton";
-import { ICartItem } from "@/modules/interfaces/products.interface";
+import { IProduct } from "@/modules/interfaces/products.interface";
 
 const CartPage = () => {
   const {
@@ -21,28 +21,28 @@ const CartPage = () => {
   } = useCart();
 
   const [currentIndex, setCurrentIndex] = useState(0);
-    const [isMobile, setIsMobile] = useState<boolean>(false);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
 
-    useEffect(() => {
-      // Only execute this code on the client side
-      if (typeof window !== "undefined") {
-        const checkScreenWidth = () => {
-          const width = window.innerWidth;
-          setIsMobile(width < 768); // Update state based on screen width
-        };
+  useEffect(() => {
+    // Only execute this code on the client side
+    if (typeof window !== "undefined") {
+      const checkScreenWidth = () => {
+        const width = window.innerWidth;
+        setIsMobile(width < 768); // Update state based on screen width
+      };
 
-        // Initial check
-        checkScreenWidth();
+      // Initial check
+      checkScreenWidth();
 
-        // Add event listener for window resize
-        window.addEventListener("resize", checkScreenWidth);
+      // Add event listener for window resize
+      window.addEventListener("resize", checkScreenWidth);
 
-        // Cleanup function to remove event listener when component unmounts
-        return () => {
-          window.removeEventListener("resize", checkScreenWidth);
-        };
-      }
-    }, []);
+      // Cleanup function to remove event listener when component unmounts
+      return () => {
+        window.removeEventListener("resize", checkScreenWidth);
+      };
+    }
+  }, []);
 
   const handleNext = () => {
     if (currentIndex < items.length - 1) {
@@ -113,7 +113,7 @@ const CartPage = () => {
                 onNext={handleNext}
                 onPrev={handlePrev}
               >
-                {items.map((item: ICartItem) => (
+                {items.map((item: IProduct) => (
                   <CartItem
                     key={item.id}
                     item={item}
