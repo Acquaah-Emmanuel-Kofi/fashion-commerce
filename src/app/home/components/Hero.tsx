@@ -68,8 +68,8 @@ export default function Hero({ products }: HeroProps) {
         <ul>
           {lastYearCollectionsFilterButtons
             .slice(1, 4)
-            .map((button: string) => (
-              <li>
+            .map((button: string, index: number) => (
+              <li key={index}>
                 <Link
                   href="#collections"
                   className="text-gray-700 uppercase"
