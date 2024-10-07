@@ -4,6 +4,7 @@ import React, { Fragment, useState } from "react";
 import AddToCartButton from "./AddToCartButton";
 import { IProductDetails } from "@/modules/interfaces/products.interface";
 import useCart from "@/hooks/useCart";
+import toast from "react-hot-toast";
 
 interface IProducts {
   products: IProductDetails;
@@ -23,8 +24,10 @@ const ProductInfo: React.FC<IProducts> = ({ products }) => {
         quantity: 1,
       };
       addItem(cartItem);
+
+      toast.success("Added to cart successfully!");
     } else {
-      alert("Please select a size and color before adding to the cart.");
+      toast.error("Please select a size and color before adding to the cart.");
     }
   };
 
