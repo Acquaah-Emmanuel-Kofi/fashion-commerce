@@ -19,16 +19,19 @@ const lastYear = year - 1;
 export default function LastYearCollections() {
   const [products, setProducts] = useState<IProduct[]>([]);
   const [error, setError] = useState<boolean>(false);
-  const [visibleCount, setVisibleCount] = useState<number>(3); 
+  const [visibleCount, setVisibleCount] = useState<number>(3);
 
-  const dispatch = useAppDispatch()
-  const collection = useAppSelector((state) => state.collections.collection)
+  const dispatch = useAppDispatch();
+  const collection = useAppSelector((state) => state.collections.collection);
 
   useEffect(() => {
     const fetchCollections = async () => {
       setError(false);
       try {
-        const data = await getLastYearCollections(true, collection.toLowerCase());
+        const data = await getLastYearCollections(
+          true,
+          collection.toLowerCase()
+        );
         setProducts(data);
       } catch (error) {
         setProducts([]);
@@ -40,13 +43,9 @@ export default function LastYearCollections() {
     fetchCollections();
   }, [collection]);
 
-  const handleAddToCart = (id: string) => {
-    console.log(`Product ${id} added to cart`);
-  };
-
   const handleGenderChange = (newGender: string) => {
-    dispatch(setSelectedCollection(newGender.toLowerCase()))
-    setVisibleCount(3); 
+    dispatch(setSelectedCollection(newGender.toLowerCase()));
+    setVisibleCount(3);
   };
 
   const handleLoadMore = () => {
