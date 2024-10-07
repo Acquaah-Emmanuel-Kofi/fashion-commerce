@@ -2,9 +2,9 @@
 
 import Image from "next/image";
 import { FiX } from "react-icons/fi";
-import { ICartItem } from "@/modules/interfaces/products.interface";
 import { FaMinus, FaPlus } from "react-icons/fa6";
 import Link from "next/link";
+import { IProduct } from "@/modules/interfaces/products.interface";
 
 const CartItem = ({
   item,
@@ -12,7 +12,7 @@ const CartItem = ({
   increaseQuantity,
   decreaseQuantity,
 }: {
-  item: ICartItem;
+  item: IProduct;
   removeItem: (id: string) => void;
   increaseQuantity: (id: string) => void;
   decreaseQuantity: (id: string) => void;

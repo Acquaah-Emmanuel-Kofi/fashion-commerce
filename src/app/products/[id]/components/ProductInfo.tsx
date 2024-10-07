@@ -30,16 +30,17 @@ const ProductInfo: React.FC<IProducts> = ({ products }) => {
 
   return (
     <Fragment>
-      <h1 className="text-sm font-bold font-beatrice">
+      <h1 className="text-lg font-bold font-beatrice">
         {products.name ?? "Product Name"}
       </h1>
 
-      <p className="text-sm font-bold">${products.price ?? "N/A"}</p>
-      <p className="text-gray-600 text-xs font-beatrice">
+      <p className="text-lg font-bold">${products.price ?? "N/A"}</p>
+
+      <p className="text-gray-600 text-sm font-beatrice">
         {products.type ?? "N/A"}
       </p>
 
-      <p className="text-xs font-semibold mt-9 font-beatrice">
+      <p className="text-sm font-semibold mt-9 font-beatrice">
         {products.description ?? "No description available"}
       </p>
 

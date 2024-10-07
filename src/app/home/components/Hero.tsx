@@ -4,13 +4,13 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import SearchBar from "@/app/shared/components/Searchbar";
 import Carousel from "@/app/shared/components/carousel/Carousel";
-import ProductCard from "@/app/shared/components/ProductCard";
 import CarouselPrevButton from "@/app/shared/components/carousel/CarouselPrevButton";
 import CarouselNextButton from "@/app/shared/components/carousel/CarouselNextButton";
 import { IProduct } from "@/modules/interfaces/products.interface";
 import { useAppDispatch } from "@/redux/store";
 import { setSelectedCollection } from "@/redux/features/collectionSlice";
 import { lastYearCollectionsFilterButtons } from "@/app/shared/helpers/constants.helper";
+import ProductCard from "@/app/shared/components/ProductCard";
 
 interface HeroProps {
   products: IProduct[];
@@ -113,6 +113,10 @@ export default function Hero({ products }: HeroProps) {
                   name={product.name}
                   type={product.type}
                   price={product.price}
+                  description={product.description}
+                  size={product.size}
+                  color={product.color}
+                  quantity={1}
                 />
               ))}
             </Carousel>
@@ -173,6 +177,10 @@ export default function Hero({ products }: HeroProps) {
                 type={product.type}
                 price={product.price}
                 showProductDetails={false}
+                description={product.description}
+                size={product.size}
+                color={product.color}
+                quantity={1}
               />
             ))}
           </Carousel>

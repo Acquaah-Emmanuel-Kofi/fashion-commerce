@@ -6,11 +6,11 @@ import { getLastYearCollections } from "@/services/products/api";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { HiPlus } from "react-icons/hi";
 import { IoChevronDownOutline } from "react-icons/io5";
 import ProductPlaceholder from "../placeholders/ProductPlaceholder";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { setSelectedCollection } from "@/redux/features/collectionSlice";
+import AddToCartPlusButton from "./AddToCartPlusButton";
 
 const date = new Date();
 const year = date.getFullYear();
@@ -19,16 +19,19 @@ const lastYear = year - 1;
 export default function LastYearCollections() {
   const [products, setProducts] = useState<IProduct[]>([]);
   const [error, setError] = useState<boolean>(false);
-  const [visibleCount, setVisibleCount] = useState<number>(3); 
+  const [visibleCount, setVisibleCount] = useState<number>(3);
 
-  const dispatch = useAppDispatch()
-  const collection = useAppSelector((state) => state.collections.collection)
+  const dispatch = useAppDispatch();
+  const collection = useAppSelector((state) => state.collections.collection);
 
   useEffect(() => {
     const fetchCollections = async () => {
       setError(false);
       try {
-        const data = await getLastYearCollections(true, collection.toLowerCase());
+        const data = await getLastYearCollections(
+          true,
+          collection.toLowerCase()
+        );
         setProducts(data);
       } catch (error) {
         setProducts([]);
@@ -40,17 +43,13 @@ export default function LastYearCollections() {
     fetchCollections();
   }, [collection]);
 
-  const handleAddToCart = (id: string) => {
-    console.log(`Product ${id} added to cart`);
-  };
-
   const handleGenderChange = (newGender: string) => {
-    dispatch(setSelectedCollection(newGender.toLowerCase()))
-    setVisibleCount(3); 
+    dispatch(setSelectedCollection(newGender.toLowerCase()));
+    setVisibleCount(3);
   };
 
   const handleLoadMore = () => {
-    setVisibleCount((prevCount) => prevCount + 3); 
+    setVisibleCount((prevCount) => prevCount + 3); // Load 3 more products on click
   };
 
   return (
@@ -119,16 +118,9 @@ export default function LastYearCollections() {
                       width={300}
                       height={376}
                     />
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleAddToCart(product.id);
-                      }}
-                      className="flex justify-between bg-[#DCDCDC70] text-[#0C0C0C] hover:bg-black hover:text-white transition items-center p-2.5 absolute bottom-1 left-2/4 -translate-x-2/4"
-                    >
-                      <HiPlus />
-                    </button>
+                    <div className="absolute bottom-1 left-2/4 -translate-x-2/4">
+                      <AddToCartPlusButton products={product} />
+                    </div>
                   </div>
 
                   {/* Product Details */}

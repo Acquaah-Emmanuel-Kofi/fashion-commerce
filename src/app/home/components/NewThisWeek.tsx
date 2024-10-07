@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { HiPlus } from "react-icons/hi";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Carousel from "@/app/shared/components/carousel/Carousel";
@@ -9,6 +8,7 @@ import CarouselPrevButton from "@/app/shared/components/carousel/CarouselPrevBut
 import CarouselNextButton from "@/app/shared/components/carousel/CarouselNextButton";
 import { IProduct } from "@/modules/interfaces/products.interface";
 import NewThisWeekPlaceholder from "../placeholders/NewThisWeekPlaceholder";
+import AddToCartPlusButton from "./AddToCartPlusButton";
 
 interface ThisWeekProductsProps {
   products: IProduct[];
@@ -51,10 +51,6 @@ export default function NewThisWeek({ products }: ThisWeekProductsProps) {
     }
   };
 
-  const handleAddToCart = (id: string) => {
-    console.log(`Product ${id} added to cart`);
-  };
-
   if (!products) {
     return <NewThisWeekPlaceholder />;
   }
@@ -86,7 +82,7 @@ export default function NewThisWeek({ products }: ThisWeekProductsProps) {
             onNext={handleNext}
             onPrev={handlePrev}
           >
-            {products?.map((product) => (
+            {products?.map((product: IProduct) => (
               <Link
                 href={`/products/${product.id}`}
                 key={product.id}
@@ -101,16 +97,10 @@ export default function NewThisWeek({ products }: ThisWeekProductsProps) {
                     width={300}
                     height={376}
                   />
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleAddToCart(product.id);
-                    }}
-                    className="flex justify-between bg-[#DCDCDC70] text-[#0C0C0C] hover:bg-black hover:text-white transition items-center p-2.5 absolute bottom-1 left-2/4 -translate-x-2/4"
-                  >
-                    <HiPlus />
-                  </button>
+
+                  <div className="absolute bottom-1 left-2/4 -translate-x-2/4">
+                    <AddToCartPlusButton products={product} />
+                  </div>
                 </div>
 
                 {/* Product Details */}
