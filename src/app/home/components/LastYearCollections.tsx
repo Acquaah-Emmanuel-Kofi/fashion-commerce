@@ -29,7 +29,7 @@ export default function LastYearCollections() {
       setError(false);
       try {
         const data = await getLastYearCollections(
-          true,
+          collection.toLowerCase() === "all",
           collection.toLowerCase()
         );
         setProducts(data);
