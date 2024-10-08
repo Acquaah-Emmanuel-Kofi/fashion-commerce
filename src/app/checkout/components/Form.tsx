@@ -6,14 +6,16 @@ import {
   validateEmail,
   validatePhoneNumber,
 } from "@/app/shared/helpers/constants.helper";
+import useCart from "@/hooks/useCart";
 import { FormFields } from "@/modules/types/common.type";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 
 const Form = () => {
   const [formData, setFormData] = useState<FormFields>(formFields);
-
   const [errors, setErrors] = useState<FormFields>(formFields);
+
+  const { items } = useCart();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -57,16 +59,49 @@ const Form = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (formIsValid()) {
-      toast.success("Submitted Successfully!");
-      console.log("Form Data Submitted:", formData);
+    if (items.length > 0) {
+      if (formIsValid()) {
+        toast.success("Submitted Successfully! Redirecting to WhatsApp...", {
+          duration: 5000,
+        });
+
+        setTimeout(() => {
+          handleWhatsAppMessage();
+        }, 5000);
+      } else {
+        toast.error("Email and phone are required!");
+      }
     } else {
-      toast.error("Email and phone are required!");
+      toast.error("Please add at least one item to the list");
     }
   };
 
   const formIsValid = () => {
     return formData.email && formData.phone;
+  };
+
+  const handleWhatsAppMessage = () => {
+    const baseURL = "https://fashion-commerce-hhcx/products/";
+
+    let message = `👋 Hi, I'm interested in the following items:\n\n`;
+
+    items.forEach((item, index) => {
+      message += `⭐ ${index + 1}. *${item.name}* - _GHS ${item.price}_\n`;
+    });
+
+    message += `\n🔗 *Product Links*:\n`;
+    items.forEach((item) => {
+      message += `• ${baseURL}${item.id}\n`;
+    });
+
+    const encodedMessage = encodeURIComponent(message);
+
+    const whatsappNumber = "233559045947";
+
+    window.open(
+      `https://wa.me/${whatsappNumber}?text=${encodedMessage}`,
+      "_blank"
+    );
   };
 
   return (
