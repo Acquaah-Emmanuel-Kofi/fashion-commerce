@@ -45,7 +45,8 @@ const CartSummary: React.FC<CartSummaryProps> = ({ totalAmount }) => {
         <button
           type="button"
           onClick={goToCheckout}
-          className="hover:bg-black font-semibold hover:text-white bg-[#D9D9D9] text-black transition-all ease-in-out px-4 py-2 w-full"
+          disabled={totalAmount === 0}
+          className="hover:bg-black font-semibold hover:text-white bg-[#D9D9D9] text-black transition-all ease-in-out px-4 py-2 w-full disabled:cursor-not-allowed"
         >
           CHECKOUT
         </button>
