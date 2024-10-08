@@ -6,6 +6,7 @@ import { FaMinus, FaPlus } from "react-icons/fa6";
 import Link from "next/link";
 import { IProduct } from "@/modules/interfaces/products.interface";
 import toast from "react-hot-toast";
+import AddToFavoriteButton from "@/app/shared/components/AddToFavoriteButton";
 
 const CartItem = ({
   item,
@@ -46,7 +47,7 @@ const CartItem = ({
             priority
           />
           <div className="absolute bottom-0 right-0">
-            {/* <AddToFavoriteButton /> */}
+            <AddToFavoriteButton products={item} />
           </div>
         </div>
 
