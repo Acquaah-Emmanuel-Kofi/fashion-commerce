@@ -24,11 +24,11 @@ const ColorFilter: React.FC<ColorFilterProps> = ({ colors, onSelect }) => {
             key={color}
             type="button"
             style={{ background: color.toLowerCase().trim() }}
-            className={`flex justify-center items-center w-11 h-11 p-2.5 hover:bg-[#D9D9D9] ${
+            className={`flex justify-center items-center p-2.5 w-11 h-11 hover:bg-[#D9D9D9] ${
               selectedColor?.toLowerCase()?.trim() ===
               color?.toLowerCase()?.trim()
-                ? "bg-black text-white"
-                : "bg-white text-black"
+                ? "border-2 border-[#ccc]"
+                : ""
             }`}
             onClick={() => handleColorClick(color)}
           ></button>

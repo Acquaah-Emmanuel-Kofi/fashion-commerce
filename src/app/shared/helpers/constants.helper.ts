@@ -1,4 +1,5 @@
 import { IFilter } from "@/app/products/interfaces/filters.interface";
+import { FormFields } from "@/modules/types/common.type";
 
 export const filters: IFilter[] = [
   {
@@ -71,3 +72,25 @@ export const lastYearCollectionsFilterButtons: string[] = [
   "Women",
   "KIDS",
 ];
+
+export const formFields: FormFields = {
+  email: "",
+  phone: "",
+  firstname: "",
+  lastname: "",
+  country: "",
+  state: "",
+  address: "",
+  city: "",
+  postalCode: "",
+};
+
+export const validateEmail = (email: string) => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+};
+
+export const validatePhoneNumber = (phone: string) => {
+  const phoneRegex = /^\d{10,15}$/;
+  return phoneRegex.test(phone);
+};

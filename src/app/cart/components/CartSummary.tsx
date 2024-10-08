@@ -1,8 +1,18 @@
+"use client";
+
+import { useRouter } from "next/navigation";
+
 interface CartSummaryProps {
   totalAmount: number;
 }
 
 const CartSummary: React.FC<CartSummaryProps> = ({ totalAmount }) => {
+  const router = useRouter();
+
+  const goToCheckout = () => {
+    router.push("/checkout");
+  };
+
   return (
     <div className="lg:w-1/3 bg-gray-50 lg:p-6">
       <h2 className="text-xl font-bold mb-4 font-beatrice">ORDER SUMMARY</h2>
@@ -34,9 +44,11 @@ const CartSummary: React.FC<CartSummaryProps> = ({ totalAmount }) => {
         </div>
         <button
           type="button"
-          className="hover:bg-black font-semibold hover:text-white bg-[#D9D9D9] text-black transition-all ease-in-out px-4 py-2 w-full"
+          onClick={goToCheckout}
+          disabled={totalAmount === 0}
+          className="hover:bg-black font-semibold hover:text-white bg-[#D9D9D9] text-black transition-all ease-in-out px-4 py-2 w-full disabled:cursor-not-allowed"
         >
-          CONTINUE
+          CHECKOUT
         </button>
       </div>
     </div>
