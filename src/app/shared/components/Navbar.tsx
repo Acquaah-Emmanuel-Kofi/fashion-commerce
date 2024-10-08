@@ -3,21 +3,31 @@
 import { selectCartItemCount } from "@/redux/features/cartSlice";
 import { useAppSelector } from "@/redux/store";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Fragment, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import GoBackButton from "./GoBack";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const pathname = usePathname();
   const cartItemCount = useAppSelector(selectCartItemCount);
 
-  const isProductPage =
-    pathname === "/products" || pathname.startsWith("/products/");
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const isProductPage = pathname.startsWith("/products/");
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
+  };
+
+  const handleScrollClick = (section: string) => {
+    router.push(`/#${section}`);
+
+    if (pathname === "/") {
+      const sectionElement = document.querySelector(`#${section}`);
+      sectionElement?.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   return (
@@ -57,7 +67,7 @@ const Navbar = () => {
                 />
               </svg>
             </button>
-            
+
             <ul className="hidden lg:flex space-x-6 ml-4">
               <li>
                 <Link href="/" className="text-gray-700 font-medium text-base">
@@ -65,20 +75,22 @@ const Navbar = () => {
                 </Link>
               </li>
               <li>
-                <Link
-                  href="#collections"
+                <button
+                  type="button"
+                  onClick={() => handleScrollClick("collections")}
                   className="text-gray-700 font-medium text-base"
                 >
                   Collections
-                </Link>
+                </button>
               </li>
               <li>
-                <Link
-                  href="#new-this-week"
+                <button
+                  type="button"
+                  onClick={() => handleScrollClick("new-this-week")}
                   className="text-gray-700 font-medium text-base"
                 >
                   New
-                </Link>
+                </button>
               </li>
             </ul>
           </div>
@@ -224,22 +236,28 @@ const Navbar = () => {
               </Link>
             </li>
             <li>
-              <Link
-                href="#collections"
-                onClick={toggleSidebar}
+              <button
+                type="button"
+                onClick={() => {
+                  handleScrollClick("collections");
+                  toggleSidebar();
+                }}
                 className="text-gray-700 font-medium text-lg"
               >
                 Collections
-              </Link>
+              </button>
             </li>
             <li>
-              <Link
-                href="#new-this-week"
-                onClick={toggleSidebar}
+              <button
+                type="button"
+                onClick={() => {
+                  handleScrollClick("new-this-week");
+                  toggleSidebar();
+                }}
                 className="text-gray-700 font-medium text-lg"
               >
                 New
-              </Link>
+              </button>
             </li>
             <li>
               <Link href="/cart" className="text-gray-700 font-medium text-lg">

@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import CarouselPrevButton from "../shared/components/carousel/CarouselPrevButton";
 import CarouselNextButton from "../shared/components/carousel/CarouselNextButton";
 import { IProduct } from "@/modules/interfaces/products.interface";
+import toast from "react-hot-toast";
 
 const CartPage = () => {
   const {
@@ -56,6 +57,11 @@ const CartPage = () => {
     }
   };
 
+  const handleRemoveAllFromCart = () => {
+    clear()
+    toast.success("Successfully removed all items from cart!");
+  }
+
   return (
     <Layout showFooter={false}>
       <div className="container mx-auto px-4 py-8">
@@ -69,7 +75,11 @@ const CartPage = () => {
           </div>
           {/* Clear Cart Button */}
           {items.length > 0 && (
-            <button type="button" onClick={clear} className="text-sm">
+            <button
+              type="button"
+              onClick={handleRemoveAllFromCart}
+              className="text-sm"
+            >
               Clear Cart
             </button>
           )}
