@@ -25,8 +25,9 @@ const ProductDetails = ({ params }: { params: { id: string } }) => {
                 Oops! No Data Found
               </h1>
               <p className="text-lg text-gray-700 mb-6">
-                We couldn't find any information related to this ID. It's
-                possible the item no longer exists or the link is incorrect.
+                We couldn&apos;t find any information related to this ID.
+                It&apos;s possible the item no longer exists or the link is
+                incorrect.
               </p>
               <div className="flex flex-col lg:flex-row justify-center items-center gap-2">
                 <Link
