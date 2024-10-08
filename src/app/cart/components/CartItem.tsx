@@ -5,6 +5,7 @@ import { FiX } from "react-icons/fi";
 import { FaMinus, FaPlus } from "react-icons/fa6";
 import Link from "next/link";
 import { IProduct } from "@/modules/interfaces/products.interface";
+import toast from "react-hot-toast";
 
 const CartItem = ({
   item,
@@ -17,12 +18,17 @@ const CartItem = ({
   increaseQuantity: (id: string) => void;
   decreaseQuantity: (id: string) => void;
 }) => {
+  const handleRemoveFromCart = (id: string) => {
+    removeItem(item.id);
+    toast.success("Successfully removed item from cart!");
+  };
+
   return (
     <div className="flex justify-between relative lg:w-[350px] w-[300px]">
       <button
         type="button"
         className="absolute top-0 right-0 text-gray-600 hover:text-gray-800"
-        onClick={() => removeItem(item.id)}
+        onClick={() => handleRemoveFromCart(item.id)}
       >
         <FiX size={20} />
       </button>
