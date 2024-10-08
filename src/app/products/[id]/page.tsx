@@ -9,6 +9,7 @@ import { Fragment } from "react";
 import ProductImagesPlaceholder from "./placeholders/ProductImagesPlaceholder";
 import ProductInfoPlaceholder from "./placeholders/ProductInfoSkeleton";
 import Link from "next/link";
+import AddToFavoriteButton from "@/app/shared/components/AddToFavoriteButton";
 
 const ProductDetails = ({ params }: { params: { id: string } }) => {
   const { data, loading, error } = useFetch<IProductDetails>(
@@ -66,7 +67,7 @@ const ProductDetails = ({ params }: { params: { id: string } }) => {
 
               <div className="lg:w-[45%] w-full lg:p-6 lg:pt-10 pt-10 py-6 px-4 mt-6 lg:mt-0 relative border-2 border-[#D9D9D9]">
                 <div className="absolute top-0 right-0">
-                  {/* <AddToFavoriteButton /> */}
+                  {data && <AddToFavoriteButton products={data} />}
                 </div>
 
                 {data && <ProductInfo key={data.id} products={data} />}

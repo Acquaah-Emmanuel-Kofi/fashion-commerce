@@ -4,14 +4,18 @@ import cartReducer from "@/redux/features/cartSlice";
 import searchReducer from "@/redux/features/searchSlice";
 import filtersReducer from "@/redux/features/filtersSlice";
 import collectionSlice from "@/redux/features/collectionSlice";
+import favoriteSlice from "@/redux/features/favoriteSlice";
+import itemsToRenderSlice from "@/redux/features/itemsToRenderSlice";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
 const rootReducer = combineReducers({
   products: productReducer,
   cart: cartReducer,
+  favorites: favoriteSlice,
   search: searchReducer,
   filters: filtersReducer,
   collections: collectionSlice,
+  itemsToRender: itemsToRenderSlice,
 });
 
 export const store = configureStore({

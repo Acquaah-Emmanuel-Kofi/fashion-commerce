@@ -6,6 +6,7 @@ import { FaMinus, FaPlus } from "react-icons/fa6";
 import Link from "next/link";
 import { IProduct } from "@/modules/interfaces/products.interface";
 import toast from "react-hot-toast";
+import AddToFavoriteButton from "@/app/shared/components/AddToFavoriteButton";
 
 const CartItem = ({
   item,
@@ -40,13 +41,13 @@ const CartItem = ({
           <Image
             src={item.images[0]}
             alt={item.name}
-            className="lg:w-full w-[90%] max-h-[250px] lg:max-h-[350px] object-contain border-2 border-[#D9D9D9]"
+            className="lg:w-full w-[90%] h-[250px] lg:h-[400px] object-contain border-2 border-[#D9D9D9]"
             width={300}
             height={376}
             priority
           />
           <div className="absolute bottom-0 right-0">
-            {/* <AddToFavoriteButton /> */}
+            <AddToFavoriteButton products={item} />
           </div>
         </div>
 
