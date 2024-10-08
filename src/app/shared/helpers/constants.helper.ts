@@ -73,7 +73,6 @@ export const lastYearCollectionsFilterButtons: string[] = [
   "KIDS",
 ];
 
-
 export const formFields: FormFields = {
   email: "",
   phone: "",
@@ -84,4 +83,14 @@ export const formFields: FormFields = {
   address: "",
   city: "",
   postalCode: "",
+};
+
+export const validateEmail = (email: string) => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+};
+
+export const validatePhoneNumber = (phone: string) => {
+  const phoneRegex = /^\d{10,15}$/;
+  return phoneRegex.test(phone);
 };
