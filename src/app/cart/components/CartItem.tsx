@@ -19,7 +19,7 @@ const CartItem = ({
   decreaseQuantity: (id: string) => void;
 }) => {
   const handleRemoveFromCart = (id: string) => {
-    removeItem(item.id);
+    removeItem(id);
     toast.success("Successfully removed item from cart!");
   };
 
