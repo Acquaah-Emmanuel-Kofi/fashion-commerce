@@ -1,4 +1,5 @@
 import { IFilter } from "@/app/products/interfaces/filters.interface";
+import { FormFields } from "@/modules/types/common.type";
 
 export const filters: IFilter[] = [
   {
@@ -71,3 +72,16 @@ export const lastYearCollectionsFilterButtons: string[] = [
   "Women",
   "KIDS",
 ];
+
+
+export const formFields: FormFields = {
+  email: "",
+  phone: "",
+  firstname: "",
+  lastname: "",
+  country: "",
+  state: "",
+  address: "",
+  city: "",
+  postalCode: "",
+};
