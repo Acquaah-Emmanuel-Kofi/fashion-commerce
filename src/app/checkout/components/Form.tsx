@@ -1,40 +1,72 @@
 "use client";
 
 import InputField from "@/app/shared/components/InputField";
+import {
+  formFields,
+  validateEmail,
+  validatePhoneNumber,
+} from "@/app/shared/helpers/constants.helper";
+import { FormFields } from "@/modules/types/common.type";
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 
 const Form = () => {
-  const [formData, setFormData] = useState({
-    email: "",
-    phone: "",
-    firstname: "",
-    lastname: "",
-    country: "",
-    state: "",
-    address: "",
-    city: "",
-    postalCode: "",
-  });
+  const [formData, setFormData] = useState<FormFields>(formFields);
 
-  const [errors, setErrors] = useState({
-    email: "",
-    phone: "",
-    firstname: "",
-    lastname: "",
-    country: "",
-    state: "",
-    address: "",
-    city: "",
-    postalCode: "",
-  });
+  const [errors, setErrors] = useState<FormFields>(formFields);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+
+    // Perform validation as the user types
+    switch (name) {
+      case "email":
+        if (!validateEmail(value)) {
+          setErrors((prevErrors) => ({
+            ...prevErrors,
+            email: "Invalid email format",
+          }));
+        } else {
+          setErrors((prevErrors) => ({ ...prevErrors, email: "" }));
+        }
+        break;
+      case "phone":
+        if (!validatePhoneNumber(value)) {
+          setErrors((prevErrors) => ({
+            ...prevErrors,
+            phone: "Invalid phone number format",
+          }));
+        } else {
+          setErrors((prevErrors) => ({ ...prevErrors, phone: "" }));
+        }
+        break;
+      // default:
+      //   if (!value) {
+      //     setErrors((prevErrors) => ({
+      //       ...prevErrors,
+      //       [name]: `${name} is required`,
+      //     }));
+      //   } else {
+      //     setErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
+      //   }
+      //   break;
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form Data Submitted:", formData);
+
+    if (formIsValid()) {
+      toast.success("Submitted Successfully!");
+      console.log("Form Data Submitted:", formData);
+    } else {
+      toast.error("Email and phone are required!");
+    }
+  };
+
+  const formIsValid = () => {
+    return formData.email && formData.phone;
   };
 
   return (
