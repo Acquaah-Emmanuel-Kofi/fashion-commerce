@@ -1,5 +1,6 @@
 import GoBackButton from "../shared/components/GoBack";
 import Form from "./components/Form";
+import OrderInfo from "./components/OrderInfo";
 
 export default function Checkout() {
   return (
@@ -16,7 +17,9 @@ export default function Checkout() {
             <Form />
           </div>
 
-          <div className="lg:w-2/5 w-full h-[500px] border border-[#D9D9D9] "></div>
+          <div className="lg:w-2/5 w-full min-h-[500px] border border-[#D9D9D9] ">
+            <OrderInfo />
+          </div>
         </div>
       </main>
     </section>
