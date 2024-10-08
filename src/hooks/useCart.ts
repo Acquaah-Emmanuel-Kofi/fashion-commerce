@@ -13,14 +13,14 @@ const useCart = () => {
   const removeItem = (id: string) => dispatch(removeFromCart(id));
 
   const increaseQuantity = (id: string) => {
-    const item = items.find((item) => item.id === id);
+    const item = items.find((item: IProduct) => item.id === id);
     if (item) {
       dispatch(updateCartQuantity({ id, quantity: item.quantity + 1 }));
     }
   };
 
   const decreaseQuantity = (id: string) => {
-    const item = items.find((item) => item.id === id);
+    const item = items.find((item: IProduct) => item.id === id);
     if (item && item.quantity > 1) {
       dispatch(updateCartQuantity({ id, quantity: item.quantity - 1 }));
     }
