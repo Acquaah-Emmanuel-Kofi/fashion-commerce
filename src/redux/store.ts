@@ -5,6 +5,7 @@ import searchReducer from "@/redux/features/searchSlice";
 import filtersReducer from "@/redux/features/filtersSlice";
 import collectionSlice from "@/redux/features/collectionSlice";
 import favoriteSlice from "@/redux/features/favoriteSlice";
+import itemsToRenderSlice from "@/redux/features/itemsToRenderSlice";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
 const rootReducer = combineReducers({
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   search: searchReducer,
   filters: filtersReducer,
   collections: collectionSlice,
+  itemsToRender: itemsToRenderSlice,
 });
 
 export const store = configureStore({
