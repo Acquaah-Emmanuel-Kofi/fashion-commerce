@@ -8,6 +8,7 @@ import {
 } from "@/app/shared/helpers/constants.helper";
 import useCart from "@/hooks/useCart";
 import { FormFields } from "@/modules/types/common.type";
+import { postDataToApi } from "@/services/api";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 
@@ -56,18 +57,42 @@ const Form = () => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (items.length > 0) {
       if (formIsValid()) {
-        toast.success("Submitted Successfully! Redirecting to WhatsApp...", {
-          duration: 5000,
-        });
+        const orderData = {
+          email: formData.email,
+          phone: formData.phone,
+          firstname: formData.firstname,
+          lastname: formData.lastname,
+          country: formData.country,
+          region: formData.state,
+          address: formData.address,
+          city: formData.city,
+          postalCode: formData.postalCode,
+          productIDs: items.map((item) => item.id),
+        };
 
-        setTimeout(() => {
-          handleWhatsAppMessage();
-        }, 5000);
+        const response = await postDataToApi("/order", orderData);
+
+        if (response) {
+          setFormData(formFields);
+          
+          toast.success(
+            "Order created successfully! Redirecting to WhatsApp...",
+            {
+              duration: 5000,
+            }
+          );
+
+          setTimeout(() => {
+            handleWhatsAppMessage();
+          }, 5000);
+        } else {
+          toast.error("Failed to create order!");
+        }
       } else {
         toast.error("Email and phone are required!");
       }
