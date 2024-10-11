@@ -2,6 +2,7 @@ import React from "react";
 import StatsCard from "../../(components)/StatsCard";
 import RecentOrders from "./components/RecentOrders";
 import Breadcrumb from "@/app/shared/components/Breadcrumb";
+import HeaderTitle from "../../(components)/HeaderTitle";
 
 const breadcrumbItems = [
   { label: "Home", href: "/admin" },
@@ -34,7 +35,7 @@ export default function Dashboard() {
   return (
     <div className="space-y-6">
       <header>
-        <h1 className="font-bold font-beatrice text-lg">Dashboard</h1>
+        <HeaderTitle title="Dashboard" />
         <div className="flex justify-between items-center">
           <Breadcrumb items={breadcrumbItems} />
           <p className="font-beatrice text-sm font-semibold">
