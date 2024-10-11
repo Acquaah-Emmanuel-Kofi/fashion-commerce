@@ -13,6 +13,8 @@ export default function DashboardNavbar() {
             <Image
               src="https://res.cloudinary.com/dvul0elbb/image/upload/e_gen_background_replace:prompt_Light_blue_background_with_soft_reflections/wmlmb18y1i769f7obc9w"
               alt="Admin"
+              width={300}
+              height={300}
               className="h-8 w-8 rounded-full ml-2 object-cover"
             />
           </button>
