@@ -4,6 +4,7 @@ import Breadcrumb from "@/app/shared/components/Breadcrumb";
 import CustomSelect from "@/app/shared/components/CustomSelect";
 import React from "react";
 import RecentPurchases from "./components/RecentPurchases";
+import HeaderTitle from "../../(components)/HeaderTitle";
 
 const breadcrumbItems = [
   { label: "Home", href: "/admin" },
@@ -24,7 +25,7 @@ export default function Orders() {
   return (
     <section className="space-y-6 pb-6">
       <header>
-        <h1 className="font-bold font-beatrice text-lg">Orders List</h1>
+        <HeaderTitle title="Orders List" />
         <div className="flex justify-between items-center">
           <Breadcrumb items={breadcrumbItems} />
           <p className="font-beatrice text-sm font-semibold">
