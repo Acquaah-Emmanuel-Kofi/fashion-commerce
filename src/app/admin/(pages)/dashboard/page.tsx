@@ -1,6 +1,6 @@
 import React from "react";
 import StatsCard from "../../(components)/StatsCard";
-import RecentOrders from "../../(components)/RecentOrders";
+import RecentOrders from "./components/RecentOrders";
 import Breadcrumb from "@/app/shared/components/Breadcrumb";
 
 const breadcrumbItems = [

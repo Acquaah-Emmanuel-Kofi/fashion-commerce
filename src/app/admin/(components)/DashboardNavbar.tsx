@@ -9,7 +9,7 @@ export default function DashboardNavbar() {
         <FaBell className="text-gray-500" />
         <div className="relative">
           <button className="flex items-center">
-            <span className="font-bold">ADMIN</span>
+            <span className="font-bold font-beatrice">ADMIN</span>
             <Image
               src="https://res.cloudinary.com/dvul0elbb/image/upload/e_gen_background_replace:prompt_Light_blue_background_with_soft_reflections/wmlmb18y1i769f7obc9w"
               alt="Admin"

@@ -1,7 +1,7 @@
 import React from "react";
-import Table from "./Table";
+import Table from "../../../(components)/Table";
 
-const RecentOrders = () => {
+const RecentPurchases = () => {
   const orders = [
     {
       product: "Lorem Ipsum",
@@ -27,6 +27,30 @@ const RecentOrders = () => {
       status: "Delivered",
       amount: "₹200.00",
     },
+    {
+      product: "Lorem Ipsum",
+      orderId: "#25424",
+      date: "Nov 6th, 2023",
+      customer: "Nikhil",
+      status: "Delivered",
+      amount: "₹200.00",
+    },
+    {
+      product: "Lorem Ipsum",
+      orderId: "#25424",
+      date: "Nov 6th, 2023",
+      customer: "Nikhil",
+      status: "Delivered",
+      amount: "₹200.00",
+    },
+    {
+      product: "Lorem Ipsum",
+      orderId: "#25424",
+      date: "Nov 6th, 2023",
+      customer: "Nikhil",
+      status: "Delivered",
+      amount: "₹200.00",
+    },
   ];
 
   const columns = [
@@ -40,10 +64,9 @@ const RecentOrders = () => {
 
   return (
     <div className="p-4 bg-white">
-      <h2 className="text-xl font-semibold mb-4">Recent Orders</h2>
-      <Table data={orders} columns={columns} />
+      <Table title="Recent Purchases" data={orders} columns={columns} />
     </div>
   );
 };
 
-export default RecentOrders;
+export default RecentPurchases;

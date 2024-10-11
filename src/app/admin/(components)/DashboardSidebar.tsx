@@ -19,7 +19,7 @@ export default function DashboardSidebar() {
       <nav className="mt-6">
         <ul>
           <li
-            className={`mb-4 flex items-center px-6 py-2 ${
+            className={`mb-4 flex items-center px-6 py-2 font-beatrice ${
               isActive("/admin/dashboard")
                 ? "text-white bg-black rounded font-bold"
                 : ""
@@ -40,7 +40,7 @@ export default function DashboardSidebar() {
 
           {/* All Products Link */}
           <li
-            className={`mb-4 flex items-center px-6 py-2 ${
+            className={`mb-4 flex items-center px-6 py-2 font-beatrice ${
               isActive("/admin/products")
                 ? "text-white bg-black rounded font-bold"
                 : ""
@@ -59,7 +59,7 @@ export default function DashboardSidebar() {
 
           {/* Order List Link */}
           <li
-            className={`mb-4 flex items-center px-6 py-2 ${
+            className={`mb-4 flex items-center px-6 py-2 font-beatrice ${
               isActive("/admin/orders")
                 ? "text-white bg-black rounded font-bold"
                 : ""

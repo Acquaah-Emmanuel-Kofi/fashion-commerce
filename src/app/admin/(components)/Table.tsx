@@ -11,11 +11,13 @@ interface TableProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   data: any[];
   columns: TableColumn[];
+  title: string;
 }
 
-const Table: React.FC<TableProps> = ({ data, columns }) => {
+const Table: React.FC<TableProps> = ({ title, data, columns }) => {
   return (
     <div className="overflow-x-auto">
+      <h2 className="text-xl font-semibold mb-4 font-beatrice">{title}</h2>
       <table className="min-w-full text-left text-base">
         <thead>
           <tr>
