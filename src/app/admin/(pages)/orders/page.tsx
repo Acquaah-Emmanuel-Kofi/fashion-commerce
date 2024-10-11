@@ -35,7 +35,7 @@ export default function Orders() {
       </header>
 
       <div className="flex justify-end">
-        <div className="w-[200px]">
+        <div className="lg:w-[200px] w-full">
           <CustomSelect
             options={options}
             onSelect={handleSelect}

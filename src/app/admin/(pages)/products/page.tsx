@@ -14,12 +14,12 @@ export default function AllProducts() {
   return (
     <section className="space-y-6 pb-6">
       <header>
-        <div className="flex justify-between items-center">
+        <div className="flex flex-col lg:flex-row gap-4 justify-between items-center">
           <div>
             <HeaderTitle title="All Products" />
             <Breadcrumb items={breadcrumbItems} />
           </div>
-          <div className="w-[250px]">
+          <div className="lg:w-[250px] w-full">
             <button
               type="button"
               className="hover:bg-gray-500 bg-black flex items-center gap-2 justify-center font-semibold hover:text-black  text-white transition-all ease-in-out p-2 w-full"
@@ -32,7 +32,7 @@ export default function AllProducts() {
       </header>
 
       <div className="flex">
-        <div className="w-[300px]">
+        <div className="lg:w-[300px] w-full">
           <SearchBar />
         </div>
       </div>
