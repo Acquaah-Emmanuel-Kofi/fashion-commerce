@@ -40,7 +40,9 @@ const RecentOrders = () => {
 
   return (
     <div className="p-4 bg-white">
-      <h2 className="text-xl font-semibold mb-4">Recent Orders</h2>
+      <h2 className="text-xl font-semibold mb-4 font-beatrice">
+        Recent Orders
+      </h2>
       <Table data={orders} columns={columns} />
     </div>
   );
