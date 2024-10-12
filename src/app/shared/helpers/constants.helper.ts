@@ -85,6 +85,17 @@ export const ORDER_FORM_FIELDS: FormFields = {
   postalCode: "",
 };
 
+export const CATEGORY_OPTIONS = [
+  { value: "men", label: "MEN" },
+  { value: "women", label: "WOMEN" },
+  { value: "kids", label: "KIDS" },
+];
+
+export const PRODUCT_TYPE_OPTIONS = [
+  { value: "T-SHIRT", label: "T-SHIRT" },
+  { value: "SHORTS", label: "SHORTS" },
+];
+
 export const validateEmail = (email: string) => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
