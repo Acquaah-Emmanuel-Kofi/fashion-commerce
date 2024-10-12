@@ -73,7 +73,7 @@ export const lastYearCollectionsFilterButtons: string[] = [
   "KIDS",
 ];
 
-export const formFields: FormFields = {
+export const ORDER_FORM_FIELDS: FormFields = {
   email: "",
   phone: "",
   firstname: "",
