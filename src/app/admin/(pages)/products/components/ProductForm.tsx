@@ -3,21 +3,17 @@ import React, { useState, useEffect } from "react";
 import MultiImageUpload from "./MultiImageUpload";
 import Image from "next/image";
 import toast from "react-hot-toast";
+import { ProductCreationForm } from "@/modules/interfaces/products.interface";
+import ChipInput from "./ChipInput";
+import CustomSelect from "@/app/shared/components/CustomSelect";
+import {
+  CATEGORY_OPTIONS,
+  PRODUCT_TYPE_OPTIONS,
+} from "@/app/shared/helpers/constants.helper";
 
 interface ProductFormProps {
-  product?: {
-    name: string;
-    description: string;
-    category: string;
-    brand: string;
-    sku: string;
-    stock: number;
-    regularPrice: number;
-    salePrice: number;
-    tags: string[];
-    images: File[];
-  };
-  onSubmit: (data: any) => void;
+  product?: ProductCreationForm;
+  onSubmit: (data: ProductCreationForm) => void;
   onDelete?: () => void;
 }
 
@@ -30,21 +26,17 @@ const ProductForm: React.FC<ProductFormProps> = ({
     name: product?.name || "",
     description: product?.description || "",
     category: product?.category || "",
-    brand: product?.brand || "",
-    sku: product?.sku || "",
-    stock: product?.stock || 0,
-    regularPrice: product?.regularPrice || 0,
-    salePrice: product?.salePrice || 0,
-    tags: product?.tags || ["Name", "Test", "Again"],
+    sizes: product?.sizes || [],
+    colors: product?.colors || [],
+    type: product?.type || "",
+    price: product?.price || "0",
+    isAvailable: product?.isAvailable || "",
     images: product?.images || [],
   });
 
   const [productImage, setProductImage] = useState<string>("");
+  const [isProductAvailable, setIsProductAvailable] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
-
-  useEffect(() => {
-    validateForm();
-  }, [formData]);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -53,15 +45,31 @@ const ProductForm: React.FC<ProductFormProps> = ({
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleTagRemove = (tag: string) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      tags: prevData.tags.filter((t) => t !== tag),
-    }));
+  const handleCategorySelect = (category: string) => {
+    setFormData({ ...formData, category });
+  };
+
+  const handleSizesUpdate = (updatedSizes: string[]) => {
+    setFormData({ ...formData, sizes: updatedSizes });
+  };
+
+  const handleColorsUpdate = (updatedColors: string[]) => {
+    setFormData({ ...formData, colors: updatedColors });
+  };
+
+  const handleProductTypeSelect = (productType: string) => {
+    setFormData({ ...formData, type: productType });
+  };
+
+  const handleIsProductAvailable = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setIsProductAvailable(event.target.checked);
+    setFormData({ ...formData, isAvailable: event.target.value });
   };
 
   const handleImagesSelect = (files: File[]) => {
-    setProductImage(URL.createObjectURL(files[0]));
+    setProductImage(URL.createObjectURL(files[files.length - 1]));
 
     setFormData((prevData) => ({
       ...prevData,
@@ -69,30 +77,36 @@ const ProductForm: React.FC<ProductFormProps> = ({
     }));
   };
 
-  const validateForm = () => {
-    const {
-      name,
-      description,
-      category,
-      brand,
-      stock,
-      regularPrice,
-      salePrice,
-      images,
-    } = formData;
+  useEffect(() => {
+    const validateForm = () => {
+      const {
+        name,
+        description,
+        category,
+        sizes,
+        colors,
+        price,
+        type,
+        isAvailable,
+        images,
+      } = formData;
 
-    const isValid =
-      !!name.trim() &&
-      !!description.trim() &&
-      !!category.trim() &&
-      !!brand.trim() &&
-      stock > 0 &&
-      regularPrice > 0 &&
-      salePrice >= 0 &&
-      images.length > 0;
+      const isValid =
+        !!name.trim() &&
+        !!description.trim() &&
+        !!category.trim() &&
+        !!price.trim() &&
+        !!type.trim() &&
+        !!isAvailable.trim() &&
+        sizes.length > 0 &&
+        colors.length > 0 &&
+        images.length > 0;
 
-    setIsFormValid(isValid);
-  };
+      setIsFormValid(isValid);
+    };
+
+    validateForm();
+  }, [formData]);
 
   const handleSubmit = () => {
     if (isFormValid) {
@@ -100,17 +114,18 @@ const ProductForm: React.FC<ProductFormProps> = ({
     } else {
       const missingFields = [];
 
-      if (!formData.name.trim()) missingFields.push("Product Name");
-      if (!formData.description.trim()) missingFields.push("Description");
-      if (!formData.category.trim()) missingFields.push("Category");
-      if (!formData.brand.trim()) missingFields.push("Brand");
-      if (formData.stock <= 0) missingFields.push("Stock Quantity");
-      if (formData.regularPrice <= 0) missingFields.push("Regular Price");
-      if (formData.salePrice < 0) missingFields.push("Sale Price");
+      if (!formData.name.trim()) missingFields.push("\nProduct Name");
+      if (!formData.description.trim()) missingFields.push("\nDescription");
+      if (!formData.category.trim()) missingFields.push("\nCategory");
+      if (!formData.price.trim()) missingFields.push("\nPrice");
+      if (formData.colors.length === 0) missingFields.push("\nColors");
+      if (formData.sizes.length === 0) missingFields.push("\nSizes");
+      if (!formData.type.trim()) missingFields.push("\nProduct Type");
       if (formData.images.length === 0)
-        missingFields.push("Add at least one image");
+        missingFields.push("\nAdd at least one image");
+      if (!formData.isAvailable.trim()) missingFields.push("\nAvailabilty");
 
-      const message = `Please fill all Product Details: \n ${missingFields.join(
+      const message = `Please fill all Product Details: ${missingFields.join(
         ", "
       )}`;
 
@@ -123,12 +138,11 @@ const ProductForm: React.FC<ProductFormProps> = ({
       name: product?.name || "",
       description: product?.description || "",
       category: product?.category || "",
-      brand: product?.brand || "",
-      sku: product?.sku || "",
-      stock: product?.stock || 0,
-      regularPrice: product?.regularPrice || 0,
-      salePrice: product?.salePrice || 0,
-      tags: product?.tags || [],
+      sizes: product?.sizes || [],
+      colors: product?.colors || [],
+      type: product?.type || "",
+      price: product?.price || "0",
+      isAvailable: product?.isAvailable || "true",
       images: product?.images || [],
     });
   };
@@ -146,6 +160,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
             onChange={handleInputChange}
             required
           />
+
           <InputField
             name="description"
             placeholder="Type description here"
@@ -154,81 +169,65 @@ const ProductForm: React.FC<ProductFormProps> = ({
             onChange={handleInputChange}
             required
           />
-          <InputField
-            name="category"
+
+          <CustomSelect
+            options={CATEGORY_OPTIONS}
+            onSelect={handleCategorySelect}
             placeholder="Type category here"
             label="Category"
-            value={formData.category}
-            onChange={handleInputChange}
             required
           />
-          <InputField
-            name="brand"
-            placeholder="Type brand name here"
-            label="Brand Name"
-            value={formData.brand}
-            onChange={handleInputChange}
+
+          <ChipInput
+            label="Colors"
+            placeholder="Type a color and press space or enter"
+            tags={formData.colors}
+            onTagsUpdate={handleColorsUpdate}
             required
           />
+
+          <ChipInput
+            label="Sizes"
+            placeholder="Type a size and press space or enter"
+            tags={formData.sizes}
+            onTagsUpdate={handleSizesUpdate}
+            required
+          />
+
           <div className="grid lg:grid-cols-2 grid-cols-1 gap-4">
-            <InputField
-              name="sku"
-              placeholder="SKU"
-              label="SKU"
-              value={formData.sku}
-              onChange={handleInputChange}
-            />
-            <InputField
-              name="stock"
-              placeholder="Stock"
-              label="Stock Quantity"
-              type="number"
-              value={String(formData.stock)}
-              onChange={handleInputChange}
+            <CustomSelect
+              options={PRODUCT_TYPE_OPTIONS}
+              onSelect={handleProductTypeSelect}
+              label="Product Type"
+              placeholder="Slect type"
               required
             />
-          </div>
-          <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 mt-4">
+
             <InputField
-              name="regularPrice"
+              name="price"
               placeholder="Price"
-              label="Regular Price"
-              type="number"
-              value={String(formData.regularPrice)}
-              onChange={handleInputChange}
-              required
-            />
-            <InputField
-              name="salePrice"
-              placeholder="Sale Price"
               label="Sale Price"
               type="number"
-              value={String(formData.salePrice)}
+              value={String(formData.price)}
               onChange={handleInputChange}
               required
             />
           </div>
 
-          {/* Tags */}
-          <div className="mt-4">
-            <label className="block font-medium mb-1">Tags</label>
-            <div className="flex flex-wrap">
-              {formData.tags.map((tag, idx) => (
-                <span
-                  key={idx}
-                  className="bg-gray-200 text-sm rounded-full px-3 py-1 mr-2 mb-2"
-                >
-                  {tag}
-                  <button
-                    type="button"
-                    className="ml-2 text-red-600"
-                    onClick={() => handleTagRemove(tag)}
-                  >
-                    &times;
-                  </button>
-                </span>
-              ))}
-            </div>
+          <div className="text-base flex">
+            <input
+              type="checkbox"
+              checked={isProductAvailable}
+              value={!isProductAvailable ? "true" : "false"}
+              onChange={handleIsProductAvailable}
+              className="shrink-0 mt-0.5 border-gray-200 rounded text-black accent-black"
+            />
+            <label
+              htmlFor="hs-checkbox-group-1"
+              className="text-base text-black font-medium ms-3"
+            >
+              Avaialable
+            </label>
           </div>
         </div>
 
