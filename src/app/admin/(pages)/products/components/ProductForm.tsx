@@ -114,18 +114,18 @@ const ProductForm: React.FC<ProductFormProps> = ({
     } else {
       const missingFields = [];
 
-      if (!formData.name.trim()) missingFields.push("\nProduct Name");
-      if (!formData.description.trim()) missingFields.push("\nDescription");
-      if (!formData.category.trim()) missingFields.push("\nCategory");
-      if (!formData.price.trim()) missingFields.push("\nPrice");
-      if (formData.colors.length === 0) missingFields.push("\nColors");
-      if (formData.sizes.length === 0) missingFields.push("\nSizes");
-      if (!formData.type.trim()) missingFields.push("\nProduct Type");
+      if (!formData.name.trim()) missingFields.push("Product Name");
+      if (!formData.description.trim()) missingFields.push("Description");
+      if (!formData.category.trim()) missingFields.push("Category");
+      if (!formData.price.trim()) missingFields.push("Price");
+      if (formData.colors.length === 0) missingFields.push("Colors");
+      if (formData.sizes.length === 0) missingFields.push("Sizes");
+      if (!formData.type.trim()) missingFields.push("Product Type");
+      if (!formData.isAvailable.trim()) missingFields.push("Availabilty");
       if (formData.images.length === 0)
-        missingFields.push("\nAdd at least one image");
-      if (!formData.isAvailable.trim()) missingFields.push("\nAvailabilty");
+        missingFields.push("Add at least one image");
 
-      const message = `Please fill all Product Details: ${missingFields.join(
+      const message = `Please fill all Product Details: \n${missingFields.join(
         ", "
       )}`;
 
@@ -226,7 +226,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
               htmlFor="hs-checkbox-group-1"
               className="text-base text-black font-medium ms-3"
             >
-              Avaialable
+              Available
             </label>
           </div>
         </div>
