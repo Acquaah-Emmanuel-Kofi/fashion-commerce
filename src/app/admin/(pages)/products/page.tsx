@@ -8,16 +8,14 @@ import ProductList from "./components/ProductList";
 import SearchBar from "@/app/shared/components/Searchbar";
 import { useRouter } from "next/navigation";
 
-const breadcrumbItems = [
-  { label: "Home", href: "/admin" },
-  { label: "All Products", href: "/admin/products" },
-];
+const breadcrumbItems = [{ label: "All Products", href: "" }];
 
 export default function AllProducts() {
   const router = useRouter();
 
-  const handleAddNewProductRoute = () => router.push("/admin/products/add-new-product");
-  
+  const handleAddNewProductRoute = () =>
+    router.push("/admin/products/add-new-product");
+
   return (
     <section className="space-y-6 pb-6">
       <header>
