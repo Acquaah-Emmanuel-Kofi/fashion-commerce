@@ -106,7 +106,7 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
         </span>
       </div>
       {isOpen && (
-        <div className="absolute mt-2 w-full bg-white border border-[#D9D9D9] shadow z-10">
+        <div className="absolute mt-2 w-full bg-white border border-[#D9D9D9] shadow">
           <ul className="py-2 max-h-40 overflow-y-auto">
             {options.map((option) => (
               <li

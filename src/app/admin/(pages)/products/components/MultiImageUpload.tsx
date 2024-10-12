@@ -71,7 +71,7 @@ const MultiImageUpload: React.FC<MultiImageUploadProps> = ({
       >
         <input
           type="file"
-          className="absolute inset-0 w-full h-full opacity-0 z-50"
+          className="absolute inset-0 w-full h-full opacity-0 z-40"
           multiple
           onChange={handleFileChange}
           accept="image/png, image/jpeg, image/gif"
