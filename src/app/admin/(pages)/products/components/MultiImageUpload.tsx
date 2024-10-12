@@ -10,7 +10,7 @@ interface UploadFile {
 }
 
 interface MultiImageUploadProps {
-  onImagesSelect: (files: File[]) => void; // Pass all files to parent component
+  onImagesSelect: (files: File[]) => void;
 }
 
 const MultiImageUpload: React.FC<MultiImageUploadProps> = ({
@@ -18,6 +18,10 @@ const MultiImageUpload: React.FC<MultiImageUploadProps> = ({
 }) => {
   const [files, setFiles] = useState<UploadFile[]>([]);
 
+  /**
+   * Handle file drop event.
+   * @param e - The drag event
+   */
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     const droppedFiles = Array.from(e.dataTransfer.files);
@@ -29,6 +33,10 @@ const MultiImageUpload: React.FC<MultiImageUploadProps> = ({
     handleFiles(selectedFiles);
   };
 
+  /**
+   * Handle multiple files upload.
+   * @param selectedFiles - An array of selected files
+   */
   const handleFiles = (selectedFiles: File[]) => {
     const newFiles: UploadFile[] = selectedFiles.map((file) => ({
       file,
@@ -40,24 +48,33 @@ const MultiImageUpload: React.FC<MultiImageUploadProps> = ({
     setFiles((prevFiles) => [...prevFiles, ...newFiles]);
     onImagesSelect(selectedFiles);
 
-    // Simulate file upload progress for demo
-    newFiles.forEach((fileObj, index) => {
-      simulateFileUpload(index);
+    // Start upload simulation for each new file
+    newFiles.forEach((fileObj) => {
+      simulateFileUpload(fileObj);
     });
   };
 
-  const simulateFileUpload = (index: number) => {
+  /**
+   * Simulate file upload progress.
+   * @param index - The index of the file to simulate upload for
+   */
+  const simulateFileUpload = (fileObj: UploadFile) => {
     let progress = 0;
     const interval = setInterval(() => {
       progress += 10;
+
       setFiles((prevFiles) => {
-        const updatedFiles = [...prevFiles];
-        updatedFiles[index].progress = progress;
-        if (progress >= 100) {
-          updatedFiles[index].isUploaded = true;
-          clearInterval(interval);
-        }
-        return updatedFiles;
+        return prevFiles.map((prevFile) => {
+          if (prevFile.file.name === fileObj.file.name) {
+            const updatedFile = { ...prevFile, progress };
+            if (progress >= 100) {
+              updatedFile.isUploaded = true;
+              clearInterval(interval);
+            }
+            return updatedFile;
+          }
+          return prevFile;
+        });
       });
     }, 300);
   };
@@ -78,7 +95,6 @@ const MultiImageUpload: React.FC<MultiImageUploadProps> = ({
         />
         <div className="text-center flex flex-col justify-center items-center gap-4">
           <BsImages size={48} />
-
           <h3 className="mt-2 text-sm font-medium text-gray-900">
             <label className="relative cursor-pointer">
               <span>Drag and drop</span>
