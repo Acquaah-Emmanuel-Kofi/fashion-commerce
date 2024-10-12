@@ -32,3 +32,14 @@ export interface IProductDetailsResponse extends ICommonResponse {
   data: IProductDetails[];
 }
 
+export interface ProductCreationForm {
+  name: string;
+  price: string;
+  type: string;
+  sizes: string[];
+  colors: string[];
+  category: string;
+  isAvailable: string;
+  description: string;
+  images: File[];
+}

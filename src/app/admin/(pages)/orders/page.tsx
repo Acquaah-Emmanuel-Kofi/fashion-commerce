@@ -6,10 +6,7 @@ import React from "react";
 import RecentPurchases from "./components/RecentPurchases";
 import HeaderTitle from "../../(components)/HeaderTitle";
 
-const breadcrumbItems = [
-  { label: "Home", href: "/admin" },
-  { label: "Orders List", href: "/admin/orders" },
-];
+const breadcrumbItems = [{ label: "Orders List", href: "" }];
 
 export default function Orders() {
   const options = [

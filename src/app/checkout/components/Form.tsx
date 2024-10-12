@@ -2,7 +2,7 @@
 
 import InputField from "@/app/shared/components/InputField";
 import {
-  formFields,
+  ORDER_FORM_FIELDS,
   validateEmail,
   validatePhoneNumber,
 } from "@/app/shared/helpers/constants.helper";
@@ -13,8 +13,8 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 
 const Form = () => {
-  const [formData, setFormData] = useState<FormFields>(formFields);
-  const [errors, setErrors] = useState<FormFields>(formFields);
+  const [formData, setFormData] = useState<FormFields>(ORDER_FORM_FIELDS);
+  const [errors, setErrors] = useState<FormFields>(ORDER_FORM_FIELDS);
 
   const { items } = useCart();
 
@@ -78,7 +78,7 @@ const Form = () => {
         const response = await postDataToApi("/order", orderData);
 
         if (response) {
-          setFormData(formFields);
+          setFormData(ORDER_FORM_FIELDS);
           
           toast.success(
             "Order created successfully! Redirecting to WhatsApp...",

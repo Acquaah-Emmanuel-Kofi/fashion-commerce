@@ -9,6 +9,7 @@ interface InputFieldProps {
   error?: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
+  onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   required?: boolean;
   disabled?: boolean;
 }
@@ -22,16 +23,14 @@ const InputField: React.FC<InputFieldProps> = ({
   error,
   onChange,
   onBlur,
+  onKeyDown,
   required = false,
   disabled = false,
 }) => {
   return (
     <div className="w-full">
       {label && (
-        <label
-          htmlFor={name}
-          className="block text-sm font-medium text-gray-700"
-        >
+        <label htmlFor={name} className="block font-medium text-black mb-1">
           {label} {required && <span className="text-red-500">*</span>}
         </label>
       )}
@@ -43,9 +42,10 @@ const InputField: React.FC<InputFieldProps> = ({
         value={value}
         onChange={onChange}
         onBlur={onBlur}
+        onKeyDown={onKeyDown}
         required={required}
         disabled={disabled}
-        className={`border border-[#D9D9D9] caret-[#D9D9D9] w-full outline-none placeholder:text-[#5E5E5E] placeholder:text-xs px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#ccc] focus:border-[#ccc] disabled:bg-gray-100 ${
+        className={`border border-[#D9D9D9] caret-[#D9D9D9] w-full outline-none placeholder:text-[#5E5E5E] placeholder:text-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#ccc] focus:border-[#ccc] disabled:bg-gray-100 ${
           error
             ? "border-red-500 text-red-500 focus:ring-red-500"
             : "border-gray-300"
