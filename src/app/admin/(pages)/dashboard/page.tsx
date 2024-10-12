@@ -5,8 +5,7 @@ import Breadcrumb from "@/app/shared/components/Breadcrumb";
 import HeaderTitle from "../../(components)/HeaderTitle";
 
 const breadcrumbItems = [
-  { label: "Home", href: "/admin" },
-  { label: "Dashboard", href: "/admin/dashboard" },
+  { label: "Dashboard", href: "" },
 ];
 
 export default function Dashboard() {
