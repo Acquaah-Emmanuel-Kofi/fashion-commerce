@@ -1,5 +1,7 @@
 import InputField from "@/app/shared/components/InputField";
 import React, { useState } from "react";
+import MultiImageUpload from "./MultiImageUpload";
+import Image from "next/image";
 
 interface ProductFormProps {
   product?: {
@@ -12,7 +14,7 @@ interface ProductFormProps {
     regularPrice: number;
     salePrice: number;
     tags: string[];
-    images: string[];
+    images: File[];
   };
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onSubmit: (data: any) => void;
@@ -36,6 +38,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
     tags: product?.tags || ["Name", "Test", "Again"],
     images: product?.images || [],
   });
+  const [productImage, setProductImage] = useState<string>("");
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -51,10 +54,12 @@ const ProductForm: React.FC<ProductFormProps> = ({
     }));
   };
 
-  const handleImageRemove = (index: number) => {
+  const handleImagesSelect = (files: File[]) => {
+    setProductImage(URL.createObjectURL(files[0]));
+
     setFormData((prevData) => ({
       ...prevData,
-      images: prevData.images.filter((_, i) => i !== index),
+      images: [...prevData.images, ...files],
     }));
   };
 
@@ -62,156 +67,183 @@ const ProductForm: React.FC<ProductFormProps> = ({
     onSubmit(formData);
   };
 
+  const handleCancel = () => {
+    setFormData({
+      name: product?.name || "",
+      description: product?.description || "",
+      category: product?.category || "",
+      brand: product?.brand || "",
+      sku: product?.sku || "",
+      stock: product?.stock || 0,
+      regularPrice: product?.regularPrice || 0,
+      salePrice: product?.salePrice || 0,
+      tags: product?.tags || [],
+      images: product?.images || [],
+    });
+  };
+
   return (
-    <div className="grid lg:grid-cols-2 grid-cols-1 gap-6 p-4 bg-white">
-      {/* Left Side Form Fields */}
-      <div className="space-y-4">
-        <div>
-          <InputField
-            name="name"
-            placeholder="Type name here"
-            label="Product Name"
-            value={formData.name}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div>
-          <InputField
-            name="description"
-            placeholder="Type description here"
-            label="Description"
-            value={formData.description}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div>
-          <InputField
-            name="category"
-            placeholder="Type category here"
-            label="Category"
-            value={formData.category}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div>
-          <InputField
-            name="brand"
-            placeholder="Type brand name here"
-            label="Brand Name"
-            value={formData.brand}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="grid lg:grid-cols-2 grid-cols-1 gap-4">
+    <div className="p-4 bg-white">
+      <div className="grid lg:grid-cols-2 grid-cols-1 gap-6">
+        {/* Left Side Form Fields */}
+        <div className="space-y-4">
           <div>
             <InputField
-              name="sku"
-              placeholder="SKU"
-              label="SKU"
-              value={formData.sku}
+              name="name"
+              placeholder="Type name here"
+              label="Product Name"
+              value={formData.name}
               onChange={handleInputChange}
+              required
             />
           </div>
           <div>
             <InputField
-              name="stock"
-              placeholder="Stock"
-              label="Stock Quantity"
-              type="number"
-              value={String(formData.stock)}
+              name="description"
+              placeholder="Type description here"
+              label="Description"
+              value={formData.description}
               onChange={handleInputChange}
-            />
-          </div>
-        </div>
-        <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 mt-4">
-          <div>
-            <InputField
-              name="regularPrice"
-              placeholder="Price"
-              label="Regular Price"
-              type="number"
-              value={String(formData.regularPrice)}
-              onChange={handleInputChange}
+              required
             />
           </div>
           <div>
             <InputField
-              name="salePrice"
-              placeholder="PriSalece"
-              label="Sale Price"
-              type="number"
-              value={String(formData.salePrice)}
+              name="category"
+              placeholder="Type category here"
+              label="Category"
+              value={formData.category}
               onChange={handleInputChange}
+              required
             />
           </div>
-        </div>
-        {/* Tags */}
-        <div className="mt-4">
-          <label className="block font-medium mb-1">Tags</label>
-          <div className="flex flex-wrap">
-            {formData.tags.map((tag, idx) => (
-              <span
-                key={idx}
-                className="bg-gray-200 text-sm rounded-full px-3 py-1 mr-2 mb-2"
-              >
-                {tag}
-                <button
-                  type="button"
-                  className="ml-2 text-red-600"
-                  onClick={() => handleTagRemove(tag)}
+          <div>
+            <InputField
+              name="brand"
+              placeholder="Type brand name here"
+              label="Brand Name"
+              value={formData.brand}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+          <div className="grid lg:grid-cols-2 grid-cols-1 gap-4">
+            <div>
+              <InputField
+                name="sku"
+                placeholder="SKU"
+                label="SKU"
+                value={formData.sku}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div>
+              <InputField
+                name="stock"
+                placeholder="Stock"
+                label="Stock Quantity"
+                type="number"
+                value={String(formData.stock)}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+          </div>
+          <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 mt-4">
+            <div>
+              <InputField
+                name="regularPrice"
+                placeholder="Price"
+                label="Regular Price"
+                type="number"
+                value={String(formData.regularPrice)}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+            <div>
+              <InputField
+                name="salePrice"
+                placeholder="PriSalece"
+                label="Sale Price"
+                type="number"
+                value={String(formData.salePrice)}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+          </div>
+          {/* Tags */}
+          <div className="mt-4">
+            <label className="block font-medium mb-1">Tags</label>
+            <div className="flex flex-wrap">
+              {formData.tags.map((tag, idx) => (
+                <span
+                  key={idx}
+                  className="bg-gray-200 text-sm rounded-full px-3 py-1 mr-2 mb-2"
                 >
-                  &times;
-                </button>
-              </span>
-            ))}
+                  {tag}
+                  <button
+                    type="button"
+                    className="ml-2 text-red-600"
+                    onClick={() => handleTagRemove(tag)}
+                  >
+                    &times;
+                  </button>
+                </span>
+              ))}
+            </div>
           </div>
+        </div>
+
+        {/* Right Side Image Upload and Gallery */}
+        <div className="space-y-6">
+          {/* <ImageUpload onImageSelect={handleImageSelect} /> */}
+          <div className="w-full h-[350px] bg-gray-200">
+            {formData.images.length === 0 ? (
+              <div className="w-full h-full flex justify-center items-center">
+                <p>No Image Uploaded Yet!</p>
+              </div>
+            ) : (
+              <Image
+                src={productImage}
+                alt={`${formData.name} image`}
+                width={300}
+                height={300}
+                className="w-full h-full object-contain"
+              />
+            )}
+          </div>
+
+          <MultiImageUpload onImagesSelect={handleImagesSelect} />
         </div>
       </div>
 
-      {/* Right Side Image Upload and Gallery */}
-      <div>
-        <div className="border border-[#D9D9D9] w-full h-40 bg-gray-200 flex items-center justify-center mb-4">
-          {/* Image Preview */}
-          <span>Drop your image here, or browse (.jpeg, .png allowed)</span>
-        </div>
-        <div>
-          <label className="block font-medium mb-2">Product Gallery</label>
-          {formData.images.map((image, idx) => (
-            <div key={idx} className="flex items-center mb-2">
-              <img
-                src={image}
-                alt={`Product thumbnail ${idx}`}
-                className="w-10 h-10 border mr-4"
-              />
-              <span className="flex-grow">{image}</span>
-              <button
-                type="button"
-                className="ml-4 text-red-600"
-                onClick={() => handleImageRemove(idx)}
-              >
-                &times;
-              </button>
-            </div>
-          ))}
-        </div>
-
+      <div className="flex justify-end w-full mt-6">
         {/* Form Action Buttons */}
-        <div className="mt-6 flex justify-between">
+        <div className="grid grid-cols-2 lg:w-3/12 w-full gap-3">
           {onDelete && (
             <button
+              type="button"
               onClick={onDelete}
-              className="px-4 py-2 bg-red-600 text-white rounded-md"
+              className="w-full py-2 bg-red-600 text-white"
             >
               DELETE
             </button>
           )}
           <button
+            type="button"
             onClick={handleSubmit}
-            className="px-4 py-2 bg-blue-600 text-white rounded-md"
+            disabled={true}
+            className="w-full py-2 bg-black text-white disabled:bg-gray-600"
           >
             {product ? "UPDATE" : "SUBMIT"}
           </button>
-          <button className="px-4 py-2 bg-gray-100 text-black rounded-md">
+          <button
+            type="button"
+            onClick={handleCancel}
+            className="w-full py-2 bg-gray-100 text-black hover:bg-black hover:text-white transition-colors"
+          >
             CANCEL
           </button>
         </div>
