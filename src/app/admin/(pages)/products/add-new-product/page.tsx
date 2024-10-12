@@ -3,9 +3,10 @@
 import React from "react";
 import ProductForm from "../components/ProductForm";
 import HeaderTitle from "@/app/admin/(components)/HeaderTitle";
+import { ProductCreationForm } from "@/modules/interfaces/products.interface";
 
 export default function AddNewProduct() {
-  const handleSubmit = (data: any) => {
+  const handleSubmit = (data: ProductCreationForm) => {
     console.log("Product Data:", data);
   };
   return (
