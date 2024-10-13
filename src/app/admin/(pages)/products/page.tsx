@@ -7,10 +7,13 @@ import { LuPlusCircle } from "react-icons/lu";
 import ProductList from "./components/ProductList";
 import SearchBar from "@/app/shared/components/Searchbar";
 import { useRouter } from "next/navigation";
+import { TbReload } from "react-icons/tb";
+import useProducts from "@/hooks/useProducts";
 
 const breadcrumbItems = [{ label: "All Products", href: "" }];
 
 export default function AllProducts() {
+  const { refetch } = useProducts();
   const router = useRouter();
 
   const handleAddNewProductRoute = () =>
@@ -37,9 +40,19 @@ export default function AllProducts() {
         </div>
       </header>
 
-      <div className="flex">
+      <div className="flex justify-between items-center gap-4 lg:gap-0">
         <div className="lg:w-[300px] w-full">
           <SearchBar />
+        </div>
+        <div>
+          <button
+            type="button"
+            onClick={refetch}
+            className="flex gap-2 p-1 hover:bg-gray-200 items-center"
+          >
+            <TbReload />
+            Reload
+          </button>
         </div>
       </div>
 
