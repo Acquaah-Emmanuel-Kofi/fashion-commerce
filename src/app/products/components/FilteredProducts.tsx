@@ -61,7 +61,7 @@ const FilteredProducts = () => {
         </p>
         <button
           onClick={refetch}
-          className="mt-4 px-4 py-2 bg-black text-white "
+          className="mt-4 px-4 py-2 bg-black hover:bg-slate-800 text-white "
         >
           Refetch Products
         </button>

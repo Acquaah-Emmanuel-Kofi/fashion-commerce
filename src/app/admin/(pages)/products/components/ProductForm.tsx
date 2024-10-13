@@ -295,7 +295,7 @@ const handleCategorySelect = (category: string) => {
           <button
             type="button"
             onClick={handleSubmit}
-            className="w-full py-2 text-white bg-black"
+            className="w-full py-2 text-white bg-black hover:bg-slate-800"
           >
             {product ? "UPDATE" : "SUBMIT"}
           </button>

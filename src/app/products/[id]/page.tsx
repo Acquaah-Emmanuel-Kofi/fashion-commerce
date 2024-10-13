@@ -39,7 +39,7 @@ const ProductDetails = ({ params }: { params: { id: string } }) => {
                 </Link>
                 <Link
                   href="/products"
-                  className="mt-4 px-4 py-2 bg-black text-white hover:bg-slate-700"
+                  className="mt-4 px-4 py-2 bg-black text-white hover:bg-slate-800"
                 >
                   Browse Products
                 </Link>
