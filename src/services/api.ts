@@ -47,9 +47,9 @@ export const putDataToApi = async (url: string, data: FormData) => {
   const token = localStorage.getItem("token"); // Assuming you store your JWT token in localStorage
   const response = await fetch(`${process.env.API_URL}${url}`, {
     method: "PUT",
-    // headers: {
-    //   "Authorization": `Bearer ${token}`,
-    // },
+    headers: {
+      "Authorization": `Bearer ${token}`,
+    },
     body: data,
   });
 

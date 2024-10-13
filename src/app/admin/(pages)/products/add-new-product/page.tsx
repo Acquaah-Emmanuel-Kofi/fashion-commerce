@@ -51,7 +51,7 @@ export default function AddNewProduct() {
         toast.error("Something went wrong!");
       }
     } catch (error) {
-      toast.error("Failed to create product.");
+      toast.error(`Failed to create product. ${error}`);
     }
   };
 
