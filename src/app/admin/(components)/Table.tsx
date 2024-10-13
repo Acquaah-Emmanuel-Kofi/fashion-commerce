@@ -1,5 +1,8 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 interface TableColumn {
   header: string;
@@ -16,6 +19,7 @@ interface TableProps {
 }
 
 const Table: React.FC<TableProps> = ({ title, data, columns }) => {
+  const pathname = usePathname();
   return (
     <div className="overflow-x-auto">
       <h2 className="text-xl font-semibold mb-4 font-beatrice">{title}</h2>
@@ -37,15 +41,21 @@ const Table: React.FC<TableProps> = ({ title, data, columns }) => {
             >
               {columns.map((column, colIndex) => (
                 <td key={colIndex} className="py-6 px-4 font-semibold">
-                  <Link
-                    href={`/admin/orders/${row.id}`}
-                    className="block w-full h-full"
-                    passHref
-                  >
-                    {column.render
-                      ? column.render(row[column.accessor])
-                      : row[column.accessor]}
-                  </Link>
+                  {!pathname.startsWith("/admin/orders/") ? (
+                    <Link
+                      href={`/admin/orders/${row.id}`}
+                      className="block w-full h-full"
+                      passHref
+                    >
+                      {column.render
+                        ? column.render(row[column.accessor])
+                        : row[column.accessor]}
+                    </Link>
+                  ) : column.render ? (
+                    column.render(row[column.accessor])
+                  ) : (
+                    row[column.accessor]
+                  )}
                 </td>
               ))}
             </tr>
