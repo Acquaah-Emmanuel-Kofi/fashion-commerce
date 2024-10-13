@@ -1,4 +1,3 @@
-import InputField from "@/app/shared/components/InputField";
 import React, { useState, useEffect } from "react";
 import MultiImageUpload from "./MultiImageUpload";
 import Image from "next/image";
@@ -10,6 +9,7 @@ import {
   CATEGORY_OPTIONS,
   PRODUCT_TYPE_OPTIONS,
 } from "@/app/shared/helpers/constants.helper";
+import InputField from "@/app/shared/components/InputField";
 
 interface ProductFormProps {
   product?: ProductCreationForm;
@@ -30,12 +30,14 @@ const ProductForm: React.FC<ProductFormProps> = ({
     colors: product?.colors || [],
     type: product?.type || "",
     price: product?.price || "0",
-    isAvailable: product?.isAvailable || "",
+    isAvailable: product?.isAvailable || "true",
     images: product?.images || [],
   });
 
   const [productImage, setProductImage] = useState<string>("");
-  const [isProductAvailable, setIsProductAvailable] = useState(false);
+  const [isProductAvailable, setIsProductAvailable] = useState<boolean>(
+    product?.isAvailable === "true"
+  );
   const [isFormValid, setIsFormValid] = useState(false);
 
   const handleInputChange = (
@@ -64,13 +66,13 @@ const ProductForm: React.FC<ProductFormProps> = ({
   const handleIsProductAvailable = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setIsProductAvailable(event.target.checked);
-    setFormData({ ...formData, isAvailable: event.target.value });
+    const isChecked = event.target.checked;
+    setIsProductAvailable(isChecked);
+    setFormData({ ...formData, isAvailable: isChecked ? "true" : "false" });
   };
 
   const handleImagesSelect = (files: File[]) => {
     setProductImage(URL.createObjectURL(files[files.length - 1]));
-
     setFormData((prevData) => ({
       ...prevData,
       images: [...prevData.images, ...files],
@@ -90,17 +92,16 @@ const ProductForm: React.FC<ProductFormProps> = ({
         isAvailable,
         images,
       } = formData;
-
       const isValid =
         !!name.trim() &&
         !!description.trim() &&
         !!category.trim() &&
         !!price.trim() &&
         !!type.trim() &&
-        !!isAvailable.trim() &&
         sizes.length > 0 &&
         colors.length > 0 &&
-        images.length > 0;
+        images.length > 0 &&
+        isAvailable !== "";
 
       setIsFormValid(isValid);
     };
@@ -121,7 +122,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
       if (formData.colors.length === 0) missingFields.push("Colors");
       if (formData.sizes.length === 0) missingFields.push("Sizes");
       if (!formData.type.trim()) missingFields.push("Product Type");
-      if (!formData.isAvailable.trim()) missingFields.push("Availabilty");
+      if (!formData.isAvailable.trim()) missingFields.push("Availability");
       if (formData.images.length === 0)
         missingFields.push("Add at least one image");
 
@@ -145,6 +146,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
       isAvailable: product?.isAvailable || "true",
       images: product?.images || [],
     });
+    setIsProductAvailable(product?.isAvailable === "true");
   };
 
   return (
@@ -173,7 +175,8 @@ const ProductForm: React.FC<ProductFormProps> = ({
           <CustomSelect
             options={CATEGORY_OPTIONS}
             onSelect={handleCategorySelect}
-            placeholder="Type category here"
+            placeholder="Select a category"
+            defaultValue={formData.category}
             label="Category"
             required
           />
@@ -198,8 +201,9 @@ const ProductForm: React.FC<ProductFormProps> = ({
             <CustomSelect
               options={PRODUCT_TYPE_OPTIONS}
               onSelect={handleProductTypeSelect}
+              defaultValue={formData.type}
               label="Product Type"
-              placeholder="Slect type"
+              placeholder="Select type"
               required
             />
 
@@ -214,11 +218,14 @@ const ProductForm: React.FC<ProductFormProps> = ({
             />
           </div>
 
+          <div>
+            <p className="text-base text-black font-thin">Check this if the product is available.</p>
+          </div>
+
           <div className="text-base flex">
             <input
               type="checkbox"
               checked={isProductAvailable}
-              value={!isProductAvailable ? "true" : "false"}
               onChange={handleIsProductAvailable}
               className="shrink-0 mt-0.5 border-gray-200 rounded text-black accent-black"
             />
@@ -254,29 +261,35 @@ const ProductForm: React.FC<ProductFormProps> = ({
       </div>
 
       <div className="flex justify-end w-full mt-6">
-        <div className="grid grid-cols-2 lg:w-3/12 w-full gap-3">
+        <div
+          className={`grid border-2 gap-3 ${
+            product
+              ? "lg:w-[48%] w-full grid-cols-3"
+              : "lg:w-3/12 w-full grid-cols-2"
+          }`}
+        >
+          <button
+            type="button"
+            onClick={handleSubmit}
+            className="w-full py-2 text-white bg-black"
+          >
+            {product ? "UPDATE" : "SUBMIT"}
+          </button>
+
           {onDelete && (
             <button
               type="button"
               onClick={onDelete}
-              className="w-full py-2 bg-red-600 text-white"
+              className="w-full py-2 bg-red-600 hover:bg-red-700 text-white"
             >
               DELETE
             </button>
           )}
-          <button
-            type="button"
-            onClick={handleSubmit}
-            className={`w-full py-2 text-white ${
-              isFormValid ? "bg-black" : "bg-gray-600"
-            }`}
-          >
-            {product ? "UPDATE" : "SUBMIT"}
-          </button>
+
           <button
             type="button"
             onClick={handleCancel}
-            className="w-full py-2 bg-gray-100 text-black hover:bg-black hover:text-white transition-colors"
+            className="w-full py-2 bg-gray-200 text-black hover:bg-gray-400 hover:text-black transition-colors"
           >
             CANCEL
           </button>
