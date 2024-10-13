@@ -55,7 +55,7 @@ const OrderDetailsInfo: React.FC<OrderDetailsProps> = ({
 
   return (
     <div className="p-4 bg-white">
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex flex-col lg:flex-row justify-between lg:items-center gap-4 mb-4">
         <div>
           <h1 className="text-lg font-bold font-beatrice">
             Order ID: <span className="text-gray-600">#{orderId}</span>
