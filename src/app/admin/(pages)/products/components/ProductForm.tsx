@@ -261,6 +261,25 @@ const ProductForm: React.FC<ProductFormProps> = ({
             )}
           </div>
 
+          {formData.images && (
+            <div className="flex gap-3 overflow-x-auto scrollbar-none">
+              {formData.images.map((image, index) => (
+                <Image
+                  key={index}
+                  src={
+                    typeof image === "string"
+                      ? image
+                      : URL.createObjectURL(image)
+                  }
+                  alt={`${formData.name} image ${index + 1}`}
+                  width={300}
+                  height={300}
+                  className="object-contain w-[50px]"
+                />
+              ))}
+            </div>
+          )}
+
           <MultiImageUpload onImagesSelect={handleImagesSelect} />
         </div>
       </div>
