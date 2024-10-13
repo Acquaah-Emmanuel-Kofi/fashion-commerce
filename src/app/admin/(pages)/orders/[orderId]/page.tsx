@@ -2,6 +2,7 @@ import HeaderTitle from "@/app/admin/(components)/HeaderTitle";
 import Breadcrumb from "@/app/shared/components/Breadcrumb";
 import React from "react";
 import OrderDetailsInfo from "./components/OrderDetailsInfo";
+import OrderProducts from "./components/OrderProducts";
 
 const breadcrumbItems = [
   { label: "Order List", href: "/admin/orders" },
@@ -14,7 +15,7 @@ export default function OrderDetails({
   params: { orderId: string };
 }) {
   const orderDetails = {
-    orderId: "6743",
+    orderId: `${params}`,
     customer: {
       name: "Shristi Singh",
       email: "shristi@gmail.com",
@@ -51,6 +52,7 @@ export default function OrderDetails({
       </header>
 
       <OrderDetailsInfo {...orderDetails} />
+      <OrderProducts />
     </section>
   );
 }
