@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 interface TableColumn {
   header: string;
@@ -30,12 +31,21 @@ const Table: React.FC<TableProps> = ({ title, data, columns }) => {
         </thead>
         <tbody>
           {data.map((row, rowIndex) => (
-            <tr key={rowIndex} className="border-t">
+            <tr
+              key={rowIndex}
+              className="border-t hover:shadow-md cursor-pointer"
+            >
               {columns.map((column, colIndex) => (
-                <td key={colIndex} className="p-4 font-semibold">
-                  {column.render
-                    ? column.render(row[column.accessor])
-                    : row[column.accessor]}
+                <td key={colIndex} className="py-6 px-4 font-semibold">
+                  <Link
+                    href={`/admin/orders/${row.id}`}
+                    className="block w-full h-full"
+                    passHref
+                  >
+                    {column.render
+                      ? column.render(row[column.accessor])
+                      : row[column.accessor]}
+                  </Link>
                 </td>
               ))}
             </tr>
