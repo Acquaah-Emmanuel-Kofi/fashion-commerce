@@ -1,6 +1,6 @@
 import HeaderTitle from "@/app/admin/(components)/HeaderTitle";
 import Breadcrumb from "@/app/shared/components/Breadcrumb";
-import React, { Fragment } from "react";
+import React from "react";
 import OrderDetailsInfo from "./components/OrderDetailsInfo";
 import OrderProducts from "./components/OrderProducts";
 import OrderTotalSummary from "./components/OrderTotalSummary";
