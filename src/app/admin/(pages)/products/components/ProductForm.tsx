@@ -34,10 +34,10 @@ const ProductForm: React.FC<ProductFormProps> = ({
     images: product?.images || [],
   });
 
-  const [productImage, setProductImage] = useState<string>("");
   const [isProductAvailable, setIsProductAvailable] = useState<boolean>(
     product?.isAvailable === "true"
   );
+
   const [isFormValid, setIsFormValid] = useState(false);
 
   const handleInputChange = (
@@ -72,7 +72,6 @@ const ProductForm: React.FC<ProductFormProps> = ({
   };
 
   const handleImagesSelect = (files: File[]) => {
-    setProductImage(URL.createObjectURL(files[files.length - 1]));
     setFormData((prevData) => ({
       ...prevData,
       images: [...prevData.images, ...files],
@@ -219,7 +218,9 @@ const ProductForm: React.FC<ProductFormProps> = ({
           </div>
 
           <div>
-            <p className="text-base text-black font-thin">Check this if the product is available.</p>
+            <p className="text-base text-black font-thin">
+              Check this if the product is available.
+            </p>
           </div>
 
           <div className="text-base flex">
@@ -247,7 +248,11 @@ const ProductForm: React.FC<ProductFormProps> = ({
               </div>
             ) : (
               <Image
-                src={productImage}
+                src={
+                  typeof formData.images[0] === "string"
+                    ? formData.images[0]
+                    : URL.createObjectURL(formData.images[0])
+                }
                 alt={`${formData.name} image`}
                 width={300}
                 height={300}
