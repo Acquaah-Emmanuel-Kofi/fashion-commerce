@@ -3,6 +3,7 @@ import StatsCard from "../../(components)/StatsCard";
 import RecentOrders from "./components/RecentOrders";
 import Breadcrumb from "@/app/shared/components/Breadcrumb";
 import HeaderTitle from "../../(components)/HeaderTitle";
+import Graph from "../products/components/Graph";
 
 const breadcrumbItems = [
   { label: "Dashboard", href: "" },
@@ -53,6 +54,8 @@ export default function Dashboard() {
           />
         ))}
       </div>
+
+      <Graph />
 
       <RecentOrders />
     </div>
