@@ -1,5 +1,5 @@
 import { IProduct } from "@/modules/interfaces/products.interface";
-import { fetchDataFromApi, postDataToApi } from "@/services/api";
+import { fetchDataFromApi } from "@/services/api";
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 
 type ProductState = {
