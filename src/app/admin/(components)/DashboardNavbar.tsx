@@ -4,7 +4,7 @@ import { FaBell } from "react-icons/fa";
 
 export default function DashboardNavbar() {
   return (
-    <div className="flex justify-end items-center p-4 bg-white border-b">
+    <div className="flex justify-end items-center p-4 bg-white border-b z-50">
       <div className="flex items-center space-x-4">
         <FaBell className="text-gray-500" />
         <div className="relative">
