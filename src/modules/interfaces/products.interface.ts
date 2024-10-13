@@ -41,5 +41,5 @@ export interface ProductCreationForm {
   category: string;
   isAvailable: string;
   description: string;
-  images: File[];
+  images: (File | string)[];
 }
