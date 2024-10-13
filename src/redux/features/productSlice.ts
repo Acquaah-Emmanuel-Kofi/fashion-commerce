@@ -30,9 +30,22 @@ export const fetchProducts = createAsyncThunk(
 
 export const createProduct = createAsyncThunk(
   "products/createProduct",
-  async (productData: FormData) => {
-    const response = await postDataToApi("/product", productData);
-    return response;
+  async (formData: FormData) => {
+    const baseUrl =
+      process.env.NEXT_PUBLIC_BACKEND_API_URL ||
+      "https://fashion-commerce.onrender.com/api/v1";
+    const url = `${baseUrl}/product`;
+
+    const response = await fetch(url, {
+      method: "POST",
+      body: formData,
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.statusText}`);
+    }
+
+    return response.json();
   }
 );
 
