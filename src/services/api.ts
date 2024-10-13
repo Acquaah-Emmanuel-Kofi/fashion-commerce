@@ -28,11 +28,14 @@ export const postDataToApi = async (endpoint: string, data: any) => {
 
     const response = await fetch(url, {
       method: "POST",
-      body: data,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
     });
 
     if (!response.ok) {
-      throw new Error(`Error: ${response.statusText}`);
+      throw new Error("Failed to post this request");
     }
 
     return await response.json();
@@ -40,23 +43,4 @@ export const postDataToApi = async (endpoint: string, data: any) => {
     console.error("Error posting data:", error);
     return null;
   }
-};
-
-
-export const putDataToApi = async (url: string, data: FormData) => {
-  const token = localStorage.getItem("token"); // Assuming you store your JWT token in localStorage
-  const response = await fetch(`${process.env.API_URL}${url}`, {
-    method: "PUT",
-    headers: {
-      "Authorization": `Bearer ${token}`,
-    },
-    body: data,
-  });
-
-  if (!response.ok) {
-    const errorResponse = await response.json();
-    throw new Error(errorResponse.message || "Failed to update the product");
-  }
-
-  return await response.json(); // Assuming the response returns the updated product
 };

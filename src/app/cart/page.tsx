@@ -82,7 +82,7 @@ const CartPage = () => {
       <div className="container mx-auto px-4 py-8">
         <div className="mb-8 flex items-center gap-10">
           <h1
-            className={`lg:text-lg text-lg font-bold cursor-pointer ${
+            className={`lg:text-lg text-base font-bold cursor-pointer ${
               itemsToRender === "cart" ? "font-bold" : "font-normal"
             }`}
             onClick={() => setActiveView("cart")}

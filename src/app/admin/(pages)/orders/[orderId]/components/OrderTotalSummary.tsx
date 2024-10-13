@@ -10,12 +10,7 @@ export default function OrderTotalSummary () {
         </div>
 
         <div className="flex justify-between w-full ">
-          <p className="text-base font-beatrice">Tax (20%)</p>
-          <p className="font-semibold text-base">GHS6,023</p>
-        </div>
-
-        <div className="flex justify-between w-full ">
-          <p className="text-base font-beatrice">Discount</p>
+          <p className="text-base font-beatrice">Shipping</p>
           <p className="font-semibold text-base">GHS0</p>
         </div>
 
