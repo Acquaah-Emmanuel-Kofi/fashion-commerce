@@ -25,7 +25,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
   const [formData, setFormData] = useState({
     name: product?.name || "",
     description: product?.description || "",
-    category: product?.category || "",
+    categories: product?.categories || [],
     sizes: product?.sizes || [],
     colors: product?.colors || [],
     type: product?.type || "",
@@ -47,9 +47,9 @@ const ProductForm: React.FC<ProductFormProps> = ({
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleCategorySelect = (category: string) => {
-    setFormData({ ...formData, category });
-  };
+const handleCategorySelect = (category: string) => {
+  setFormData({ ...formData, categories: [category] });
+};
 
   const handleSizesUpdate = (updatedSizes: string[]) => {
     setFormData({ ...formData, sizes: updatedSizes });
@@ -83,7 +83,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
       const {
         name,
         description,
-        category,
+        categories,
         sizes,
         colors,
         price,
@@ -94,9 +94,9 @@ const ProductForm: React.FC<ProductFormProps> = ({
       const isValid =
         !!name.trim() &&
         !!description.trim() &&
-        !!category.trim() &&
         !!price.trim() &&
         !!type.trim() &&
+        categories.length > 0 &&
         sizes.length > 0 &&
         colors.length > 0 &&
         images.length > 0 &&
@@ -116,8 +116,8 @@ const ProductForm: React.FC<ProductFormProps> = ({
 
       if (!formData.name.trim()) missingFields.push("Product Name");
       if (!formData.description.trim()) missingFields.push("Description");
-      if (!formData.category.trim()) missingFields.push("Category");
       if (!formData.price.trim()) missingFields.push("Price");
+      if (formData.categories.length === 0) missingFields.push("categories");
       if (formData.colors.length === 0) missingFields.push("Colors");
       if (formData.sizes.length === 0) missingFields.push("Sizes");
       if (!formData.type.trim()) missingFields.push("Product Type");
@@ -137,7 +137,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
     setFormData({
       name: product?.name || "",
       description: product?.description || "",
-      category: product?.category || "",
+      categories: product?.categories || [],
       sizes: product?.sizes || [],
       colors: product?.colors || [],
       type: product?.type || "",
@@ -174,9 +174,9 @@ const ProductForm: React.FC<ProductFormProps> = ({
           <CustomSelect
             options={CATEGORY_OPTIONS}
             onSelect={handleCategorySelect}
-            placeholder="Select a category"
-            defaultValue={formData.category}
-            label="Category"
+            placeholder="Select a categories"
+            defaultValue={formData.categories[0]}
+            label="categories"
             required
           />
 

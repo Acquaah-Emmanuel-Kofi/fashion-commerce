@@ -38,7 +38,7 @@ export interface ProductCreationForm {
   type: string;
   sizes: string[];
   colors: string[];
-  category: string;
+  categories: string[];
   isAvailable: string;
   description: string;
   images: (File | string)[];
