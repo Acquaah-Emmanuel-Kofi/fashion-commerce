@@ -19,7 +19,7 @@ export const fetchDataFromApi = async (endpoint: string) => {
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const postDataToApi = async (endpoint: string, data: FormData) => {
+export const postDataToApi = async (endpoint: string, data: any) => {
   try {
     const baseUrl =
       process.env.NEXT_PUBLIC_BACKEND_API_URL ||
