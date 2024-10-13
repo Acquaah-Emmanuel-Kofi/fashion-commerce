@@ -1,8 +1,9 @@
 import HeaderTitle from "@/app/admin/(components)/HeaderTitle";
 import Breadcrumb from "@/app/shared/components/Breadcrumb";
-import React from "react";
+import React, { Fragment } from "react";
 import OrderDetailsInfo from "./components/OrderDetailsInfo";
 import OrderProducts from "./components/OrderProducts";
+import OrderTotalSummary from "./components/OrderTotalSummary";
 
 const breadcrumbItems = [
   { label: "Order List", href: "/admin/orders" },
@@ -15,7 +16,7 @@ export default function OrderDetails({
   params: { orderId: string };
 }) {
   const orderDetails = {
-    orderId: `${params}`,
+    orderId: `${params.orderId}`,
     customer: {
       name: "Shristi Singh",
       email: "shristi@gmail.com",
@@ -53,6 +54,10 @@ export default function OrderDetails({
 
       <OrderDetailsInfo {...orderDetails} />
       <OrderProducts />
+
+      <div className="flex lg:justify-end">
+        <OrderTotalSummary />
+      </div>
     </section>
   );
 }
