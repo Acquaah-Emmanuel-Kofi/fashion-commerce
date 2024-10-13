@@ -46,7 +46,7 @@ const CartItem = ({
             height={376}
             priority
           />
-          <div className="absolute bottom-0 right-0">
+          <div className="absolute bottom-0 right-7 lg:bottom-0 lg:right-0">
             <AddToFavoriteButton products={item} />
           </div>
         </div>
