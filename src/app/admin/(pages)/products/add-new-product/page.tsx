@@ -5,8 +5,10 @@ import ProductForm from "../components/ProductForm";
 import HeaderTitle from "@/app/admin/(components)/HeaderTitle";
 import { ProductCreationForm } from "@/modules/interfaces/products.interface";
 import Breadcrumb from "@/app/shared/components/Breadcrumb";
-import { postDataToApi } from "@/services/api";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
+import { useAppDispatch } from "@/redux/store";
+import { createProduct } from "@/redux/features/productSlice";
 
 const breadcrumbItems = [
   { label: "All Products", href: "/admin/products" },
@@ -14,6 +16,9 @@ const breadcrumbItems = [
 ];
 
 export default function AddNewProduct() {
+  const router = useRouter();
+  const dispatch = useAppDispatch();
+
   const handleSubmit = async (data: ProductCreationForm) => {
     const formData = new FormData();
 
@@ -37,12 +42,13 @@ export default function AddNewProduct() {
     });
 
     try {
-      const response = await postDataToApi("/product", formData);
+      const responseAction = await dispatch(createProduct(formData));
 
-      if (response.status === 200) {
+      if (createProduct.fulfilled.match(responseAction)) {
         toast.success("Product created successfully!");
+        router.push("/admin/products");
       } else {
-        toast.error(response.message);
+        toast.error("Something went wrong!");
       }
     } catch (error) {
       toast.error("Failed to create product.");
