@@ -31,9 +31,14 @@ const AdminProductDetails = ({ params }: { params: { productId: string } }) => {
 
   const productDetails = data && {
     ...data,
-    category: data?.categories[0],
-    isAvailable: String(data?.available),
-    images: [],
+    category: data.categories[0],
+    isAvailable: String(data.available),
+    images: data.images.map((img) => {
+      if (typeof img === "string") {
+        return img;
+      }
+      return img.src;
+    }),
   };
 
   if (error) {
