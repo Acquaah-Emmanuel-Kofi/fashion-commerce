@@ -57,10 +57,10 @@ export default function AddNewProduct() {
 
   return (
     <section className="space-y-6 pb-6">
-      <div>
+      <header>
         <HeaderTitle title="Product Details" />
         <Breadcrumb items={breadcrumbItems} />
-      </div>
+      </header>
       <ProductForm onSubmit={handleSubmit} />
     </section>
   );
