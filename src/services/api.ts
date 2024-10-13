@@ -28,14 +28,11 @@ export const postDataToApi = async (endpoint: string, data: any) => {
 
     const response = await fetch(url, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
+      body: data,
     });
 
     if (!response.ok) {
-      throw new Error("Failed to post this request");
+      throw new Error(`Error: ${response.statusText}`);
     }
 
     return await response.json();
