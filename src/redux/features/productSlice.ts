@@ -1,5 +1,5 @@
 import { IProduct } from "@/modules/interfaces/products.interface";
-import { fetchDataFromApi } from "@/services/api";
+import { fetchDataFromApi, postDataToApi } from "@/services/api";
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 
 type ProductState = {
@@ -24,7 +24,15 @@ export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
   async () => {
     const response = await fetchDataFromApi("/product/all");
-    return response.data; 
+    return response.data;
+  }
+);
+
+export const createProduct = createAsyncThunk(
+  "products/createProduct",
+  async (productData: FormData) => {
+    const response = await postDataToApi("/product", productData);
+    return response;
   }
 );
 
@@ -49,15 +57,21 @@ const productSlice = createSlice({
           }>
         ) => {
           state.loading = false;
-          state.products = action.payload.products; 
-          state.available = action.payload.available; 
-          state.unavailable = action.payload.unavailable; 
-          state.total = action.payload.total; 
+          state.products = action.payload.products;
+          state.available = action.payload.available;
+          state.unavailable = action.payload.unavailable;
+          state.total = action.payload.total;
         }
       )
       .addCase(fetchProducts.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || "Failed to load products";
+      })
+      .addCase(createProduct.fulfilled, (state, action) => {
+        state.products.push(action.payload);
+      })
+      .addCase(createProduct.rejected, (state, action) => {
+        state.error = action.error.message || "Failed to create product";
       });
   },
 });
