@@ -31,7 +31,7 @@ export default function AllProducts() {
             <button
               type="button"
               onClick={handleAddNewProductRoute}
-              className="hover:bg-slate-800 bg-black text-sm flex items-center gap-2 justify-center font-semibold hover:text-black text-white transition-all ease-in-out p-2 w-full"
+              className="hover:bg-slate-800 bg-black text-sm flex items-center gap-2 justify-center font-semibold text-white transition-all ease-in-out p-2 w-full"
             >
               <LuPlusCircle />
               ADD NEW PRODUCT
