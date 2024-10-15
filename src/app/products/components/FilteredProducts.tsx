@@ -4,7 +4,10 @@ import NotAvailable from "@/app/shared/components/NotAvailable";
 import ProductCard from "@/app/shared/components/ProductCard";
 import ProductCardSkeleton from "@/app/shared/components/ProductCardSkeleton";
 import useProducts from "@/hooks/useProducts";
-import { IProduct } from "@/modules/interfaces/products.interface";
+import {
+  IProduct,
+  IProductDetails,
+} from "@/modules/interfaces/products.interface";
 import { useAppSelector } from "@/redux/store";
 import { useEffect, useState } from "react";
 
@@ -13,8 +16,10 @@ const FilteredProducts = () => {
 
   const keyword = useAppSelector((state) => state.search.keyword);
   const selectedType = useAppSelector((state) => state.filters.selectedType);
-
-  const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
+  const otherFilter = useAppSelector((state) => state.filters.otherFilters);
+  const [filteredProducts, setFilteredProducts] = useState<IProductDetails[]>(
+    []
+  );
 
   useEffect(() => {
     if (!products || products.length === 0) return;
@@ -37,8 +42,35 @@ const FilteredProducts = () => {
       );
     }
 
+    if (otherFilter) {
+      if (otherFilter.sizes) {
+        filtered = filtered.filter((product: IProductDetails) =>
+          product.sizes?.includes(otherFilter.sizes)
+        );
+      }
+
+      if (otherFilter.colors) {
+        filtered = filtered.filter((product: IProductDetails) =>
+          product.colors?.includes(otherFilter.color)
+        );
+      }
+
+      if (otherFilter.categories) {
+        filtered = filtered.filter((product: IProductDetails) =>
+          product.categories?.includes(otherFilter.categories.toLowerCase())
+        );
+      }
+
+      if (otherFilter.availability) {
+        filtered = filtered.filter(
+          (product: IProductDetails) =>
+            product.available === (otherFilter.availability === "true")
+        );
+      }
+    }
+
     setFilteredProducts(filtered);
-  }, [keyword, selectedType, products]);
+  }, [keyword, selectedType, products, otherFilter]);
 
   if (loading) {
     return (
@@ -69,7 +101,6 @@ const FilteredProducts = () => {
     );
   }
 
-  // Check if there are no products at all
   if (!products || products.length === 0) {
     return (
       <NotAvailable
@@ -79,7 +110,6 @@ const FilteredProducts = () => {
     );
   }
 
-  // Check if filtered products are empty
   if (filteredProducts.length === 0) {
     return (
       <NotAvailable
