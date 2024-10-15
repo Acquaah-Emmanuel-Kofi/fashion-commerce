@@ -4,7 +4,10 @@ import NotAvailable from "@/app/shared/components/NotAvailable";
 import ProductCard from "@/app/shared/components/ProductCard";
 import ProductCardSkeleton from "@/app/shared/components/ProductCardSkeleton";
 import useProducts from "@/hooks/useProducts";
-import { IProduct } from "@/modules/interfaces/products.interface";
+import {
+  IProduct,
+  IProductDetails,
+} from "@/modules/interfaces/products.interface";
 import { useAppSelector } from "@/redux/store";
 import { useEffect, useState } from "react";
 
@@ -13,8 +16,10 @@ const FilteredProducts = () => {
 
   const keyword = useAppSelector((state) => state.search.keyword);
   const selectedType = useAppSelector((state) => state.filters.selectedType);
-
-  const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
+  const otherFilter = useAppSelector((state) => state.filters.otherFilters);
+  const [filteredProducts, setFilteredProducts] = useState<IProductDetails[]>(
+    []
+  );
 
   useEffect(() => {
     if (!products || products.length === 0) return;
@@ -37,8 +42,61 @@ const FilteredProducts = () => {
       );
     }
 
+    if (otherFilter) {
+      const noActiveFilters =
+        (!otherFilter.sizes || otherFilter.sizes.length === 0) &&
+        (!otherFilter.colors || otherFilter.colors.length === 0) &&
+        (!otherFilter.categories || otherFilter.categories.length === 0) &&
+        (!otherFilter.availability || otherFilter.availability.length === 0);
+
+      if (noActiveFilters) {
+        filtered = products;
+      } else {
+        if (otherFilter.availability) {
+          if (
+            otherFilter.availability.includes("true") &&
+            otherFilter.availability.includes("false")
+          ) {
+            filtered = filtered;
+          } else if (otherFilter.availability.includes("true")) {
+            filtered = filtered.filter(
+              (product: IProductDetails) => product.available === true
+            );
+          } else if (otherFilter.availability.includes("false")) {
+            filtered = filtered.filter(
+              (product: IProductDetails) => product.available === false
+            );
+          }
+        }
+
+        if (otherFilter.sizes) {
+          filtered = filtered.filter((product: IProductDetails) =>
+            (otherFilter.sizes as string[]).some((size) =>
+              product.sizes?.includes(size)
+            )
+          );
+        }
+
+        if (otherFilter.colors) {
+          filtered = filtered.filter((product: IProductDetails) =>
+            (otherFilter.colors as string[]).some((color) =>
+              product.colors?.includes(color)
+            )
+          );
+        }
+
+        if (otherFilter.categories) {
+          filtered = filtered.filter((product: IProductDetails) =>
+            (otherFilter.categories as string[]).some((category) =>
+              product.categories?.includes(category.toLowerCase())
+            )
+          );
+        }
+      }
+    }
+
     setFilteredProducts(filtered);
-  }, [keyword, selectedType, products]);
+  }, [keyword, selectedType, products, otherFilter]);
 
   if (loading) {
     return (
@@ -69,7 +127,6 @@ const FilteredProducts = () => {
     );
   }
 
-  // Check if there are no products at all
   if (!products || products.length === 0) {
     return (
       <NotAvailable
@@ -79,11 +136,16 @@ const FilteredProducts = () => {
     );
   }
 
-  // Check if filtered products are empty
   if (filteredProducts.length === 0) {
     return (
       <NotAvailable
-        title={`No results for: ${keyword || selectedType}`}
+        title={`No results for: ${
+          keyword ||
+          selectedType ||
+          otherFilter["categories"] ||
+          otherFilter["colors"] ||
+          otherFilter["sizes"]
+        }`}
         subTitle="Sorry, we couldn't find any products matching your search criteria."
       />
     );

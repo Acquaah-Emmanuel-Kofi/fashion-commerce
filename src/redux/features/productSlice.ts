@@ -1,9 +1,9 @@
-import { IProduct } from "@/modules/interfaces/products.interface";
+import { IProductDetails } from "@/modules/interfaces/products.interface";
 import { fetchDataFromApi } from "@/services/api";
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 
 type ProductState = {
-  products: IProduct[];
+  products: IProductDetails[];
   available: number;
   unavailable: number;
   total: string;
@@ -24,7 +24,12 @@ export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
   async () => {
     const response = await fetchDataFromApi("/product/all");
-    return response.data;
+    return {
+      available: response.data.available,
+      unavailable: response.data.unavailable,
+      products: response.data.products,
+      total: response.total,
+    };
   }
 );
 
@@ -65,7 +70,7 @@ const productSlice = createSlice({
           action: PayloadAction<{
             available: number;
             unavailable: number;
-            products: IProduct[];
+            products: IProductDetails[];
             total: string;
           }>
         ) => {

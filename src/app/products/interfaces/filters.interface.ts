@@ -1,3 +1,5 @@
+import { ICommonResponse } from "@/modules/interfaces/common.interface";
+
 export interface IFilterOption {
   value: string | number;
   label: string;
@@ -10,6 +12,6 @@ export interface IFilter {
   options: IFilterOption[];
 }
 
-export interface IFiltersProps {
-  filters: IFilter[];
+export interface IFilterResponse extends ICommonResponse {
+  data: IFilter[]
 }

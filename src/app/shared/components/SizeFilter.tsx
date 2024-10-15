@@ -16,7 +16,7 @@ const SizeFilter: React.FC<SizeFilterProps> = ({ sizes, onSelect }) => {
   return (
     <Fragment>
       <label htmlFor="size" className="font-semibold font-beatrice">
-        Size
+        Sizes
       </label>
       <div className="flex space-x-1 ">
         {sizes?.map((size) => (
