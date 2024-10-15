@@ -24,7 +24,12 @@ export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
   async () => {
     const response = await fetchDataFromApi("/product/all");
-    return response.data;
+    return {
+      available: response.data.available,
+      unavailable: response.data.unavailable,
+      products: response.data.products,
+      total: response.total,
+    };
   }
 );
 
