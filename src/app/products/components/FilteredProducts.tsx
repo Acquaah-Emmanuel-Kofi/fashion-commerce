@@ -42,36 +42,56 @@ const FilteredProducts = () => {
       );
     }
 
-    if (otherFilter.availability) {
-      filtered = filtered.filter(
-        (product: IProductDetails) =>
-          product.available === (otherFilter.availability === "true")
-      );
-    }
-
     if (otherFilter) {
-      if (otherFilter.sizes) {
-        filtered = filtered.filter((product: IProductDetails) =>
-          (otherFilter.sizes as string[]).some((size) =>
-            product.sizes?.includes(size)
-          )
-        );
-      }
+      const noActiveFilters =
+        (!otherFilter.sizes || otherFilter.sizes.length === 0) &&
+        (!otherFilter.colors || otherFilter.colors.length === 0) &&
+        (!otherFilter.categories || otherFilter.categories.length === 0) &&
+        (!otherFilter.availability || otherFilter.availability.length === 0);
 
-      if (otherFilter.colors) {
-        filtered = filtered.filter((product: IProductDetails) =>
-          (otherFilter.colors as string[]).some((color) =>
-            product.colors?.includes(color)
-          )
-        );
-      }
+      if (noActiveFilters) {
+        filtered = products;
+      } else {
+        if (otherFilter.availability) {
+          if (
+            otherFilter.availability.includes("true") &&
+            otherFilter.availability.includes("false")
+          ) {
+            filtered = filtered;
+          } else if (otherFilter.availability.includes("true")) {
+            filtered = filtered.filter(
+              (product: IProductDetails) => product.available === true
+            );
+          } else if (otherFilter.availability.includes("false")) {
+            filtered = filtered.filter(
+              (product: IProductDetails) => product.available === false
+            );
+          }
+        }
 
-      if (otherFilter.categories) {
-        filtered = filtered.filter((product: IProductDetails) =>
-          (otherFilter.categories as string[]).some((category) =>
-            product.categories?.includes(category.toLowerCase())
-          )
-        );
+        if (otherFilter.sizes) {
+          filtered = filtered.filter((product: IProductDetails) =>
+            (otherFilter.sizes as string[]).some((size) =>
+              product.sizes?.includes(size)
+            )
+          );
+        }
+
+        if (otherFilter.colors) {
+          filtered = filtered.filter((product: IProductDetails) =>
+            (otherFilter.colors as string[]).some((color) =>
+              product.colors?.includes(color)
+            )
+          );
+        }
+
+        if (otherFilter.categories) {
+          filtered = filtered.filter((product: IProductDetails) =>
+            (otherFilter.categories as string[]).some((category) =>
+              product.categories?.includes(category.toLowerCase())
+            )
+          );
+        }
       }
     }
 
