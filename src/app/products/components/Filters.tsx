@@ -3,7 +3,7 @@ import { IoIosArrowForward, IoIosArrowUp } from "react-icons/io";
 import { IFilter } from "../interfaces/filters.interface";
 import SizeFilter from "@/app/shared/components/SizeFilter";
 import { fetchDataFromApi } from "@/services/api";
-import { useAppDispatch, useAppSelector } from "@/redux/store";
+import { useAppDispatch } from "@/redux/store";
 import { setOtherFilters } from "@/redux/features/filtersSlice";
 import FiltersPlaceholder from "./FiltersPlaceholder";
 import useProducts from "@/hooks/useProducts";
@@ -125,6 +125,7 @@ const Filters = () => {
 
         setIsLoading(false);
       } catch (error) {
+        console.error(`Error getting filter options: ${error}`)
         setIsLoading(false);
       }
     };
