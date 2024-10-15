@@ -1,9 +1,9 @@
-import { IProduct } from "@/modules/interfaces/products.interface";
+import { IProductDetails } from "@/modules/interfaces/products.interface";
 import { fetchDataFromApi } from "@/services/api";
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 
 type ProductState = {
-  products: IProduct[];
+  products: IProductDetails[];
   available: number;
   unavailable: number;
   total: string;
@@ -65,7 +65,7 @@ const productSlice = createSlice({
           action: PayloadAction<{
             available: number;
             unavailable: number;
-            products: IProduct[];
+            products: IProductDetails[];
             total: string;
           }>
         ) => {
