@@ -3,17 +3,37 @@ import { IoIosArrowForward, IoIosArrowUp } from "react-icons/io";
 import { IFilter } from "../interfaces/filters.interface";
 import SizeFilter from "@/app/shared/components/SizeFilter";
 import { fetchDataFromApi } from "@/services/api";
-import { useAppDispatch } from "@/redux/store";
+import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { setOtherFilters } from "@/redux/features/filtersSlice";
 import FiltersPlaceholder from "./FiltersPlaceholder";
+import useProducts from "@/hooks/useProducts";
 
 const Filters = () => {
   const dispatch = useAppDispatch();
 
+  const { available, unavailable } = useProducts();
+
   const [openFilters, setOpenFilters] = useState<{ [key: string]: boolean }>(
     {}
   );
-  const [filters, setFilters] = useState<IFilter[]>([]);
+  const [filters, setFilters] = useState<IFilter[]>([
+    {
+      id: "availability",
+      name: "Availability",
+      options: [
+        {
+          value: "true",
+          label: `In Stock (${available})`,
+          checked: false,
+        },
+        {
+          value: "false",
+          label: `Out Of Stock (${unavailable})`,
+          checked: false,
+        },
+      ],
+    },
+  ]);
   const [sizes, setSizes] = useState<string[]>([]);
   const [selectedFilters, setSelectedFilters] = useState<
     Record<string, string | string[]>
@@ -68,20 +88,7 @@ const Filters = () => {
         );
 
         setSizes(sizeLabels);
-
         const transformedFilters: IFilter[] = [
-          {
-            id: "availability",
-            name: "Availability",
-            options: [
-              { value: "true", label: `Availability (${540})`, checked: false },
-              {
-                value: "false",
-                label: `Out Of Stock (${18})`,
-                checked: false,
-              },
-            ],
-          },
           {
             id: "colors",
             name: "Colors",
@@ -106,7 +113,16 @@ const Filters = () => {
           },
         ];
 
-        setFilters(transformedFilters);
+        setFilters((prevFilters) => {
+          const uniqueFilters = prevFilters.filter(
+            (prevFilter) =>
+              !transformedFilters.some(
+                (newFilter) => newFilter.id === prevFilter.id
+              )
+          );
+          return [...uniqueFilters, ...transformedFilters];
+        });
+
         setIsLoading(false);
       } catch (error) {
         setIsLoading(false);
@@ -115,6 +131,31 @@ const Filters = () => {
 
     fetchFiltersFromAPI();
   }, []);
+
+  useEffect(() => {
+    // Re-update the filters whenever available/unavailable values change
+    setFilters((prevFilters) =>
+      prevFilters.map((filter) =>
+        filter.id === "availability"
+          ? {
+              ...filter,
+              options: [
+                {
+                  value: "true",
+                  label: `In Stock (${available})`,
+                  checked: false,
+                },
+                {
+                  value: "false",
+                  label: `Out Of Stock (${unavailable})`,
+                  checked: false,
+                },
+              ],
+            }
+          : filter
+      )
+    );
+  }, [available, unavailable]);
 
   if (isLoading) return <FiltersPlaceholder />;
 
