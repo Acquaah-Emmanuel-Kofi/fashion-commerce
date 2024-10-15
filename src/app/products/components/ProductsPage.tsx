@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import Filters from "./Filters";
-import { filters } from "@/app/shared/helpers/constants.helper";
 import Breadcrumb from "@/app/shared/components/Breadcrumb";
 import SearchBar from "@/app/shared/components/Searchbar";
 import ProductTypeButtons from "./ProductTypeButtons";
@@ -71,7 +70,7 @@ export default function ProductsPage() {
               } ${isHidden ? "hidden" : ""}`}
             >
               <div className="sticky top-6">
-                <Filters filters={filters} />
+                <Filters />
               </div>
             </div>
 
