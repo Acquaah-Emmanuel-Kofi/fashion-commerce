@@ -1,26 +1,128 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
 import { IoIosArrowForward, IoIosArrowUp } from "react-icons/io";
-import { IFiltersProps } from "../interfaces/filters.interface";
+import { IFilter } from "../interfaces/filters.interface";
 import SizeFilter from "@/app/shared/components/SizeFilter";
+import { fetchDataFromApi } from "@/services/api";
+import { useAppDispatch } from "@/redux/store";
+import { setOtherFilters } from "@/redux/features/filtersSlice";
+import FiltersPlaceholder from "./FiltersPlaceholder";
 
-const Filters: React.FC<IFiltersProps> = ({ filters }) => {
+const Filters = () => {
+  const dispatch = useAppDispatch();
+
   const [openFilters, setOpenFilters] = useState<{ [key: string]: boolean }>(
     {}
   );
+  const [filters, setFilters] = useState<IFilter[]>([]);
+  const [sizes, setSizes] = useState<string[]>([]);
+  const [selectedFilters, setSelectedFilters] = useState<
+    Record<string, string>
+  >({});
+  const [selectedSize, setSelectedSize] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const toggleFilter = (id: string) => {
     setOpenFilters((prev) => ({ ...prev, [id]: !prev[id] }));
   };
 
-  const handleSizeSelect = () => {
-    setOpenFilters((prev) => ({ ...prev, size: !prev.size }));
-  }
+  const handleCheckboxChange = (filterId: string, value: string) => {
+    setSelectedFilters((prevFilters) => {
+      const updatedFilters = {
+        ...prevFilters,
+        [filterId]: prevFilters[filterId] === value ? "" : value,
+      };
+      dispatch(setOtherFilters({ ...updatedFilters, sizes: selectedSize }));
+      return updatedFilters;
+    });
+  };
+
+  const handleSizeSelect = (size: string) => {
+    setSelectedSize(size);
+    dispatch(setOtherFilters({ ...selectedFilters, sizes: size }));
+  };
+
+  useEffect(() => {
+    setIsLoading(true);
+
+    const fetchFiltersFromAPI = async () => {
+      try {
+        const response = await fetchDataFromApi("/product/filter/options");
+        const data = await response.data;
+
+        const sizeLabels = data?.sizes.map(
+          (value: { id: string; size: string }) => value.size
+        );
+
+        setSizes(sizeLabels);
+
+        const transformedFilters: IFilter[] = [
+          {
+            id: "availability",
+            name: "Availability",
+            options: [
+              { value: "true", label: `Availability (${540})`, checked: false },
+              {
+                value: "false",
+                label: `Out Of Stock (${18})`,
+                checked: false,
+              },
+            ],
+          },
+          {
+            id: "colors",
+            name: "Colors",
+            options: data?.colors?.map(
+              (type: { id: string; color: string }) => ({
+                value: type.color,
+                label: type.color,
+                checked: false,
+              })
+            ),
+          },
+          {
+            id: "categories",
+            name: "Categories",
+            options: data?.categories?.map(
+              (type: { id: string; category: string }) => ({
+                value: type.category,
+                label: type.category,
+                checked: false,
+              })
+            ),
+          },
+          {
+            id: "productTypes",
+            name: "Product Types",
+            options: data?.productTypes?.map(
+              (type: { id: string; name: string }) => ({
+                value: type.name,
+                label: type.name,
+                checked: false,
+              })
+            ),
+          },
+        ];
+
+        setFilters(transformedFilters);
+        setIsLoading(false);
+      } catch (error) {
+        setIsLoading(false);
+      }
+    };
+
+    fetchFiltersFromAPI();
+  }, []);
+
+  if (isLoading) return <FiltersPlaceholder />;
 
   return (
     <Fragment>
-      <div className="border-b border-dashed border-gray-200 pb-5 mb-2 mt-3">
-        <SizeFilter sizes={[]} onSelect={handleSizeSelect} />
-      </div>
+      {sizes.length !== 0 && (
+        <div className="border-b border-dashed border-gray-200 pb-5 mb-2 mt-3">
+          <SizeFilter sizes={sizes} onSelect={handleSizeSelect} />
+        </div>
+      )}
+
       <div className="space-y-2">
         {filters.map((filter) => (
           <div
@@ -49,14 +151,17 @@ const Filters: React.FC<IFiltersProps> = ({ filters }) => {
                 {filter.options.map((option, idx) => (
                   <div key={idx} className="flex items-center">
                     <input
-                      id={`filter-${filter.id}-${idx}`}
+                      id={`api-filter-${filter.id}-${idx}`}
                       name={`${filter.id}[]`}
                       type="checkbox"
                       defaultChecked={option.checked}
-                      className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 accent-black"
+                      onChange={() =>
+                        handleCheckboxChange(filter.id, String(option.value))
+                      }
+                      className="h-4 w-4 rounded border-gray-300 accent-black"
                     />
                     <label
-                      htmlFor={`filter-${filter.id}-${idx}`}
+                      htmlFor={`api-filter-${filter.id}-${idx}`}
                       className="ml-3 text-sm text-gray-600 font-beatrice"
                     >
                       {option.label}
