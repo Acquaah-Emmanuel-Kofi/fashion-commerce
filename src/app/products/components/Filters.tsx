@@ -16,8 +16,9 @@ const Filters = () => {
   const [filters, setFilters] = useState<IFilter[]>([]);
   const [sizes, setSizes] = useState<string[]>([]);
   const [selectedFilters, setSelectedFilters] = useState<
-    Record<string, string>
+    Record<string, string | string[]>
   >({});
+
   const [selectedSize, setSelectedSize] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -26,11 +27,24 @@ const Filters = () => {
   };
 
   const handleCheckboxChange = (filterId: string, value: string) => {
-    setSelectedFilters((prevFilters) => {
-      const updatedFilters = {
-        ...prevFilters,
-        [filterId]: prevFilters[filterId] === value ? "" : value,
-      };
+    setSelectedFilters((prevFilters: Record<string, string[] | string>) => {
+      const updatedFilters = { ...prevFilters };
+
+      if (Array.isArray(updatedFilters[filterId])) {
+        if ((updatedFilters[filterId] as string[]).includes(value)) {
+          updatedFilters[filterId] = (
+            updatedFilters[filterId] as string[]
+          ).filter((v: string) => v !== value);
+        } else {
+          updatedFilters[filterId] = [
+            ...(updatedFilters[filterId] as string[]),
+            value,
+          ];
+        }
+      } else {
+        updatedFilters[filterId] = [value];
+      }
+
       dispatch(setOtherFilters({ ...updatedFilters, sizes: selectedSize }));
       return updatedFilters;
     });
@@ -86,17 +100,6 @@ const Filters = () => {
               (type: { id: string; category: string }) => ({
                 value: type.category,
                 label: type.category,
-                checked: false,
-              })
-            ),
-          },
-          {
-            id: "productTypes",
-            name: "Product Types",
-            options: data?.productTypes?.map(
-              (type: { id: string; name: string }) => ({
-                value: type.name,
-                label: type.name,
                 checked: false,
               })
             ),
