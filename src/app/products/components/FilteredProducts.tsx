@@ -42,29 +42,35 @@ const FilteredProducts = () => {
       );
     }
 
+    if (otherFilter.availability) {
+      filtered = filtered.filter(
+        (product: IProductDetails) =>
+          product.available === (otherFilter.availability === "true")
+      );
+    }
+
     if (otherFilter) {
       if (otherFilter.sizes) {
         filtered = filtered.filter((product: IProductDetails) =>
-          product.sizes?.includes(otherFilter.sizes)
+          (otherFilter.sizes as string[]).some((size) =>
+            product.sizes?.includes(size)
+          )
         );
       }
 
       if (otherFilter.colors) {
         filtered = filtered.filter((product: IProductDetails) =>
-          product.colors?.includes(otherFilter.color)
+          (otherFilter.colors as string[]).some((color) =>
+            product.colors?.includes(color)
+          )
         );
       }
 
       if (otherFilter.categories) {
         filtered = filtered.filter((product: IProductDetails) =>
-          product.categories?.includes(otherFilter.categories.toLowerCase())
-        );
-      }
-
-      if (otherFilter.availability) {
-        filtered = filtered.filter(
-          (product: IProductDetails) =>
-            product.available === (otherFilter.availability === "true")
+          (otherFilter.categories as string[]).some((category) =>
+            product.categories?.includes(category.toLowerCase())
+          )
         );
       }
     }
@@ -113,7 +119,13 @@ const FilteredProducts = () => {
   if (filteredProducts.length === 0) {
     return (
       <NotAvailable
-        title={`No results for: ${keyword || selectedType}`}
+        title={`No results for: ${
+          keyword ||
+          selectedType ||
+          otherFilter["categories"] ||
+          otherFilter["colors"] ||
+          otherFilter["sizes"]
+        }`}
         subTitle="Sorry, we couldn't find any products matching your search criteria."
       />
     );
