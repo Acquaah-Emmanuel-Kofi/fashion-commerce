@@ -22,7 +22,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
   onSubmit,
   onDelete,
 }) => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<ProductCreationForm>({
     name: product?.name || "",
     description: product?.description || "",
     categories: product?.categories || [],
@@ -47,16 +47,23 @@ const ProductForm: React.FC<ProductFormProps> = ({
     setFormData({ ...formData, [name]: value });
   };
 
-const handleCategorySelect = (category: string) => {
-  setFormData({ ...formData, categories: [category] });
-};
+  const handleCategorySelect = (category: string) => {
+    setFormData({ ...formData, categories: [category] });
+  };
 
   const handleSizesUpdate = (updatedSizes: string[]) => {
-    setFormData({ ...formData, sizes: updatedSizes });
+    const transformedToUppercase = updatedSizes.map((size) =>
+      size.toUpperCase()
+    );
+    setFormData({ ...formData, sizes: transformedToUppercase });
   };
 
   const handleColorsUpdate = (updatedColors: string[]) => {
-    setFormData({ ...formData, colors: updatedColors });
+    const transformedToLowercase = updatedColors.map((color) =>
+      color.toUpperCase()
+    );
+
+    setFormData({ ...formData, colors: transformedToLowercase });
   };
 
   const handleProductTypeSelect = (productType: string) => {
@@ -92,10 +99,10 @@ const handleCategorySelect = (category: string) => {
         images,
       } = formData;
       const isValid =
-        !!name.trim() &&
-        !!description.trim() &&
-        !!price.trim() &&
-        !!type.trim() &&
+        !!name?.trim() &&
+        !!description?.trim() &&
+        !!price?.trim() &&
+        !!type?.trim() &&
         categories.length > 0 &&
         sizes.length > 0 &&
         colors.length > 0 &&
@@ -174,9 +181,9 @@ const handleCategorySelect = (category: string) => {
           <CustomSelect
             options={CATEGORY_OPTIONS}
             onSelect={handleCategorySelect}
-            placeholder="Select a categories"
+            placeholder="Select a category"
             defaultValue={formData.categories[0]}
-            label="categories"
+            label="category"
             required
           />
 
