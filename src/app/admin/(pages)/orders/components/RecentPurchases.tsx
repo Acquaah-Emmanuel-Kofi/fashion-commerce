@@ -4,7 +4,7 @@ import { useOrders } from "@/hooks/useOrders";
 import { IOrder } from "@/modules/interfaces/order.interface";
 import { formatDate } from "@/app/shared/helpers/functions.helper";
 
-const RecentPurchases = () => {
+const RecentPurchases = ({ filterValue }: { filterValue: string }) => {
   const { orders, loading, error } = useOrders();
 
   if (loading) {
@@ -24,7 +24,11 @@ const RecentPurchases = () => {
     { header: "Amount", accessor: "amount" },
   ];
 
-  const data = orders?.slice(0, 3)?.map((order: IOrder) => {
+  const filteredOrders = filterValue
+    ? orders.filter((order: IOrder) => order.orderStatus === filterValue)
+    : orders;
+
+  const data = filteredOrders?.map((order: IOrder) => {
     const firstProductName = order.products[0]?.name || "N/A";
 
     const totalAmount = order.products.reduce(
@@ -39,7 +43,7 @@ const RecentPurchases = () => {
       customer: `${order.shippingAddress.firstname} ${order.shippingAddress.lastname}`,
       status: order.orderStatus,
       amount: `GHS${totalAmount.toFixed(2)}`,
-    }; 
+    };
   });
 
   return (
