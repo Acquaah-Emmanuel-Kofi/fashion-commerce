@@ -4,46 +4,29 @@ import React from "react";
 import OrderDetailsInfo from "./components/OrderDetailsInfo";
 import OrderProducts from "./components/OrderProducts";
 import OrderTotalSummary from "./components/OrderTotalSummary";
+import { ApiResponse } from "@/modules/interfaces/common.interface";
+import { IOrder } from "@/modules/interfaces/order.interface";
+import { fetchDataFromApi } from "@/services/api";
 
 const breadcrumbItems = [
   { label: "Order List", href: "/admin/orders" },
   { label: "Order Details", href: "" },
 ];
 
-export default function OrderDetails({
+export default async function OrderDetails({
   params,
 }: {
   params: { orderId: string };
 }) {
-  const orderDetails = {
-    orderId: `${params.orderId}`,
-    customer: {
-      name: "Shristi Singh",
-      email: "shristi@gmail.com",
-      phone: "091 904 231 1212",
-    },
-    orderInfo: {
-      shippingMethod: "Next Express",
-      paymentMethod: "Paypal",
-      status: "Pending",
-    },
-    deliveryAddress: {
-      address: "Dharam Colony",
-      city: "Gurgaon",
-      region: "Haryana",
-      country: "India",
-    },
-    paymentInfo: {
-      cardType: "MasterCard",
-      maskedCardNumber: "**** **** **** 6557",
-      businessName: "Shristi Singh",
-      phone: "091 904 231 1212",
-    },
-    orderDate: {
-      start: "Feb 16, 2022",
-      end: "Feb 20, 2022",
-    },
-  };
+  const query: ApiResponse<IOrder> = await fetchDataFromApi(
+    `/order/get?id=${params.orderId}`
+  );
+  const orderDetails = query.data;
+
+  const totalAmount = orderDetails?.products.reduce(
+    (sum, product) => sum + Number(product.price),
+    0
+  );
 
   return (
     <section className="space-y-6 pb-6">
@@ -53,10 +36,11 @@ export default function OrderDetails({
       </header>
 
       <OrderDetailsInfo {...orderDetails} />
-      <OrderProducts />
+
+      <OrderProducts products={orderDetails.products} />
 
       <div className="flex lg:justify-end">
-        <OrderTotalSummary />
+        <OrderTotalSummary subTotal={totalAmount} totalAmount={totalAmount} />
       </div>
     </section>
   );

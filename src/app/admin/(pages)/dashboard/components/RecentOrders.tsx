@@ -36,7 +36,7 @@ const RecentOrders = () => {
 
     return {
       product: firstProductName,
-      orderId: `#${order.id}`,
+      orderId: `${order.id}`,
       date: formatDate(order.dateCreated),
       customer: `${order.shippingAddress.firstname} ${order.shippingAddress.lastname}`,
       status: order.orderStatus,

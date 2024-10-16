@@ -43,12 +43,14 @@ const Table: React.FC<TableProps> = ({ title, data, columns }) => {
                 <td key={colIndex} className="py-6 px-4 font-semibold">
                   {!pathname.startsWith("/admin/orders/") ? (
                     <Link
-                      href={`/admin/orders/${row.id}`}
+                      href={`/admin/orders/${row["orderId"]}`}
                       className="block w-full h-full"
                       passHref
                     >
                       {column.render
                         ? column.render(row[column.accessor])
+                        : column.accessor === "orderId"
+                        ? `#${row["orderId"]}`
                         : row[column.accessor]}
                     </Link>
                   ) : column.render ? (
