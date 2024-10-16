@@ -12,7 +12,7 @@ export default function DasboardLayout({
   children: React.ReactNode;
 }>) {
     const isLoading = useAppSelector(
-      (state: RootState) => state.loadingSlice.isLoading
+      (state: RootState) => state.loading.isLoading
   );
   
   const [isOpen, setIsOpen] = useState(false);
