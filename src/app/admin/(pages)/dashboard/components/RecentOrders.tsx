@@ -1,33 +1,21 @@
+"use client";
+
 import React from "react";
 import Table from "../../../(components)/Table";
+import { useOrders } from "@/hooks/useOrders";
+import { IOrder } from "@/modules/interfaces/order.interface";
+import { formatDate } from "@/app/shared/helpers/functions.helper";
 
 const RecentOrders = () => {
-  const orders = [
-    {
-      product: "Lorem Ipsum",
-      orderId: "#25426",
-      date: "Nov 8th, 2023",
-      customer: "Kavin",
-      status: "Delivered",
-      amount: "₹200.00",
-    },
-    {
-      product: "Lorem Ipsum",
-      orderId: "#25425",
-      date: "Nov 7th, 2023",
-      customer: "Komal",
-      status: "Cancelled",
-      amount: "₹200.00",
-    },
-    {
-      product: "Lorem Ipsum",
-      orderId: "#25424",
-      date: "Nov 6th, 2023",
-      customer: "Nikhil",
-      status: "Delivered",
-      amount: "₹200.00",
-    },
-  ];
+  const { orders, loading, error } = useOrders();
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>Error: {error}</p>;
+  }
 
   const columns = [
     { header: "Product", accessor: "product" },
@@ -38,9 +26,27 @@ const RecentOrders = () => {
     { header: "Amount", accessor: "amount" },
   ];
 
+  const data = orders?.slice(0, 3)?.map((order: IOrder) => {
+    const firstProductName = order.products[0]?.name || "N/A";
+
+    const totalAmount = order.products.reduce(
+      (sum, product) => sum + Number(product.price),
+      0
+    );
+
+    return {
+      product: firstProductName,
+      orderId: `#${order.id}`,
+      date: formatDate(order.dateCreated),
+      customer: `${order.shippingAddress.firstname} ${order.shippingAddress.lastname}`,
+      status: order.orderStatus,
+      amount: `GHS${totalAmount.toFixed(2)}`,
+    };
+  });
+
   return (
     <div className="p-4 bg-white">
-      <Table title="Recent Orders" data={orders} columns={columns} />
+      <Table title="Recent Orders" data={data} columns={columns} />
     </div>
   );
 };
