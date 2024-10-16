@@ -1,14 +1,39 @@
-"use client"
+"use client";
 
 import NotAvailable from "@/app/shared/components/NotAvailable";
 import ProductCardSkeleton from "@/app/shared/components/ProductCardSkeleton";
 import useProducts from "@/hooks/useProducts";
-import { IProduct } from "@/modules/interfaces/products.interface";
-import React from "react";
+import {
+  IProduct,
+  IProductDetails,
+} from "@/modules/interfaces/products.interface";
+import React, { useEffect, useState } from "react";
 import AdminProductCard from "./ProductCard";
+import { useAppSelector } from "@/redux/store";
 
 const ProductList = () => {
   const { products, loading, error, refetch } = useProducts();
+
+  const keyword = useAppSelector((state) => state.search.keyword);
+  const [filteredProducts, setFilteredProducts] = useState<IProductDetails[]>(
+    []
+  );
+
+  useEffect(() => {
+    if (!products || products.length === 0) return;
+
+    let filtered = products;
+
+    if (keyword) {
+      filtered = filtered.filter(
+        (product: IProduct) =>
+          product.name.toLowerCase().includes(keyword.toLowerCase()) ||
+          product.type.toLowerCase().includes(keyword.toLowerCase())
+      );
+    }
+
+    setFilteredProducts(filtered);
+  }, [keyword, products]);
 
   if (loading) {
     return (
@@ -25,8 +50,10 @@ const ProductList = () => {
   if (error) {
     return (
       <div className="flex flex-col items-center justify-center h-[300px] lg:h-[500px] bg-gray-100 border-2 border-gray-300 rounded-lg">
-        <h2 className="text-xl font-bold">Oops! Something went wrong.</h2>
-        <p className="text-gray-600">
+        <h2 className="text-xl font-bold text-center">
+          Oops! Something went wrong.
+        </h2>
+        <p className="text-gray-600 text-center">
           We were unable to fetch products. Please try again later.
         </p>
         <button
@@ -48,9 +75,18 @@ const ProductList = () => {
     );
   }
 
+  if (filteredProducts.length === 0) {
+    return (
+      <NotAvailable
+        title={`No results for: ${keyword}`}
+        subTitle="Sorry, we couldn't find any products matching your search criteria."
+      />
+    );
+  }
+
   return (
     <div className="grid grid-cols-2 lg:grid-cols-3 lg:gap-10 gap-5">
-      {products.map((product: IProduct) => (
+      {filteredProducts.map((product: IProduct) => (
         <AdminProductCard
           key={product.id}
           id={product.id}
