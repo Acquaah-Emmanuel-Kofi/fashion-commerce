@@ -2,21 +2,24 @@
 
 import Breadcrumb from "@/app/shared/components/Breadcrumb";
 import CustomSelect from "@/app/shared/components/CustomSelect";
-import React from "react";
+import React, { useState } from "react";
 import RecentPurchases from "./components/RecentPurchases";
 import HeaderTitle from "../../(components)/HeaderTitle";
 
 const breadcrumbItems = [{ label: "Orders List", href: "" }];
 
+const options = [
+  { value: "", label: "All" },
+  { value: "DELIVERED", label: "Delivered" },
+  { value: "CANCELLED", label: "Cancelled" },
+  { value: "PENDING", label: "Pending" },
+];
+
 export default function Orders() {
-  const options = [
-    { value: "DELIVERED", label: "Delivered" },
-    { value: "CANCELLED", label: "Cancelled" },
-    { value: "PENDING", label: "Pending" },
-  ];
+  const [selectedType, setSelectedType] = useState<string>("");
 
   const handleSelect = (value: string) => {
-    console.log("Selected:", value);
+    setSelectedType(value);
   };
 
   return (
@@ -41,7 +44,7 @@ export default function Orders() {
         </div>
       </div>
 
-      <RecentPurchases />
+      <RecentPurchases filterValue={selectedType} />
     </section>
   );
 }

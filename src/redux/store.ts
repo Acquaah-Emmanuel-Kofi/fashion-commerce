@@ -6,7 +6,8 @@ import favoriteReducer from "@/redux/features/favoriteSlice";
 import searchReducer from "@/redux/features/searchSlice";
 import collectionsReducer from "@/redux/features/collectionSlice";
 import itemsToRenderReducer from "@/redux/features/itemsToRenderSlice";
-import loadingSlice from "@/redux/features/loadingSlice";
+import loadingReducer from "@/redux/features/loadingSlice";
+import ordersReducer from "@/redux/features/orders/ordersSlice";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
 const rootReducer = combineReducers({
@@ -17,7 +18,8 @@ const rootReducer = combineReducers({
   search: searchReducer,
   collections: collectionsReducer,
   itemsToRender: itemsToRenderReducer,
-  loadingSlice: loadingSlice,
+  loading: loadingReducer,
+  orders: ordersReducer,
 });
 
 export const store = configureStore({
