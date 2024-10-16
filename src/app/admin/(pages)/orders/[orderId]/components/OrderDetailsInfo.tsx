@@ -1,47 +1,21 @@
 "use client";
 
 import CustomSelect from "@/app/shared/components/CustomSelect";
+import { formatDate } from "@/app/shared/helpers/functions.helper";
+import { IOrder } from "@/modules/interfaces/order.interface";
 import React, { useState } from "react";
 import { AiOutlinePrinter } from "react-icons/ai";
 import { FaRegNoteSticky } from "react-icons/fa6";
 
-interface OrderDetailsProps {
-  orderId: string;
-  customer: {
-    name: string;
-    email: string;
-    phone: string;
-  };
-  orderInfo: {
-    shippingMethod: string;
-    paymentMethod: string;
-    status: string;
-  };
-  deliveryAddress: {
-    address: string;
-    city: string;
-    region: string;
-    country: string;
-  };
-  paymentInfo: {
-    cardType: string;
-    maskedCardNumber: string;
-    businessName: string;
-    phone: string;
-  };
-  orderDate: {
-    start: string;
-    end: string;
-  };
-}
-
-const OrderDetailsInfo: React.FC<OrderDetailsProps> = ({
-  orderId,
-  customer,
-  orderInfo,
-  orderDate,
+const OrderDetailsInfo: React.FC<IOrder> = ({
+  id,
+  orderStatus,
+  dateCreated,
+  dateUpdated,
+  contactInfo,
+  shippingAddress,
 }) => {
-  const [status, setStatus] = useState(orderInfo.status);
+  const [status, setStatus] = useState(orderStatus);
 
   const options = [
     { value: "DELIVERED", label: "Delivered" },
@@ -58,10 +32,10 @@ const OrderDetailsInfo: React.FC<OrderDetailsProps> = ({
       <div className="flex flex-col lg:flex-row justify-between lg:items-center gap-4 mb-4">
         <div>
           <h1 className="text-lg font-bold font-beatrice">
-            Order ID: <span className="text-gray-600">#{orderId}</span>
+            Order ID: <span className="text-gray-600">#{id}</span>
           </h1>
           <p className="text-base text-gray-500">
-            {orderDate.start} - {orderDate.end}
+            {formatDate(dateCreated)} - {formatDate(dateUpdated)}
           </p>
         </div>
 
@@ -113,14 +87,15 @@ const OrderDetailsInfo: React.FC<OrderDetailsProps> = ({
             </div>
             <h2 className="text-lg font-semibold font-beatrice">Customer</h2>
           </div>
-          <p className="text-base">
-            <strong>Full Name:</strong> {customer.name}
+          <p className="text-base truncate line-clamp-1 whitespace-nowrap max-w-[20rem]">
+            <strong>Full Name:</strong>{" "}
+            {`${shippingAddress.firstname} ${shippingAddress.lastname}`}
           </p>
-          <p className="text-base">
-            <strong>Email:</strong> {customer.email}
+          <p className="text-base truncate line-clamp-1 whitespace-nowrap max-w-[20rem]">
+            <strong>Email:</strong> {contactInfo.email}
           </p>
-          <p className="text-base">
-            <strong>Phone:</strong> {customer.phone}
+          <p className="text-base truncate line-clamp-1 whitespace-nowrap max-w-[20rem]">
+            <strong>Phone:</strong> {contactInfo.phone}
           </p>
         </div>
 
@@ -152,13 +127,13 @@ const OrderDetailsInfo: React.FC<OrderDetailsProps> = ({
               Shipping Address
             </h2>
           </div>
-          <p className="text-base">
-            <strong>City:</strong> Accra
+          <p className="text-base truncate line-clamp-1 whitespace-nowrap max-w-[20rem]">
+            <strong>City:</strong> {shippingAddress.city ?? "N/A"}
           </p>
-          <p className="text-base">
-            <strong>Postal Code:</strong> 00233
+          <p className="text-base truncate line-clamp-1 whitespace-nowrap max-w-[20rem]">
+            <strong>Postal Code:</strong> {shippingAddress.postalCode ?? "N/A"}
           </p>
-          <p className="text-base">
+          <p className="text-base truncate line-clamp-1 whitespace-nowrap max-w-[20rem]">
             <strong>Order Status:</strong> {status}
           </p>
         </div>
