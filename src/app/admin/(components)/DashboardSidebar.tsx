@@ -19,7 +19,7 @@ export default function DashboardSidebar({
 
   return (
     <div
-      className={`fixed inset-0 z-50 transition-transform md:translate-x-0 ${
+      className={`fixed inset-0 z-40 transition-transform md:translate-x-0 ${
         isOpen ? "translate-x-0" : "-translate-x-full"
       } bg-white border-r p-4 md:block w-64 h-full`}
     >
