@@ -46,10 +46,10 @@ const AdminProductDetails = ({ params }: { params: { productId: string } }) => {
       <div className="container mx-auto lg:w-[80%] py-20">
         <div className="flex flex-col lg:flex-row lg:justify-center lg:gap-8 items-center text-center">
           <div className="p-6  lg:max-w-[60%]">
-            <h1 className="lg:text-4xl text-2xl font-bold text-black font-beatrice mb-4">
+            <h1 className="lg:text-4xl text-2xl text-center font-bold text-black font-beatrice mb-4">
               Oops! No Data Found
             </h1>
-            <p className="text-lg text-gray-700 mb-6">
+            <p className="text-lg text-gray-700 mb-6 text-center">
               We couldn&apos;t find any information related to this ID.
               It&apos;s possible the item no longer exists or the link is
               incorrect.
