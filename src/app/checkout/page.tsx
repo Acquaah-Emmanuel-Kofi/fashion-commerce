@@ -1,10 +1,19 @@
+"use client"
+
+import { RootState, useAppSelector } from "@/redux/store";
 import GoBackButton from "../shared/components/GoBack";
 import Form from "./components/Form";
 import OrderInfo from "./components/OrderInfo";
+import LoadingOverlay from "../shared/components/LoadingOverlay";
 
 export default function Checkout() {
+  const isLoading = useAppSelector(
+    (state: RootState) => state.loadingSlice.isLoading
+  );
+
   return (
     <section>
+      <LoadingOverlay isLoading={isLoading} />
       <header className="flex w-full p-6">
         <GoBackButton />
       </header>
