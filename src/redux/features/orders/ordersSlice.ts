@@ -28,7 +28,7 @@ export const fetchOrders = createAsyncThunk(
         total: query.total || "0",
       };
     } catch (error) {
-      return rejectWithValue("Failed to fetch orders");
+      return rejectWithValue(`Failed to fetch orders: ${error}`);
     }
   }
 );
