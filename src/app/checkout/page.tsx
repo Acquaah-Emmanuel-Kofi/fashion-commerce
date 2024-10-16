@@ -8,7 +8,7 @@ import LoadingOverlay from "../shared/components/LoadingOverlay";
 
 export default function Checkout() {
   const isLoading = useAppSelector(
-    (state: RootState) => state.loadingSlice.isLoading
+    (state: RootState) => state.loading.isLoading
   );
 
   return (

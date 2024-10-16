@@ -28,10 +28,6 @@ export interface IProductDetails extends IProduct {
   updatedAt: string; 
 }
 
-export interface IProductDetailsResponse extends ICommonResponse {
-  data: IProductDetails[];
-}
-
 export interface ProductCreationForm {
   name: string;
   price: string;
