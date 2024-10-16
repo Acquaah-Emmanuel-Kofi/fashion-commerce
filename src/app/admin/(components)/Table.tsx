@@ -3,13 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
-interface TableColumn {
-  header: string;
-  accessor: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  render?: (data: any) => JSX.Element | string;
-}
+import { TableColumn } from "../interfaces/table.interface";
 
 interface TableProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
