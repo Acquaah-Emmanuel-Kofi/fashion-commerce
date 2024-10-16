@@ -71,9 +71,7 @@ const FilteredProducts = () => {
 
         if (otherFilter.sizes) {
           filtered = filtered.filter((product: IProductDetails) =>
-            (otherFilter.sizes as string[]).some((size) =>
-              product.sizes?.includes(size)
-            )
+            product.sizes.includes(otherFilter.sizes as string)
           );
         }
 
@@ -113,8 +111,10 @@ const FilteredProducts = () => {
   if (error) {
     return (
       <div className="flex flex-col items-center justify-center h-[300px] lg:h-[500px] bg-gray-100 border-2 border-gray-300 rounded-lg">
-        <h2 className="text-xl font-bold">Oops! Something went wrong.</h2>
-        <p className="text-gray-600">
+        <h2 className="text-xl font-bold text-center">
+          Oops! Something went wrong.
+        </h2>
+        <p className="text-gray-600 text-center">
           We were unable to fetch products. Please try again later.
         </p>
         <button
