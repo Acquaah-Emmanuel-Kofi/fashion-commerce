@@ -3,17 +3,10 @@ import Table from "../../../(components)/Table";
 import { useOrders } from "@/hooks/useOrders";
 import { IOrder } from "@/modules/interfaces/order.interface";
 import { formatDate } from "@/app/shared/helpers/functions.helper";
+import TableSkeletonPlaceholder from "@/app/admin/(components)/TableSkeletonPlaceholder";
 
 const RecentPurchases = ({ filterValue }: { filterValue: string }) => {
   const { orders, loading, error } = useOrders();
-
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
-  if (error) {
-    return <p>Error: {error}</p>;
-  }
 
   const columns = [
     { header: "Product", accessor: "product" },
@@ -45,6 +38,22 @@ const RecentPurchases = ({ filterValue }: { filterValue: string }) => {
       amount: `GHS${totalAmount.toFixed(2)}`,
     };
   });
+
+  if (loading) {
+    return (
+      <div className="p-4 bg-white">
+        <TableSkeletonPlaceholder
+          title="Recent Purchases"
+          columns={columns}
+          rows={10}
+        />
+      </div>
+    );
+  }
+
+  if (error) {
+    return <p>Error: {error}</p>;
+  }
 
   return (
     <div className="p-4 bg-white">
