@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/redux/store";
 import { createProduct } from "@/redux/features/productSlice";
+import { hideLoading, showLoading } from "@/redux/features/loadingSlice";
 
 const breadcrumbItems = [
   { label: "All Products", href: "/admin/products" },
@@ -20,6 +21,8 @@ export default function AddNewProduct() {
   const dispatch = useAppDispatch();
 
   const handleSubmit = async (data: ProductCreationForm) => {
+    dispatch(showLoading());
+
     const formData = new FormData();
 
     formData.append("name", data.name);
@@ -45,12 +48,15 @@ export default function AddNewProduct() {
       const responseAction = await dispatch(createProduct(formData));
 
       if (createProduct.fulfilled.match(responseAction)) {
+        dispatch(hideLoading());
         toast.success("Product created successfully!");
         router.push("/admin/products");
       } else {
+        dispatch(hideLoading());
         toast.error("Something went wrong!");
       }
     } catch (error) {
+      dispatch(hideLoading());
       toast.error(`Failed to create product. ${error}`);
     }
   };

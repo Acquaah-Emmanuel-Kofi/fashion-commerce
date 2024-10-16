@@ -8,6 +8,8 @@ import {
 } from "@/app/shared/helpers/constants.helper";
 import useCart from "@/hooks/useCart";
 import { FormFields } from "@/modules/types/common.type";
+import { hideLoading, showLoading } from "@/redux/features/loadingSlice";
+import { useAppDispatch } from "@/redux/store";
 import { postDataToApi } from "@/services/api";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
@@ -17,12 +19,12 @@ const Form = () => {
   const [errors, setErrors] = useState<FormFields>(ORDER_FORM_FIELDS);
 
   const { items } = useCart();
+  const dispatch = useAppDispatch();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
 
-    // Perform validation as the user types
     switch (name) {
       case "email":
         if (!validateEmail(value)) {
@@ -62,6 +64,8 @@ const Form = () => {
 
     if (items.length > 0) {
       if (formIsValid()) {
+        dispatch(showLoading());
+
         const orderData = {
           email: formData.email,
           phone: formData.phone,
@@ -89,8 +93,10 @@ const Form = () => {
 
           setTimeout(() => {
             handleWhatsAppMessage();
+            dispatch(hideLoading());
           }, 5000);
         } else {
+          dispatch(hideLoading());
           toast.error("Failed to create order!");
         }
       } else {

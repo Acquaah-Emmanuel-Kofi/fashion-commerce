@@ -1,21 +1,23 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import productReducer from "@/redux/features/productSlice";
-import cartReducer from "@/redux/features/cartSlice";
-import searchReducer from "@/redux/features/searchSlice";
 import filtersReducer from "@/redux/features/filtersSlice";
-import collectionSlice from "@/redux/features/collectionSlice";
-import favoriteSlice from "@/redux/features/favoriteSlice";
-import itemsToRenderSlice from "@/redux/features/itemsToRenderSlice";
+import cartReducer from "@/redux/features/cartSlice";
+import favoriteReducer from "@/redux/features/favoriteSlice";
+import searchReducer from "@/redux/features/searchSlice";
+import collectionsReducer from "@/redux/features/collectionSlice";
+import itemsToRenderReducer from "@/redux/features/itemsToRenderSlice";
+import loadingSlice from "@/redux/features/loadingSlice";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
 const rootReducer = combineReducers({
   products: productReducer,
-  cart: cartReducer,
-  favorites: favoriteSlice,
-  search: searchReducer,
   filters: filtersReducer,
-  collections: collectionSlice,
-  itemsToRender: itemsToRenderSlice,
+  cart: cartReducer,
+  favorites: favoriteReducer,
+  search: searchReducer,
+  collections: collectionsReducer,
+  itemsToRender: itemsToRenderReducer,
+  loadingSlice: loadingSlice,
 });
 
 export const store = configureStore({

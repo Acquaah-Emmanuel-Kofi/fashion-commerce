@@ -32,6 +32,7 @@ const AdminProductDetails = ({ params }: { params: { productId: string } }) => {
   const productDetails = data && {
     ...data,
     categories: data.categories,
+    price: String(data.price),
     isAvailable: String(data.available),
     images: data.images.map((img) => {
       if (typeof img === "string") {
