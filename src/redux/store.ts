@@ -6,6 +6,7 @@ import filtersReducer from "@/redux/features/filtersSlice";
 import collectionSlice from "@/redux/features/collectionSlice";
 import favoriteSlice from "@/redux/features/favoriteSlice";
 import itemsToRenderSlice from "@/redux/features/itemsToRenderSlice";
+import loadingSlice from "@/redux/features/loadingSlice";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
 const rootReducer = combineReducers({
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   filters: filtersReducer,
   collections: collectionSlice,
   itemsToRender: itemsToRenderSlice,
+  loadingSlice: loadingSlice,
 });
 
 export const store = configureStore({
