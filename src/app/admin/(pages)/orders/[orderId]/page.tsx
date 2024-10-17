@@ -1,6 +1,8 @@
+"use client";
+
 import HeaderTitle from "@/app/admin/(components)/HeaderTitle";
 import Breadcrumb from "@/app/shared/components/Breadcrumb";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import OrderDetailsInfo from "./components/OrderDetailsInfo";
 import OrderProducts from "./components/OrderProducts";
 import OrderTotalSummary from "./components/OrderTotalSummary";
@@ -18,10 +20,19 @@ export default async function OrderDetails({
 }: {
   params: { orderId: string };
 }) {
-  const query: ApiResponse<IOrder> = await fetchDataFromApi(
-    `/order/get?id=${params.orderId}`
-  );
-  const orderDetails = query.data;
+  const [orderDetails, setOrderDetails] = useState<IOrder>();
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      const query: ApiResponse<IOrder> = await fetchDataFromApi(
+        `/order/get?id=${params.orderId}`
+      );
+      const order = query.data;
+      setOrderDetails(order);
+    };
+
+    fetchOrders();
+  }, []);
 
   const totalAmount = orderDetails?.products.reduce(
     (sum, product) => sum + Number(product.price),
@@ -35,12 +46,14 @@ export default async function OrderDetails({
         <Breadcrumb items={breadcrumbItems} />
       </header>
 
-      <OrderDetailsInfo {...orderDetails} />
+      {orderDetails && <OrderDetailsInfo {...orderDetails} />}
 
-      <OrderProducts products={orderDetails.products} />
+      {orderDetails && (
+        <OrderProducts products={orderDetails.products} />
+      )}
 
       <div className="flex lg:justify-end">
-        <OrderTotalSummary subTotal={totalAmount} totalAmount={totalAmount} />
+        <OrderTotalSummary subTotal={totalAmount || 0} totalAmount={totalAmount || 0} />
       </div>
     </section>
   );
