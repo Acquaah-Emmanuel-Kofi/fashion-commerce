@@ -49,7 +49,16 @@ const RecentOrders = () => {
   }
 
   if (error) {
-    return <p>Error: {error}</p>;
+    return (
+      <div className="p-4 bg-white">
+        <TableSkeletonPlaceholder
+          title="Recent Orders"
+          columns={columns}
+          rows={3}
+          errorMessage="Something went wrong. We couldn't fetch the data."
+        />
+      </div>
+    );
   }
 
   return (

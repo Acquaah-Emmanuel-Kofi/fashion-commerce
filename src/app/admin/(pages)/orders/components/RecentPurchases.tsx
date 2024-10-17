@@ -52,7 +52,16 @@ const RecentPurchases = ({ filterValue }: { filterValue: string }) => {
   }
 
   if (error) {
-    return <p>Error: {error}</p>;
+    return (
+      <div className="p-4 bg-white">
+        <TableSkeletonPlaceholder
+          title="Recent Purchases"
+          columns={columns}
+          rows={10}
+          errorMessage="Something went wrong. We couldn't fetch the data."
+        />
+      </div>
+    );
   }
 
   return (
