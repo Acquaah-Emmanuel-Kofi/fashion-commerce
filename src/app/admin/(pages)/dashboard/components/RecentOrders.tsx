@@ -5,17 +5,10 @@ import Table from "../../../(components)/Table";
 import { useOrders } from "@/hooks/useOrders";
 import { IOrder } from "@/modules/interfaces/order.interface";
 import { formatDate } from "@/app/shared/helpers/functions.helper";
+import TableSkeletonPlaceholder from "@/app/admin/(components)/TableSkeletonPlaceholder";
 
 const RecentOrders = () => {
   const { orders, loading, error } = useOrders();
-
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
-  if (error) {
-    return <p>Error: {error}</p>;
-  }
 
   const columns = [
     { header: "Product", accessor: "product" },
@@ -33,7 +26,6 @@ const RecentOrders = () => {
       (sum, product) => sum + Number(product.price),
       0
     );
-
     return {
       product: firstProductName,
       orderId: `${order.id}`,
@@ -43,6 +35,31 @@ const RecentOrders = () => {
       amount: `GHS${totalAmount.toFixed(2)}`,
     };
   });
+
+  if (loading) {
+    return (
+      <div className="p-4 bg-white">
+        <TableSkeletonPlaceholder
+          title="Recent Orders"
+          columns={columns}
+          rows={3}
+        />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="p-4 bg-white">
+        <TableSkeletonPlaceholder
+          title="Recent Orders"
+          columns={columns}
+          rows={3}
+          errorMessage="Something went wrong. We couldn't fetch the data."
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="p-4 bg-white">
