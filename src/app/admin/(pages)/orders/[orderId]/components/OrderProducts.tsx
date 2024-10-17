@@ -18,7 +18,7 @@ const OrderProducts: React.FC<IProps> = ({ products }) => {
     return {
       product: item.name,
       productId: `#${item.id}`,
-      quantity: 2,
+      quantity: products.length || 1,
       total: `GHS${item.price}`,
     };
   });
