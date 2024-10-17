@@ -1,4 +1,7 @@
-import { IProductDetails } from "@/modules/interfaces/products.interface";
+import {
+  IProductDetails,
+  ProductCreationForm,
+} from "@/modules/interfaces/products.interface";
 import { fetchDataFromApi } from "@/services/api";
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 
@@ -54,6 +57,36 @@ export const createProduct = createAsyncThunk(
   }
 );
 
+export const updateProduct = createAsyncThunk(
+  "products/updateProduct",
+  async ({
+    productId,
+    formData,
+  }: {
+    productId: string;
+    formData: ProductCreationForm;
+  }) => {
+    const baseUrl =
+      process.env.NEXT_PUBLIC_BACKEND_API_URL ||
+      "https://fashion-commerce.onrender.com/api/v1";
+    const url = `${baseUrl}/product/update/${productId}`;
+
+    const response = await fetch(url, {
+      method: "PATCH",
+       headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.statusText}`);
+    }
+
+    return response.json();
+  }
+);
+
 const productSlice = createSlice({
   name: "products",
   initialState,
@@ -90,6 +123,18 @@ const productSlice = createSlice({
       })
       .addCase(createProduct.rejected, (state, action) => {
         state.error = action.error.message || "Failed to create product";
+      })
+      .addCase(updateProduct.fulfilled, (state, action) => {
+        const updatedProduct = action.payload;
+        const index = state.products.findIndex(
+          (product) => product.id === updatedProduct.id
+        );
+        if (index !== -1) {
+          state.products[index] = updatedProduct;
+        }
+      })
+      .addCase(updateProduct.rejected, (state, action) => {
+        state.error = action.error.message || "Failed to update product";
       });
   },
 });
