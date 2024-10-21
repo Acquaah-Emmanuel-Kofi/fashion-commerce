@@ -31,7 +31,7 @@ export interface IProductDetails extends IProduct {
 export interface ProductCreationForm {
   name: string;
   price: string;
-  type: string;
+  types: string[];
   sizes: string[];
   colors: string[];
   categories: string[];
