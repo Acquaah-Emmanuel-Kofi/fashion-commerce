@@ -1,6 +1,5 @@
 import useCart from "@/hooks/useCart";
 import { IProduct } from "@/modules/interfaces/products.interface";
-import toast from "react-hot-toast";
 import { HiPlus } from "react-icons/hi";
 
 interface ICartItem {
