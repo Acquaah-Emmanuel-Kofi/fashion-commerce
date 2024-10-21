@@ -71,7 +71,7 @@ export const updateProduct = createAsyncThunk(
       "https://fashion-commerce.onrender.com/api/v1";
     const url = `${baseUrl}/product/update/${productId}`;
 
-    const response = await fetch(url, {
+        const response = await fetch(url, {
       method: "PATCH",
        headers: {
         "Content-Type": "application/json",
@@ -84,6 +84,30 @@ export const updateProduct = createAsyncThunk(
     }
 
     return response.json();
+  }
+);
+
+
+export const deleteProduct = createAsyncThunk(
+  "products/deleteProduct",
+  async (productId: string) => {
+    const baseUrl =
+      process.env.NEXT_PUBLIC_BACKEND_API_URL ||
+      "https://fashion-commerce.onrender.com/api/v1";
+    const url = `${baseUrl}/product/delete?id=${productId}`;
+
+    const response = await fetch(url, {
+      method: "DELETE",
+       headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.statusText}`);
+    }
+
+    return productId;
   }
 );
 
@@ -135,6 +159,14 @@ const productSlice = createSlice({
       })
       .addCase(updateProduct.rejected, (state, action) => {
         state.error = action.error.message || "Failed to update product";
+      }).addCase(deleteProduct.fulfilled, (state, action) => {
+        const deletedProductId = action.meta.arg; 
+        state.products = state.products.filter(
+          (product) => product.id !== deletedProductId
+        );
+      })
+      .addCase(deleteProduct.rejected, (state, action) => {
+        state.error = action.error.message || "Failed to delete product";
       });
   },
 });
