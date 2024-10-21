@@ -28,7 +28,7 @@ const ProductList = () => {
       filtered = filtered.filter(
         (product: IProduct) =>
           product.name.toLowerCase().includes(keyword.toLowerCase()) ||
-          product.type.toLowerCase().includes(keyword.toLowerCase())
+          product.types.includes(keyword.toLowerCase())
       );
     }
 
@@ -93,7 +93,7 @@ const ProductList = () => {
           thumbnail={product.images?.[0]}
           images={product.images}
           name={product.name}
-          type={product.type}
+          types={product.types}
           price={product.price}
           description={product.description}
           size={product.size}

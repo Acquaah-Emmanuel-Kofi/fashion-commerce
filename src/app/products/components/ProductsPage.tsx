@@ -17,8 +17,8 @@ const breadcrumbItems = [
 ];
 
 export default function ProductsPage() {
-  const [toggledFilters, setToggledFilters] = useState<boolean>(false);
-  const [isHidden, setIsHidden] = useState(false);
+  const [toggledFilters, setToggledFilters] = useState<boolean>(true);
+  const [isHidden, setIsHidden] = useState(true);
 
   const dispatch = useAppDispatch();
 

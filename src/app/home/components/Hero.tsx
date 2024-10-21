@@ -111,7 +111,7 @@ export default function Hero({ products }: HeroProps) {
                   thumbnail={product.images[0]}
                   images={product.images}
                   name={product.name}
-                  type={product.type}
+                  types={product.types}
                   price={product.price}
                   description={product.description}
                   size={product.size}
@@ -174,7 +174,7 @@ export default function Hero({ products }: HeroProps) {
                 images={product.images}
                 thumbnail={product.images[0]}
                 name={product.name}
-                type={product.type}
+                types={product.types}
                 price={product.price}
                 showProductDetails={false}
                 description={product.description}

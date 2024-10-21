@@ -39,7 +39,7 @@ const ProductInfo: React.FC<IProducts> = ({ products }) => {
       <p className="text-lg font-bold">${products.price ?? "N/A"}</p>
 
       <p className="text-gray-600 text-sm font-beatrice">
-        {products.type ?? "N/A"}
+        {products.types ?? "N/A"}
       </p>
 
       <p className="text-sm font-semibold mt-9 font-beatrice">

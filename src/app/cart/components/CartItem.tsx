@@ -53,7 +53,7 @@ const CartItem = ({
 
         <div className="p-2">
           <h1 className="text-gray-600 text-sm lg:text-base line-clamp-1 font-beatrice">
-            {item.type}
+            {item.types}
           </h1>
           <div className="flex items-center justify-between">
             <p className="text-base lg:text-lg font-medium line-clamp-1 font-beatrice">
