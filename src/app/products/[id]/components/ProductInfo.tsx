@@ -23,9 +23,8 @@ const ProductInfo: React.FC<IProducts> = ({ products }) => {
         color: selectedColor,
         quantity: 1,
       };
-      addItem(cartItem);
-
-      toast.success("Added to cart successfully!");
+      addItem(cartItem)
+      
     } else {
       toast.error("Please select a size and color before adding to the cart.");
     }
@@ -40,7 +39,7 @@ const ProductInfo: React.FC<IProducts> = ({ products }) => {
       <p className="text-lg font-bold">${products.price ?? "N/A"}</p>
 
       <p className="text-gray-600 text-sm font-beatrice">
-        {products.type ?? "N/A"}
+        {products.types ?? "N/A"}
       </p>
 
       <p className="text-sm font-semibold mt-9 font-beatrice">

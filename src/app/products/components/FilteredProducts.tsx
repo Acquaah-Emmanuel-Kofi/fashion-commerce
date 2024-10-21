@@ -30,17 +30,27 @@ const FilteredProducts = () => {
       filtered = filtered.filter(
         (product: IProduct) =>
           product.name.toLowerCase().includes(keyword.toLowerCase()) ||
-          product.type.toLowerCase().includes(keyword.toLowerCase())
+          product.types
+            ?.map((type) => type.toLowerCase().trim())
+            .includes(selectedType.toLowerCase().trim())
       );
     }
 
     if (selectedType) {
-      filtered = filtered.filter(
-        (product: IProduct) =>
-          product.type.toLowerCase().trim() ===
-          selectedType.toLowerCase().trim()
+      filtered = filtered.filter((product: IProduct) =>
+        product.types
+          ?.map((type) => type.toLowerCase().trim())
+          .includes(selectedType.toLowerCase().trim())
       );
     }
+
+    setFilteredProducts(filtered);
+  }, [keyword, selectedType, products]);
+
+  useEffect(() => {
+    if (!products || products.length === 0) return;
+
+    let filtered = products;
 
     if (otherFilter) {
       const noActiveFilters =
@@ -94,7 +104,7 @@ const FilteredProducts = () => {
     }
 
     setFilteredProducts(filtered);
-  }, [keyword, selectedType, products, otherFilter]);
+  }, [products, otherFilter]);
 
   if (loading) {
     return (
@@ -160,7 +170,7 @@ const FilteredProducts = () => {
           thumbnail={product.images?.[0]}
           images={product.images}
           name={product.name}
-          type={product.type}
+          types={product.types}
           price={product.price}
           description={product.description}
           size={product.size}

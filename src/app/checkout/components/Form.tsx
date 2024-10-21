@@ -7,6 +7,7 @@ import {
   validatePhoneNumber,
 } from "@/app/shared/helpers/constants.helper";
 import useCart from "@/hooks/useCart";
+import { IProduct } from "@/modules/interfaces/products.interface";
 import { FormFields } from "@/modules/types/common.type";
 import { hideLoading, showLoading } from "@/redux/features/loadingSlice";
 import { useAppDispatch } from "@/redux/store";
@@ -76,7 +77,12 @@ const Form = () => {
           address: formData.address,
           city: formData.city,
           postalCode: formData.postalCode,
-          productIDs: items.map((item) => item.id),
+          shippingCost: 0.00,
+          tax: 0.00,
+          productIDs: items.map((item: IProduct) => ({
+            id: item.id,
+            quantity: item.quantity,
+          })),
         };
 
         const response = await postDataToApi("/order", orderData);
