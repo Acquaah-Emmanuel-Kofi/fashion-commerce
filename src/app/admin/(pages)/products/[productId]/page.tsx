@@ -31,6 +31,7 @@ const AdminProductDetails = ({ params }: { params: { productId: string } }) => {
 
   const productDetails = data && {
     ...data,
+    types: data.types,
     categories: data.categories,
     price: String(data.price),
     isAvailable: String(data.available),

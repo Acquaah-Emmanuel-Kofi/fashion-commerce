@@ -106,7 +106,7 @@ export default function NewThisWeek({ products }: ThisWeekProductsProps) {
                 {/* Product Details */}
                 <div className="p-2">
                   <h1 className="text-gray-600 text-sm lg:text-base line-clamp-1 font-beatrice">
-                    {product.type}
+                    {product.types}
                   </h1>
                   <div className="flex items-center justify-between">
                     <p className="text-base lg:text-lg font-medium line-clamp-1 font-beatrice">
