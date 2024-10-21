@@ -22,12 +22,14 @@ const cartSlice = createSlice({
 
       if (existingItem) {
         toast.error("Item is already in the cart!");
+        return;
         
       } else {
         state.items.push(newItem);
+        state.totalAmount += parseFloat(newItem.price) * newItem.quantity;
+        toast.success("Added to cart successfully!");
       }
 
-      state.totalAmount += parseFloat(newItem.price) * newItem.quantity;
     },
     removeFromCart: (state, action: PayloadAction<string>) => {
       const id = action.payload;
