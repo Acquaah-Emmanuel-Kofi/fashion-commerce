@@ -10,8 +10,6 @@ interface ICartItem {
 export default function AddToCartPlusButton({ products }: ICartItem) {
   const { addItem } = useCart();
 
-  const notify = () => toast.success("Added to cart successfully!");
-
   const handleAddToCart = () => {
     const cartItem = {
       ...products,
@@ -20,7 +18,6 @@ export default function AddToCartPlusButton({ products }: ICartItem) {
       quantity: 1,
     };
     addItem(cartItem);
-    notify();
   };
 
   return (

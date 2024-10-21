@@ -23,9 +23,8 @@ const ProductInfo: React.FC<IProducts> = ({ products }) => {
         color: selectedColor,
         quantity: 1,
       };
-      addItem(cartItem);
-
-      toast.success("Added to cart successfully!");
+      addItem(cartItem)
+      
     } else {
       toast.error("Please select a size and color before adding to the cart.");
     }
