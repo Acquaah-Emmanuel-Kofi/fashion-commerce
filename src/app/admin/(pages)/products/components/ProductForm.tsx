@@ -28,7 +28,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
     categories: product?.categories || [],
     sizes: product?.sizes || [],
     colors: product?.colors || [],
-    type: product?.type || "",
+    types: product?.types || [],
     price: product?.price || "0",
     isAvailable: product?.isAvailable || "true",
     images: product?.images || [],
@@ -67,7 +67,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
   };
 
   const handleProductTypeSelect = (productType: string) => {
-    setFormData({ ...formData, type: productType });
+    setFormData({ ...formData, types: [productType] });
   };
 
   const handleIsProductAvailable = (
@@ -94,7 +94,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
         sizes,
         colors,
         price,
-        type,
+        types,
         isAvailable,
         images,
       } = formData;
@@ -102,7 +102,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
         !!name?.trim() &&
         !!description?.trim() &&
         !!price?.trim() &&
-        !!type?.trim() &&
+        types.length > 0 &&
         categories.length > 0 &&
         sizes.length > 0 &&
         colors.length > 0 &&
@@ -127,7 +127,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
       if (formData.categories.length === 0) missingFields.push("categories");
       if (formData.colors.length === 0) missingFields.push("Colors");
       if (formData.sizes.length === 0) missingFields.push("Sizes");
-      if (!formData.type.trim()) missingFields.push("Product Type");
+      if (formData.types.length === 0) missingFields.push("Product Type");
       if (!formData.isAvailable.trim()) missingFields.push("Availability");
       if (formData.images.length === 0)
         missingFields.push("Add at least one image");
@@ -147,7 +147,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
       categories: product?.categories || [],
       sizes: product?.sizes || [],
       colors: product?.colors || [],
-      type: product?.type || "",
+      types: product?.types || [],
       price: product?.price || "0",
       isAvailable: product?.isAvailable || "true",
       images: product?.images || [],
@@ -207,7 +207,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
             <CustomSelect
               options={PRODUCT_TYPE_OPTIONS}
               onSelect={handleProductTypeSelect}
-              defaultValue={formData.type}
+              defaultValue={formData.types[0]}
               label="Product Type"
               placeholder="Select type"
               required

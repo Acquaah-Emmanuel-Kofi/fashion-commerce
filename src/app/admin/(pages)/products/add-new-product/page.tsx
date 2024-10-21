@@ -28,9 +28,9 @@ export default function AddNewProduct() {
     formData.append("name", data.name);
     formData.append("description", data.description);
     formData.append("price", data.price);
-    formData.append("type", data.type);
     formData.append("isAvailable", data.isAvailable);
 
+    data.types.forEach((type) => formData.append("types[]", type));
     data.sizes.forEach((size) => formData.append("sizes[]", size));
     data.colors.forEach((color) => formData.append("colors[]", color));
     data.categories.forEach((category) =>
@@ -38,10 +38,7 @@ export default function AddNewProduct() {
     );
 
     data.images.forEach((image) => {
-      if (typeof image === "string") {
-      } else {
-        formData.append("images", image);
-      }
+      formData.append("images", image);
     });
 
     try {
