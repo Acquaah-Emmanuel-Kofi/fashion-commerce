@@ -1,5 +1,6 @@
 import { IProduct } from "@/modules/interfaces/products.interface";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import toast from "react-hot-toast";
 
 interface CartState {
   items: IProduct[];
@@ -20,12 +21,15 @@ const cartSlice = createSlice({
       const existingItem = state.items.find((item) => item.id === newItem.id);
 
       if (existingItem) {
-        existingItem.quantity += newItem.quantity;
+        toast.error("Item is already in the cart!");
+        return;
+        
       } else {
         state.items.push(newItem);
+        state.totalAmount += parseFloat(newItem.price) * newItem.quantity;
+        toast.success("Added to cart successfully!");
       }
 
-      state.totalAmount += parseFloat(newItem.price) * newItem.quantity;
     },
     removeFromCart: (state, action: PayloadAction<string>) => {
       const id = action.payload;
@@ -61,6 +65,6 @@ export const { addToCart, removeFromCart, updateCartQuantity, clearCart } =
   cartSlice.actions;
 
 export const selectCartItemCount = (state: { cart: CartState }) =>
-  state.cart.items.reduce((total, item) => total + item.quantity, 0);
+  state.cart.items.length;
 
 export default cartSlice.reducer;
