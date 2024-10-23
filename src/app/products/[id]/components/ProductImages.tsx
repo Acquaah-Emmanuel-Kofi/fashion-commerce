@@ -39,7 +39,32 @@ const ProductImages: React.FC<IProductImagesProps> = ({
     });
   };
 
+  const handleTouchMove = (e: React.TouchEvent) => {
+    const { left, top, width, height } =
+      imageContainerRef.current?.getBoundingClientRect() ?? {
+        left: 0,
+        top: 0,
+        width: 0,
+        height: 0,
+      };
+    const touch = e.touches[0];
+    const x = ((touch.clientX - left) / width) * 100;
+    const y = ((touch.clientY - top) / height) * 100;
+
+    setZoomStyle({
+      transformOrigin: `${x}% ${y}%`,
+      transform: "scale(2)",
+    });
+  };
+
   const handleMouseLeave = () => {
+    setZoomStyle({
+      transformOrigin: "center center",
+      transform: "scale(1)",
+    });
+  };
+
+  const handleTouchEnd = () => {
     setZoomStyle({
       transformOrigin: "center center",
       transform: "scale(1)",
@@ -54,6 +79,8 @@ const ProductImages: React.FC<IProductImagesProps> = ({
         ref={imageContainerRef}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
       >
         <Image
           src={selectedImage}
