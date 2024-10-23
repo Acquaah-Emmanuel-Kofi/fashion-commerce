@@ -256,7 +256,8 @@ const ProductForm: React.FC<ProductFormProps> = ({
           <ImagesPreview
             mainImage={formData.images[0]}
             images={formData.images}
-            name="Product"
+            name={formData.name}
+            onRemoveImage={handleRemoveImage}
           />
 
           <MultiImageUpload onImagesSelect={handleImagesSelect} />
