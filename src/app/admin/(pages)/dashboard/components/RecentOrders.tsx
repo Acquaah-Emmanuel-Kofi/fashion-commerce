@@ -20,15 +20,15 @@ const RecentOrders = () => {
   ];
 
   const data = orders?.slice(0, 3)?.map((order: IOrder) => {
-    const firstProductName = order.products[0]?.name || "N/A";
+    const firstProductName = order.products[0].product.name || "N/A";
 
     const totalAmount = order.products.reduce(
-      (sum, product) => sum + Number(product.price),
+      (sum, products) => sum + Number(products.product.price),
       0
     );
     return {
       product: firstProductName,
-      orderId: `${order.id}`,
+      orderId: order.id,
       date: formatDate(order.dateCreated),
       customer: `${order.shippingAddress.firstname} ${order.shippingAddress.lastname}`,
       status: order.orderStatus,
