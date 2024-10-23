@@ -11,7 +11,7 @@ import ProductForm from "../components/ProductForm";
 import Link from "next/link";
 import ProductFormPlaceholder from "../components/ProductFormPlaceholder";
 import { useAppDispatch } from "@/redux/store";
-import { deleteProduct } from "@/redux/features/productSlice";
+import { deleteProduct, updateProduct } from "@/redux/features/productSlice";
 import { hideLoading, showLoading } from "@/redux/features/loadingSlice";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
@@ -60,8 +60,23 @@ const AdminProductDetails = ({ params }: { params: { productId: string } }) => {
     }
   };
 
-  const handleUpdate = (data: ProductCreationForm) => {
-    console.log("Product Data:", data);
+  const handleUpdate = async (data: ProductCreationForm) => {
+    try {
+      const responseAction = await dispatch(
+        updateProduct({ productId: params.productId, formData: data })
+      );
+
+      if (updateProduct.fulfilled.match(responseAction)) {
+        dispatch(hideLoading());
+        toast.success("Product updated successfully!");
+      } else {
+        dispatch(hideLoading());
+        toast.error("Something went wrong, please try again.");
+      }
+    } catch (error) {
+      dispatch(hideLoading());
+      toast.error(`Failed to update product. ${error}`);
+    }
   };
 
   const productDetails = data && {
