@@ -15,6 +15,7 @@ const ProductImages: React.FC<IProductImagesProps> = ({
   );
   const [zoomStyle, setZoomStyle] = useState({
     transformOrigin: "center center",
+    transform: "scale(1)",
   });
   const imageContainerRef = useRef<HTMLDivElement | null>(null);
 
@@ -32,11 +33,35 @@ const ProductImages: React.FC<IProductImagesProps> = ({
       };
     const x = ((e.clientX - left) / width) * 100;
     const y = ((e.clientY - top) / height) * 100;
-    setZoomStyle({ transformOrigin: `${x}% ${y}%` });
+    setZoomStyle({
+      transformOrigin: `${x}% ${y}%`,
+      transform: "scale(2)",
+    });
   };
 
-  const handleMouseLeave = () => {
-    setZoomStyle({ transformOrigin: "center center" });
+  const handleTouchMove = (e: React.TouchEvent) => {
+    const { left, top, width, height } =
+      imageContainerRef.current?.getBoundingClientRect() ?? {
+        left: 0,
+        top: 0,
+        width: 0,
+        height: 0,
+      };
+    const touch = e.touches[0];
+    const x = ((touch.clientX - left) / width) * 100;
+    const y = ((touch.clientY - top) / height) * 100;
+
+    setZoomStyle({
+      transformOrigin: `${x}% ${y}%`,
+      transform: "scale(2)",
+    });
+  };
+
+  const handleMouseAndTouchLeave = () => {
+    setZoomStyle({
+      transformOrigin: "center center",
+      transform: "scale(1)",
+    });
   };
 
   return (
@@ -46,7 +71,9 @@ const ProductImages: React.FC<IProductImagesProps> = ({
         className="w-full mb-4 group relative overflow-hidden"
         ref={imageContainerRef}
         onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
+        onMouseLeave={handleMouseAndTouchLeave}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleMouseAndTouchLeave}
       >
         <Image
           src={selectedImage}
@@ -55,7 +82,7 @@ const ProductImages: React.FC<IProductImagesProps> = ({
           width={900}
           height={200}
           priority
-          className="w-full h-full object-cover cursor-pointer max-w-[450px] transition-transform duration-300 group-hover:scale-150"
+          className="w-full h-full object-contain transition-transform duration-300 ease-in-out cursor-pointer"
           style={zoomStyle}
         />
       </div>

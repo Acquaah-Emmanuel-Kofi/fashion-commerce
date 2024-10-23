@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import MultiImageUpload from "./MultiImageUpload";
-import Image from "next/image";
 import toast from "react-hot-toast";
 import { ProductCreationForm } from "@/modules/interfaces/products.interface";
 import ChipInput from "./ChipInput";
@@ -10,6 +9,7 @@ import {
   PRODUCT_TYPE_OPTIONS,
 } from "@/app/shared/helpers/constants.helper";
 import InputField from "@/app/shared/components/InputField";
+import ImagesPreview from "./ImagesPreview";
 
 interface ProductFormProps {
   product?: ProductCreationForm;
@@ -83,6 +83,11 @@ const ProductForm: React.FC<ProductFormProps> = ({
       ...prevData,
       images: [...prevData.images, ...files],
     }));
+  };
+
+  const handleRemoveImage = (index: number) => {
+    const updatedImages = formData.images.filter((_, i) => i !== index);
+    setFormData({ ...formData, images: updatedImages });
   };
 
   useEffect(() => {
@@ -241,51 +246,19 @@ const ProductForm: React.FC<ProductFormProps> = ({
               htmlFor="hs-checkbox-group-1"
               className="text-base text-black font-medium ms-3"
             >
-              Available
+              Availabledsdf
             </label>
           </div>
         </div>
 
         {/* Right Side Image Upload and Gallery */}
         <div className="space-y-6">
-          <div className="w-full h-[350px] bg-gray-200">
-            {formData.images.length === 0 ? (
-              <div className="w-full h-full flex justify-center items-center">
-                <p>No Image Uploaded Yet!</p>
-              </div>
-            ) : (
-              <Image
-                src={
-                  typeof formData.images[0] === "string"
-                    ? formData.images[0]
-                    : URL.createObjectURL(formData.images[0])
-                }
-                alt={`${formData.name} image`}
-                width={300}
-                height={300}
-                className="w-full h-full object-contain"
-              />
-            )}
-          </div>
-
-          {formData.images && (
-            <div className="flex gap-3 overflow-x-auto scrollbar-none">
-              {formData.images.map((image, index) => (
-                <Image
-                  key={index}
-                  src={
-                    typeof image === "string"
-                      ? image
-                      : URL.createObjectURL(image)
-                  }
-                  alt={`${formData.name} image ${index + 1}`}
-                  width={300}
-                  height={300}
-                  className="object-contain w-[50px]"
-                />
-              ))}
-            </div>
-          )}
+          <ImagesPreview
+            mainImage={formData.images[0]}
+            images={formData.images}
+            name={formData.name}
+            onRemoveImage={handleRemoveImage}
+          />
 
           <MultiImageUpload onImagesSelect={handleImagesSelect} />
         </div>
