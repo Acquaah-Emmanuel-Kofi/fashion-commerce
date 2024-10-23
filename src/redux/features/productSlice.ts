@@ -71,12 +71,31 @@ export const updateProduct = createAsyncThunk(
       "https://fashion-commerce.onrender.com/api/v1";
     const url = `${baseUrl}/product/update/${productId}`;
 
-        const response = await fetch(url, {
+    const form = new FormData();
+
+    form.append("name", formData.name);
+    form.append("description", formData.description);
+    form.append("price", formData.price);
+    form.append("available", formData.isAvailable);
+
+    formData.types.forEach((type) => form.append("types[]", type));
+    formData.sizes.forEach((size) => form.append("sizes[]", size));
+    formData.colors.forEach((color) => form.append("colors[]", color));
+    formData.categories.forEach((category) =>
+      form.append("categories[]", category)
+    );
+
+    formData.images.forEach((image) => {
+      if (typeof image === "string") {
+        form.append("imageUrls[]", image);
+      } else {
+        form.append("images[]", image);
+      }
+    });
+
+    const response = await fetch(url, {
       method: "PATCH",
-       headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
+      body: form,
     });
 
     if (!response.ok) {
@@ -86,7 +105,6 @@ export const updateProduct = createAsyncThunk(
     return response.json();
   }
 );
-
 
 export const deleteProduct = createAsyncThunk(
   "products/deleteProduct",
@@ -98,7 +116,7 @@ export const deleteProduct = createAsyncThunk(
 
     const response = await fetch(url, {
       method: "DELETE",
-       headers: {
+      headers: {
         "Content-Type": "application/json",
       },
     });
@@ -159,8 +177,9 @@ const productSlice = createSlice({
       })
       .addCase(updateProduct.rejected, (state, action) => {
         state.error = action.error.message || "Failed to update product";
-      }).addCase(deleteProduct.fulfilled, (state, action) => {
-        const deletedProductId = action.meta.arg; 
+      })
+      .addCase(deleteProduct.fulfilled, (state, action) => {
+        const deletedProductId = action.meta.arg;
         state.products = state.products.filter(
           (product) => product.id !== deletedProductId
         );
