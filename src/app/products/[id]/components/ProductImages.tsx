@@ -15,6 +15,7 @@ const ProductImages: React.FC<IProductImagesProps> = ({
   );
   const [zoomStyle, setZoomStyle] = useState({
     transformOrigin: "center center",
+    transform: "scale(1)",
   });
   const imageContainerRef = useRef<HTMLDivElement | null>(null);
 
@@ -32,11 +33,17 @@ const ProductImages: React.FC<IProductImagesProps> = ({
       };
     const x = ((e.clientX - left) / width) * 100;
     const y = ((e.clientY - top) / height) * 100;
-    setZoomStyle({ transformOrigin: `${x}% ${y}%` });
+    setZoomStyle({
+      transformOrigin: `${x}% ${y}%`,
+      transform: "scale(2)",
+    });
   };
 
   const handleMouseLeave = () => {
-    setZoomStyle({ transformOrigin: "center center" });
+    setZoomStyle({
+      transformOrigin: "center center",
+      transform: "scale(1)",
+    });
   };
 
   return (
