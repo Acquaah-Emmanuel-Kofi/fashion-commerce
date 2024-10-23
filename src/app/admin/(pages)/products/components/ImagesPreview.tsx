@@ -1,16 +1,21 @@
 import React, { useState, useRef } from "react";
 import Image from "next/image";
+import { IoCloseCircle } from "react-icons/io5";
 
-interface ImageZoomProps {
+interface ImagesPreviewProps {
   mainImage: string | File;
   images: (string | File)[];
   name: string;
+  onRemoveImage: (index: number) => void;
 }
 
-const ImagesPreview: React.FC<ImageZoomProps> = ({ mainImage, images, name }) => {
-  const [selectedImage, setSelectedImage] = useState<string | File>(
-    mainImage
-  );
+const ImagesPreview: React.FC<ImagesPreviewProps> = ({
+  mainImage,
+  images,
+  name,
+  onRemoveImage,
+}) => {
+  const [selectedImage, setSelectedImage] = useState<string | File>(mainImage);
   const [zoomStyle, setZoomStyle] = useState({
     transformOrigin: "center center",
   });
@@ -64,20 +69,26 @@ const ImagesPreview: React.FC<ImageZoomProps> = ({ mainImage, images, name }) =>
         )}
       </div>
 
-      {/* Thumbnails (if applicable) */}
-      <div className="flex space-x-2 mt-4">
+      <div className="flex space-x-5 mt-4">
         {images.map((image, index) => (
-          <div key={index} className="cursor-pointer">
+          <div key={index} className="relative">
             <Image
               src={
                 typeof image === "string" ? image : URL.createObjectURL(image)
               }
-              alt={`Thumbnail ${index + 1}`}
+              alt={`Thumbnail ${index}`}
               width={50}
               height={50}
-              className="object-cover"
+              className="object-cover cursor-pointer"
               onClick={() => handleThumbnailClick(image)}
             />
+            {/* Remove Button */}
+            <button
+              className="absolute -right-2 -top-2"
+              onClick={() => onRemoveImage(index)}
+            >
+              <IoCloseCircle color="red" />
+            </button>
           </div>
         ))}
       </div>
