@@ -15,12 +15,17 @@ export interface IShippingAddress {
   region: string;
 }
 
+export interface IOrderProduct {
+  product: IProductDetails;
+  quantity: number;
+}
+
 export interface IOrder {
   id: string;
   contactInfo: IContactInfo;
-  dateCreated: string;  
-  dateUpdated: string; 
+  dateCreated: string;
+  dateUpdated: string;
   orderStatus: string;
-  products: IProductDetails[];
+  products: IOrderProduct[];
   shippingAddress: IShippingAddress;
 }
