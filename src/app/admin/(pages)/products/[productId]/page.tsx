@@ -10,6 +10,11 @@ import {
 import ProductForm from "../components/ProductForm";
 import Link from "next/link";
 import ProductFormPlaceholder from "../components/ProductFormPlaceholder";
+import { useAppDispatch } from "@/redux/store";
+import { deleteProduct, updateProduct } from "@/redux/features/productSlice";
+import { hideLoading, showLoading } from "@/redux/features/loadingSlice";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const breadcrumbItems = [
   { label: "All Products", href: "/admin/products" },
@@ -21,12 +26,59 @@ const AdminProductDetails = ({ params }: { params: { productId: string } }) => {
     `/product/${params.productId}`
   );
 
-  const handleDelete = () => {
-    console.log("Product Deleted");
+  const router = useRouter();
+  const dispatch = useAppDispatch();
+
+  const handleDelete = async () => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this product?"
+    );
+
+    if (!confirmDelete) return;
+
+    try {
+      dispatch(showLoading());
+
+      const responseAction = await dispatch(deleteProduct(params.productId));
+
+      if (deleteProduct.fulfilled.match(responseAction)) {
+        dispatch(hideLoading());
+
+        toast.success("Product deleted successfully!");
+        router.push("/admin/products");
+      } else {
+        dispatch(hideLoading());
+
+        const errorMessage =
+          responseAction.error?.message || "Failed to delete product.";
+        toast.error(errorMessage);
+      }
+    } catch (error) {
+      dispatch(hideLoading());
+
+      toast.error(`Error deleting product: ${error}`);
+    }
   };
 
-  const handleUpdate = (data: ProductCreationForm) => {
-    console.log("Product Data:", data);
+  const handleUpdate = async (data: ProductCreationForm) => {
+    try {
+      dispatch(showLoading());
+      
+      const responseAction = await dispatch(
+        updateProduct({ productId: params.productId, formData: data })
+      );
+
+      if (updateProduct.fulfilled.match(responseAction)) {
+        dispatch(hideLoading());
+        toast.success("Product updated successfully!");
+      } else {
+        dispatch(hideLoading());
+        toast.error("Something went wrong, please try again.");
+      }
+    } catch (error) {
+      dispatch(hideLoading());
+      toast.error(`Failed to update product. ${error}`);
+    }
   };
 
   const productDetails = data && {

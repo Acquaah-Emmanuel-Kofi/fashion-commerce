@@ -103,7 +103,7 @@ const Form = () => {
           }, 5000);
         } else {
           dispatch(hideLoading());
-          toast.error("Failed to create order!");
+          toast.error("Something went wrong while placing your order.");
         }
       } else {
         toast.error("Email and phone are required!");

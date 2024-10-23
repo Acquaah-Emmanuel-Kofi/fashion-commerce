@@ -293,7 +293,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
 
       <div className="flex justify-end w-full mt-6">
         <div
-          className={`grid border-2 gap-3 ${
+          className={`grid gap-3 ${
             product
               ? "lg:w-[48%] w-full grid-cols-3"
               : "lg:w-3/12 w-full grid-cols-2"
