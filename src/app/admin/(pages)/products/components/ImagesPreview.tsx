@@ -18,6 +18,7 @@ const ImagesPreview: React.FC<ImagesPreviewProps> = ({
   const [selectedImage, setSelectedImage] = useState<string | File>(mainImage);
   const [zoomStyle, setZoomStyle] = useState({
     transformOrigin: "center center",
+    transform: "scale(1)", 
   });
   const imageContainerRef = useRef<HTMLDivElement | null>(null);
 
@@ -35,18 +36,25 @@ const ImagesPreview: React.FC<ImagesPreviewProps> = ({
       };
     const x = ((e.clientX - left) / width) * 100;
     const y = ((e.clientY - top) / height) * 100;
-    setZoomStyle({ transformOrigin: `${x}% ${y}%` });
+
+    setZoomStyle({
+      transformOrigin: `${x}% ${y}%`,
+      transform: "scale(2)", 
+    });
   };
 
   const handleMouseLeave = () => {
-    setZoomStyle({ transformOrigin: "center center" });
+    setZoomStyle({
+      transformOrigin: "center center",
+      transform: "scale(1)", 
+    });
   };
 
   return (
     <div className="w-full">
       {/* Image Display Container */}
       <div
-        className="w-full h-[350px] bg-gray-200 flex justify-center items-center"
+        className="w-full h-[350px] bg-gray-200 flex justify-center items-center overflow-hidden"
         ref={imageContainerRef}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
@@ -63,8 +71,8 @@ const ImagesPreview: React.FC<ImagesPreviewProps> = ({
             alt={`${name} image`}
             width={300}
             height={300}
-            className="w-full h-full object-contain"
-            style={{ transformOrigin: zoomStyle.transformOrigin }}
+            className="w-full h-full object-contain transition-transform duration-300 ease-in-out" 
+            style={zoomStyle} 
           />
         )}
       </div>
