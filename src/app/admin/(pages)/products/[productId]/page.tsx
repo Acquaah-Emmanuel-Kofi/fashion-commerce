@@ -62,6 +62,8 @@ const AdminProductDetails = ({ params }: { params: { productId: string } }) => {
 
   const handleUpdate = async (data: ProductCreationForm) => {
     try {
+      dispatch(showLoading());
+      
       const responseAction = await dispatch(
         updateProduct({ productId: params.productId, formData: data })
       );
