@@ -61,14 +61,7 @@ const ImagesPreview: React.FC<ImagesPreviewProps> = ({
     });
   };
 
-  const handleMouseLeave = () => {
-    setZoomStyle({
-      transformOrigin: "center center",
-      transform: "scale(1)",
-    });
-  };
-
-  const handleTouchEnd = () => {
+  const handleMouseAndTouchLeave = () => {
     setZoomStyle({
       transformOrigin: "center center",
       transform: "scale(1)",
@@ -82,9 +75,9 @@ const ImagesPreview: React.FC<ImagesPreviewProps> = ({
         className="w-full h-[350px] bg-gray-200 flex justify-center items-center overflow-hidden"
         ref={imageContainerRef}
         onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
+        onMouseLeave={handleMouseAndTouchLeave}
         onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
+        onTouchEnd={handleMouseAndTouchLeave}
       >
         {images.length === 0 ? (
           <p>No Image Uploaded Yet!</p>

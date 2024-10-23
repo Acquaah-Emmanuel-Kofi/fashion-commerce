@@ -57,14 +57,7 @@ const ProductImages: React.FC<IProductImagesProps> = ({
     });
   };
 
-  const handleMouseLeave = () => {
-    setZoomStyle({
-      transformOrigin: "center center",
-      transform: "scale(1)",
-    });
-  };
-
-  const handleTouchEnd = () => {
+  const handleMouseAndTouchLeave = () => {
     setZoomStyle({
       transformOrigin: "center center",
       transform: "scale(1)",
@@ -78,9 +71,9 @@ const ProductImages: React.FC<IProductImagesProps> = ({
         className="w-full mb-4 group relative overflow-hidden"
         ref={imageContainerRef}
         onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
+        onMouseLeave={handleMouseAndTouchLeave}
         onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
+        onTouchEnd={handleMouseAndTouchLeave}
       >
         <Image
           src={selectedImage}
