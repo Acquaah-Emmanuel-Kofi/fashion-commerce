@@ -85,6 +85,11 @@ const ProductForm: React.FC<ProductFormProps> = ({
     }));
   };
 
+  const handleRemoveImage = (index: number) => {
+    const updatedImages = formData.images.filter((_, i) => i !== index);
+    setFormData({ ...formData, images: updatedImages });
+  };
+
   useEffect(() => {
     const validateForm = () => {
       const {
