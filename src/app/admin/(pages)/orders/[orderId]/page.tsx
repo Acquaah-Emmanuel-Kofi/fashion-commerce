@@ -24,7 +24,7 @@ export default async function OrderDetails({
   const orderDetails = query.data;
 
   const totalAmount = orderDetails?.products.reduce(
-    (sum, product) => sum + Number(product.price),
+    (sum, products) => sum + Number(products.product.price),
     0
   );
 
