@@ -1,9 +1,9 @@
 import Table from "@/app/admin/(components)/Table";
-import { IProductDetails } from "@/modules/interfaces/products.interface";
+import { IOrderProduct } from "@/modules/interfaces/order.interface";
 import React from "react";
 
 type IProps = {
-  products: IProductDetails[];
+  products: IOrderProduct[];
 };
 
 const OrderProducts: React.FC<IProps> = ({ products }) => {
@@ -16,10 +16,10 @@ const OrderProducts: React.FC<IProps> = ({ products }) => {
 
   const orders = products?.map((item) => {
     return {
-      product: item.name,
-      productId: `#${item.id}`,
-      quantity: products.length || 1,
-      total: `GHS${item.price}`,
+      product: item.product.name,
+      productId: `#${item.product.id}`,
+      quantity: item.quantity,
+      total: `GHS${item.product.price}`,
     };
   });
 
