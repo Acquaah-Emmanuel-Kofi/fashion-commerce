@@ -98,7 +98,7 @@ const ImagesPreview: React.FC<ImagesPreviewProps> = ({
             alt={`${name} image`}
             width={300}
             height={300}
-            className="w-full h-full object-contain transition-transform duration-300 ease-in-out"
+            className="w-full h-full object-contain transition-transform duration-300 ease-in-out cursor-pointer"
             style={zoomStyle}
           />
         )}

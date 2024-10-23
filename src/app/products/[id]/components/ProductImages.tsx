@@ -89,7 +89,7 @@ const ProductImages: React.FC<IProductImagesProps> = ({
           width={900}
           height={200}
           priority
-          className="w-full h-full object-cover cursor-pointer max-w-[450px] transition-transform duration-300 group-hover:scale-150"
+          className="w-full h-full object-contain transition-transform duration-300 ease-in-out cursor-pointer"
           style={zoomStyle}
         />
       </div>
