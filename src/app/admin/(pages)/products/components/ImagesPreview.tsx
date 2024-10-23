@@ -18,7 +18,7 @@ const ImagesPreview: React.FC<ImagesPreviewProps> = ({
   const [selectedImage, setSelectedImage] = useState<string | File>(mainImage);
   const [zoomStyle, setZoomStyle] = useState({
     transformOrigin: "center center",
-    transform: "scale(1)", 
+    transform: "scale(1)",
   });
   const imageContainerRef = useRef<HTMLDivElement | null>(null);
 
@@ -39,14 +39,39 @@ const ImagesPreview: React.FC<ImagesPreviewProps> = ({
 
     setZoomStyle({
       transformOrigin: `${x}% ${y}%`,
-      transform: "scale(2)", 
+      transform: "scale(2)",
+    });
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    const { left, top, width, height } =
+      imageContainerRef.current?.getBoundingClientRect() ?? {
+        left: 0,
+        top: 0,
+        width: 0,
+        height: 0,
+      };
+    const touch = e.touches[0];
+    const x = ((touch.clientX - left) / width) * 100;
+    const y = ((touch.clientY - top) / height) * 100;
+
+    setZoomStyle({
+      transformOrigin: `${x}% ${y}%`,
+      transform: "scale(2)",
     });
   };
 
   const handleMouseLeave = () => {
     setZoomStyle({
       transformOrigin: "center center",
-      transform: "scale(1)", 
+      transform: "scale(1)",
+    });
+  };
+
+  const handleTouchEnd = () => {
+    setZoomStyle({
+      transformOrigin: "center center",
+      transform: "scale(1)",
     });
   };
 
@@ -58,6 +83,8 @@ const ImagesPreview: React.FC<ImagesPreviewProps> = ({
         ref={imageContainerRef}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
       >
         {images.length === 0 ? (
           <p>No Image Uploaded Yet!</p>
@@ -71,8 +98,8 @@ const ImagesPreview: React.FC<ImagesPreviewProps> = ({
             alt={`${name} image`}
             width={300}
             height={300}
-            className="w-full h-full object-contain transition-transform duration-300 ease-in-out" 
-            style={zoomStyle} 
+            className="w-full h-full object-contain transition-transform duration-300 ease-in-out"
+            style={zoomStyle}
           />
         )}
       </div>
