@@ -52,6 +52,7 @@ const OrderDetailsInfo: React.FC<IOrder> = ({
       if (response && response.status === 201) {
         toast.success("Order status updated successfully!");
         setStatus(status);
+        setNote("");
       } else {
         toast.error(
           `Something went wrong. ${
