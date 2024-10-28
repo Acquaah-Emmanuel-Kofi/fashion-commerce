@@ -1,6 +1,5 @@
-import Image from "next/image";
 import React from "react";
-import { FaBell } from "react-icons/fa";
+import { FaBell, FaUserCircle } from "react-icons/fa";
 
 export default function DashboardNavbar({
   toggleSidebar,
@@ -45,15 +44,11 @@ export default function DashboardNavbar({
       <div className="flex items-center space-x-4">
         <FaBell className="text-gray-500" />
         <div className="relative">
-          <button className="flex items-center">
-            <span className="font-bold font-beatrice hidden lg:block">ADMIN</span>
-            <Image
-              src="https://res.cloudinary.com/dvul0elbb/image/upload/e_gen_background_replace:prompt_Light_blue_background_with_soft_reflections/wmlmb18y1i769f7obc9w"
-              alt="Admin"
-              width={300}
-              height={300}
-              className="h-8 w-8 rounded-full ml-2 object-cover"
-            />
+          <button className="flex items-center gap-2">
+            <span className="font-bold font-beatrice hidden lg:block">
+              ADMIN
+            </span>
+            <FaUserCircle size={30} />
           </button>
         </div>
       </div>
