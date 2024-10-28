@@ -88,7 +88,7 @@ export default function Hero({ products }: HeroProps) {
 
       <div className="flex items-end">
         <div className="w-full lg:w-1/4">
-          <div className="lg:mt-18 mt-[20%]">
+          <div className="lg:mt-18 mt-[20%] jump-xs">
             <h1 className="text-5xl font-bold lg:mb-4 font-beatrice">
               NEW COLLECTION
             </h1>
@@ -97,7 +97,7 @@ export default function Hero({ products }: HeroProps) {
             </p>
           </div>
 
-          <div className="block mt-[10%] lg:hidden">
+          <div className="block mt-[10%] lg:hidden fade-down">
             <Carousel
               visibleImages={isMobile ? 2 : 3}
               currentIndex={currentIndex}
@@ -126,19 +126,18 @@ export default function Hero({ products }: HeroProps) {
             <Link href="/products" className="lg:w-full w-1/2">
               <button
                 type="button"
-                className="flex justify-between items-center bg-[#D9D9D9] py-2.5 px-4 w-full font-beatrice text-sm lg:text-base"
+                className="group flex justify-between items-center bg-[#D9D9D9] py-2.5 px-4 w-full font-beatrice text-sm lg:text-base hover:bg-black hover:text-white transition-colors"
               >
                 Go To Shop
                 <svg
                   width="50"
                   height="14"
                   viewBox="0 0 50 14"
-                  fill="none"
                   xmlns="http://www.w3.org/2000/svg"
+                  className="fill-black stroke-black group-hover:fill-white group-hover:stroke-white transition-all duration-500 transform fade-right"
                 >
                   <path
                     d="M1 7H48.5M48.5 7L42.5 1M48.5 7L42.5 13"
-                    stroke="black"
                     strokeWidth="1.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -160,7 +159,7 @@ export default function Hero({ products }: HeroProps) {
           </div>
         </div>
 
-        <div className="hidden lg:block lg:w-[70%] lg:ml-10">
+        <div className="hidden lg:block lg:w-[70%] lg:ml-10 fade-right">
           <Carousel
             visibleImages={3}
             currentIndex={currentIndex}
