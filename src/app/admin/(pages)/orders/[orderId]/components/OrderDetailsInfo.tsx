@@ -52,7 +52,9 @@ const OrderDetailsInfo: React.FC<IOrder> = ({
         );
       }
     } catch (error) {
-      toast.error("An unexpected error occurred while updating status.");
+      toast.error(
+        `An unexpected error occurred while updating status. ${error}`
+      );
     } finally {
       dispatch(hideLoading());
     }
