@@ -12,18 +12,20 @@ interface CustomSelectProps {
   options: Option[];
   label?: string;
   placeholder?: string;
-  required?: boolean;
   onSelect: (value: string) => void;
   defaultValue?: string;
+  showAddCustomField?: boolean;
+  required?: boolean;
 }
 
 const CustomSelect: React.FC<CustomSelectProps> = ({
   options,
   label,
   placeholder,
-  required = false,
   onSelect,
   defaultValue,
+  showAddCustomField = false,
+  required = false,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState<string | undefined>(
@@ -118,15 +120,17 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
               </li>
             ))}
             {/* Custom Option Input */}
-            <li className="px-3 py-2">
-              <InputField
-                name="custom"
-                placeholder="Add custom option"
-                value={customOption}
-                onChange={handleInputChange}
-                onKeyDown={handleCustomOptionKeyDown}
-              />
-            </li>
+            {showAddCustomField && (
+              <li className="px-3 py-2">
+                <InputField
+                  name="custom"
+                  placeholder="Add custom option"
+                  value={customOption}
+                  onChange={handleInputChange}
+                  onKeyDown={handleCustomOptionKeyDown}
+                />
+              </li>
+            )}
           </ul>
         </div>
       )}
