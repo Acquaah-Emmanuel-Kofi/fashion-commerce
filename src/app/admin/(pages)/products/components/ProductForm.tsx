@@ -246,7 +246,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
               htmlFor="hs-checkbox-group-1"
               className="text-base text-black font-medium ms-3"
             >
-              Availabledsdf
+              Available
             </label>
           </div>
         </div>
