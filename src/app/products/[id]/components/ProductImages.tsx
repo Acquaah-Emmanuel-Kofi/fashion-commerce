@@ -68,7 +68,7 @@ const ProductImages: React.FC<IProductImagesProps> = ({
     <div className="flex flex-col lg:flex-row lg:w-full gap-5 min-h-[500px] max-h-[500px] lg:max-h-[700px]">
       {/* Main image with zoom follow effect */}
       <div
-        className="w-full mb-4 group relative overflow-hidden"
+        className="w-full mb-4 group relative overflow-hidden fade-right"
         ref={imageContainerRef}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseAndTouchLeave}
@@ -93,7 +93,7 @@ const ProductImages: React.FC<IProductImagesProps> = ({
           {thumbnails?.map((thumb, idx) => (
             <div
               key={idx}
-              className={`cursor-pointer ${
+              className={`cursor-pointer fade-down ${
                 selectedImage === thumb ? "opacity-100" : "opacity-50"
               } hover:opacity-100 transition-opacity duration-300`}
               onClick={() => handleThumbnailClick(thumb)}
