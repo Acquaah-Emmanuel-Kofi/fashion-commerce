@@ -2,8 +2,11 @@
 
 import CustomSelect from "@/app/shared/components/CustomSelect";
 import { formatDate } from "@/app/shared/helpers/functions.helper";
+import { ApiResponse } from "@/modules/interfaces/common.interface";
 import { IOrder } from "@/modules/interfaces/order.interface";
+import { patchDataToApi } from "@/services/api";
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 import { AiOutlinePrinter } from "react-icons/ai";
 import { FaRegNoteSticky } from "react-icons/fa6";
 
@@ -15,7 +18,7 @@ const OrderDetailsInfo: React.FC<IOrder> = ({
   contactInfo,
   shippingAddress,
 }) => {
-  const [status, setStatus] = useState(orderStatus);
+  const [status, setStatus] = useState<string>(orderStatus);
 
   const options = [
     { value: "DELIVERED", label: "Delivered" },
@@ -25,6 +28,27 @@ const OrderDetailsInfo: React.FC<IOrder> = ({
 
   const handleSelect = (value: string) => {
     setStatus(value);
+  };
+
+  const handleSave = async () => {
+    try {
+      const response: ApiResponse<IOrder> = await patchDataToApi(
+        `/order/update/${id}?status=${status}`
+      );
+
+      if (response && response.status === 201) {
+        toast.success("Order status updated successfully!");
+        setStatus(status);
+      } else {
+        toast.error(
+          `Something went wrong. ${
+            response ? response.message : "Unknown error"
+          }`
+        );
+      }
+    } catch (error) {
+      toast.error("An unexpected error occurred while updating status.");
+    }
   };
 
   return (
@@ -52,6 +76,7 @@ const OrderDetailsInfo: React.FC<IOrder> = ({
           </button>
           <button
             type="button"
+            onClick={handleSave}
             className="bg-black hover:bg-slate-800 text-white px-4 py-2"
           >
             Save
