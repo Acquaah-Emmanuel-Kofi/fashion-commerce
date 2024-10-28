@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import Filters from "./Filters";
 import Breadcrumb from "@/app/shared/components/Breadcrumb";
@@ -17,8 +17,8 @@ const breadcrumbItems = [
 ];
 
 export default function ProductsPage() {
-  const [toggledFilters, setToggledFilters] = useState<boolean>(true);
-  const [isHidden, setIsHidden] = useState(true);
+  const [toggledFilters, setToggledFilters] = useState<boolean>(false);
+  const [isHidden, setIsHidden] = useState<boolean>(false);
 
   const dispatch = useAppDispatch();
 
@@ -40,6 +40,13 @@ export default function ProductsPage() {
     }
   };
 
+  useEffect(() => {
+    if (window.innerWidth < 1024) {
+      setToggledFilters(true);
+      setIsHidden(true)
+    }
+  }, []);
+
   return (
     <section className="bg-white">
       <main>
@@ -56,7 +63,11 @@ export default function ProductsPage() {
               </button>
             </div>
             <div>
-              <button type="button" onClick={() => handleClearFilters()} className="flex items-center gap-1">
+              <button
+                type="button"
+                onClick={() => handleClearFilters()}
+                className="flex items-center gap-1"
+              >
                 <MdClear size={25} />
                 Clear filters
               </button>
