@@ -76,7 +76,7 @@ export default function ProductsPage() {
 
           <div className="flex w-[95%] lg:w-full mx-auto lg:pl-6">
             <div
-              className={`lg:w-1/4 w-full relative transition-transform duration-300 ${
+              className={`lg:w-1/4 w-full relative transition-transform duration-300 fade-right ${
                 toggledFilters ? "-translate-x-full" : "translate-x-0"
               } ${isHidden ? "hidden" : ""}`}
             >

@@ -172,7 +172,7 @@ const Filters = () => {
         {filters.map((filter) => (
           <div
             key={filter.id}
-            className="border-b border-dashed border-gray-200 pb-2"
+            className="border-b border-dashed border-gray-200 pb-2 fade-right"
           >
             <button
               type="button"
