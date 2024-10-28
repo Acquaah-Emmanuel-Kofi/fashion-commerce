@@ -189,6 +189,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
             placeholder="Select a category"
             defaultValue={formData.categories[0]}
             label="category"
+            showAddCustomField
             required
           />
 
@@ -215,6 +216,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
               defaultValue={formData.types[0]}
               label="Product Type"
               placeholder="Select type"
+              showAddCustomField
               required
             />
 
