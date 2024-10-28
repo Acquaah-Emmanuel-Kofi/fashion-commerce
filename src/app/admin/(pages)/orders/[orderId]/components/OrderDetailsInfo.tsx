@@ -4,6 +4,8 @@ import CustomSelect from "@/app/shared/components/CustomSelect";
 import { formatDate } from "@/app/shared/helpers/functions.helper";
 import { ApiResponse } from "@/modules/interfaces/common.interface";
 import { IOrder } from "@/modules/interfaces/order.interface";
+import { hideLoading, showLoading } from "@/redux/features/loadingSlice";
+import { useAppDispatch } from "@/redux/store";
 import { patchDataToApi } from "@/services/api";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
@@ -19,6 +21,7 @@ const OrderDetailsInfo: React.FC<IOrder> = ({
   shippingAddress,
 }) => {
   const [status, setStatus] = useState<string>(orderStatus);
+   const dispatch = useAppDispatch();
 
   const options = [
     { value: "DELIVERED", label: "Delivered" },
@@ -31,6 +34,8 @@ const OrderDetailsInfo: React.FC<IOrder> = ({
   };
 
   const handleSave = async () => {
+    dispatch(showLoading());
+    
     try {
       const response: ApiResponse<IOrder> = await patchDataToApi(
         `/order/update/${id}?status=${status}`
@@ -48,6 +53,8 @@ const OrderDetailsInfo: React.FC<IOrder> = ({
       }
     } catch (error) {
       toast.error("An unexpected error occurred while updating status.");
+    } finally {
+      dispatch(hideLoading());
     }
   };
 
