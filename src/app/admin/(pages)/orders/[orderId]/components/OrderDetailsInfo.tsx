@@ -21,7 +21,8 @@ const OrderDetailsInfo: React.FC<IOrder> = ({
   shippingAddress,
 }) => {
   const [status, setStatus] = useState<string>(orderStatus);
-   const dispatch = useAppDispatch();
+  const [note, setNote] = useState<string>("");
+  const dispatch = useAppDispatch();
 
   const options = [
     { value: "DELIVERED", label: "Delivered" },
@@ -33,12 +34,19 @@ const OrderDetailsInfo: React.FC<IOrder> = ({
     setStatus(value);
   };
 
+  const handleNoteChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setNote(event.target.value);
+  };
+
   const handleSave = async () => {
     dispatch(showLoading());
-    
+
     try {
       const response: ApiResponse<IOrder> = await patchDataToApi(
-        `/order/update/${id}?status=${status}`
+        `/order/update/${id}?status=${status}`,
+        {
+          notes: note,
+        }
       );
 
       if (response && response.status === 201) {
@@ -183,7 +191,9 @@ const OrderDetailsInfo: React.FC<IOrder> = ({
           <textarea
             className="w-full mt-2 p-2 border resize-none"
             rows={3}
-            placeholder="Type some notes"
+            placeholder="Add some note"
+            value={note}
+            onChange={handleNoteChange}
           />
         </div>
       </div>
