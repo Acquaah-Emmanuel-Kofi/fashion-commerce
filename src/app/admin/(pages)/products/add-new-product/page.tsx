@@ -45,16 +45,15 @@ export default function AddNewProduct() {
       const responseAction = await dispatch(createProduct(formData));
 
       if (createProduct.fulfilled.match(responseAction)) {
-        dispatch(hideLoading());
         toast.success("Product created successfully!");
         router.push("/admin/products");
       } else {
-        dispatch(hideLoading());
         toast.error("Something went wrong!");
       }
     } catch (error) {
-      dispatch(hideLoading());
       toast.error(`Failed to create product. ${error}`);
+    } finally {
+      dispatch(hideLoading());
     }
   };
 
