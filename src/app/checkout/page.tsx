@@ -22,11 +22,11 @@ export default function Checkout() {
         <h1 className="font-beatrice font-bold text-2xl mb-6">CHECKOUT</h1>
 
         <div className="flex lg:flex-row flex-col gap-7 lg:gap-0 justify-between">
-          <div className="lg:w-2/5 w-full">
+          <div className="lg:w-2/5 w-full fade-right">
             <Form />
           </div>
 
-          <div className="lg:w-2/5 w-full min-h-[500px] border border-[#D9D9D9] ">
+          <div className="lg:w-2/5 w-full min-h-[500px] border border-[#D9D9D9] fade-left">
             <OrderInfo />
           </div>
         </div>
