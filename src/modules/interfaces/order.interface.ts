@@ -13,6 +13,8 @@ export interface IShippingAddress {
   lastname: string;
   postalCode: string;
   region: string;
+  shippingCost: number;
+  tax: number; 
 }
 
 export interface IOrderProduct {
@@ -28,4 +30,12 @@ export interface IOrder {
   orderStatus: string;
   products: IOrderProduct[];
   shippingAddress: IShippingAddress;
+}
+
+export interface IOrderSummary {
+  order: IOrder;
+  subTotal: number;
+  shippingCost: number;
+  tax: number;
+  totalPrice: number;
 }

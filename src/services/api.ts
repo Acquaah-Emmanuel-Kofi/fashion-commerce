@@ -44,3 +44,35 @@ export const postDataToApi = async (endpoint: string, data: any) => {
     return null;
   }
 };
+
+export const patchDataToApi = async (
+  endpoint: string,
+  data?: object,
+  headers = {}
+) => {
+  try {
+    const baseUrl =
+      process.env.NEXT_PUBLIC_BACKEND_API_URL ||
+      "https://fashion-commerce.onrender.com/api/v1";
+    const url = `${baseUrl}${endpoint}`;
+
+    const response = await fetch(url, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        ...headers,
+      },
+      ...(data ? { body: JSON.stringify(data) } : {}),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to update data");
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("Error updating data:", error);
+    return null;
+  }
+};
+

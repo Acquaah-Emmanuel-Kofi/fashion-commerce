@@ -5,7 +5,7 @@ import OrderDetailsInfo from "./components/OrderDetailsInfo";
 import OrderProducts from "./components/OrderProducts";
 import OrderTotalSummary from "./components/OrderTotalSummary";
 import { ApiResponse } from "@/modules/interfaces/common.interface";
-import { IOrder } from "@/modules/interfaces/order.interface";
+import { IOrderSummary } from "@/modules/interfaces/order.interface";
 import { fetchDataFromApi } from "@/services/api";
 
 const breadcrumbItems = [
@@ -18,15 +18,10 @@ export default async function OrderDetails({
 }: {
   params: { orderId: string };
 }) {
-  const query: ApiResponse<IOrder> = await fetchDataFromApi(
+  const query: ApiResponse<IOrderSummary> = await fetchDataFromApi(
     `/order/get?id=${params.orderId}`
   );
-  const orderDetails = query.data;
-
-  const totalAmount = orderDetails?.products.reduce(
-    (sum, products) => sum + Number(products.product.price),
-    0
-  );
+  const { order, subTotal, totalPrice, shippingCost, tax } = query.data;
 
   return (
     <section className="space-y-6 pb-6">
@@ -35,12 +30,17 @@ export default async function OrderDetails({
         <Breadcrumb items={breadcrumbItems} />
       </header>
 
-      <OrderDetailsInfo {...orderDetails} />
+      <OrderDetailsInfo {...order} />
 
-      <OrderProducts products={orderDetails.products} />
+      <OrderProducts products={order?.products} />
 
       <div className="flex lg:justify-end">
-        <OrderTotalSummary subTotal={totalAmount} totalAmount={totalAmount} />
+        <OrderTotalSummary
+          subTotal={subTotal}
+          shippingCost={shippingCost}
+          tax={tax}
+          totalAmount={totalPrice}
+        />
       </div>
     </section>
   );

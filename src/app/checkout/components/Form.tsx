@@ -77,8 +77,8 @@ const Form = () => {
           address: formData.address,
           city: formData.city,
           postalCode: formData.postalCode,
-          shippingCost: 0.00,
-          tax: 0.00,
+          shippingCost: 0.0,
+          tax: 0.0,
           productIDs: items.map((item: IProduct) => ({
             id: item.id,
             quantity: item.quantity,
@@ -89,7 +89,7 @@ const Form = () => {
 
         if (response) {
           setFormData(ORDER_FORM_FIELDS);
-          
+
           toast.success(
             "Order created successfully! Redirecting to WhatsApp...",
             {
@@ -118,12 +118,12 @@ const Form = () => {
   };
 
   const handleWhatsAppMessage = () => {
-    const baseURL = "https://fashion-commerce-hhcx/products/";
+    const baseURL = "https://fashion-commerce-hhcx.vercel.app/admin/products/";
 
     let message = `👋 Hi, I'm interested in the following items:\n\n`;
 
     items.forEach((item, index) => {
-      message += `⭐ ${index + 1}. *${item.name}* - _GHS ${item.price}_\n`;
+      message += `⭐ ${index + 1}. *${item.name}* - _GHS${item.price}_\n`;
     });
 
     message += `\n🔗 *Product Links*:\n`;
