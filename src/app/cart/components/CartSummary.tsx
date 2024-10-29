@@ -14,7 +14,7 @@ const CartSummary: React.FC<CartSummaryProps> = ({ totalAmount }) => {
   };
 
   return (
-    <div className="lg:w-1/3 bg-gray-50 lg:p-6">
+    <div className="lg:w-1/3 bg-gray-50 lg:p-6 jump-xs">
       <h2 className="text-xl font-bold mb-4 font-beatrice">ORDER SUMMARY</h2>
       <div className="flex justify-between mb-2">
         <p>Subtotal</p>

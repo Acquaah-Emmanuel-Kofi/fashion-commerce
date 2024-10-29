@@ -17,7 +17,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   return (
     <Link
       href={`/products/${id}`}
-      className="w-full bg-white overflow-hidden cursor-pointer hover:shadow-lg"
+      className="w-full bg-white overflow-hidden cursor-pointer hover:shadow-lg jump-in-xs"
     >
       {thumbnail && (
         <Image

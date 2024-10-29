@@ -65,7 +65,7 @@ const ProductDetails = ({ params }: { params: { id: string } }) => {
                 ) : null}
               </div>
 
-              <div className="lg:w-[45%] w-full lg:p-6 lg:pt-10 pt-10 py-6 px-4 mt-6 lg:mt-0 relative border-2 border-[#D9D9D9]">
+              <div className="lg:w-[45%] w-full lg:p-6 lg:pt-10 pt-10 py-6 px-4 mt-6 lg:mt-0 relative border-2 border-[#D9D9D9] fade-left">
                 <div className="absolute top-0 right-0">
                   {data && <AddToFavoriteButton products={data} />}
                 </div>

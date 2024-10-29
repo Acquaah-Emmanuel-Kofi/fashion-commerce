@@ -97,7 +97,7 @@ const Table: React.FC<TableProps> = ({
             currentData.map((row, rowIndex) => (
               <tr
                 key={rowIndex}
-                className="border-t hover:shadow-md cursor-pointer"
+                className="border-t hover:shadow-md cursor-pointer fade-down"
               >
                 {columns.map((column, colIndex) => (
                   <td key={colIndex} className="py-6 px-4 font-semibold">
@@ -128,7 +128,7 @@ const Table: React.FC<TableProps> = ({
 
       {/* Pagination controls */}
       {!isEmpty && (
-        <div className="flex justify-between items-center mt-4">
+        <div className="flex flex-col lg:flex-row justify-between items-center gap-5 mt-4">
           {/* Rows per page selector */}
           <div className="flex items-center">
             <span className="mr-2">Rows per page:</span>

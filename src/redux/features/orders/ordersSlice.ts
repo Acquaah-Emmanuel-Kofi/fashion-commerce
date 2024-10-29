@@ -45,7 +45,7 @@ const orderSlice = createSlice({
       })
       .addCase(fetchOrders.fulfilled, (state, action: PayloadAction<{ orders: IOrder[]; total: string }>) => {
         state.loading = false;
-        state.orders = action.payload.orders;
+        state.orders = action.payload.orders.reverse();
         state.total = action.payload.total;
       })
       .addCase(fetchOrders.rejected, (state, action) => {

@@ -138,7 +138,7 @@ const CartPage = () => {
 
         <div className="flex flex-col lg:flex-row justify-between">
           {/* Cart Items */}
-          <div className="flex border-t-2 border-b-2 border-[#C9C9C9] pt-5 pb-8 lg:w-[60%] ">
+          <div className="flex border-t-2 border-b-2 border-[#C9C9C9] pt-5 pb-8 lg:w-[60%] fade-right">
             {currentItems.length === 0 ? (
               <div className="w-full min-h-[350px] flex justify-center items-center flex-col">
                 <p className="text-lg font-semibold flex items-center gap-2">
@@ -163,7 +163,8 @@ const CartPage = () => {
                       />
                     </svg>
                   </span>
-                  Your {itemsToRender === "cart" ? "cart" : "favorites"} is empty!
+                  Your {itemsToRender === "cart" ? "cart" : "favorites"} is
+                  empty!
                 </p>
                 <p>
                   Explore our products and add them to your{" "}

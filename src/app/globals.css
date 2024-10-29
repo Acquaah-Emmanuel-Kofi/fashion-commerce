@@ -15,3 +15,131 @@ html {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
+
+.page-fade-in {
+  animation: fade 500ms ease-in-out both;
+}
+
+.page-fade-out {
+  animation: fade-out var(--tw-animate-duration, 1s) var(--tw-animate-easing, ease) var(--tw-animate-delay, 0s) 1 both;
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.page-fade-up {
+  animation: fade-up 1000ms ease-in-out both;
+}
+
+.jump-xs {
+  animation: jump var(--tw-animate-duration, 500ms) var(--tw-animate-easing, ease) var(--tw-animate-delay, 0s) 1 both;
+}
+
+@keyframes jump {
+
+  0%,
+  100% {
+    transform: scale(100%);
+  }
+
+  10% {
+    transform: scale(80%);
+  }
+
+  50% {
+    transform: scale(103%);
+  }
+}
+
+.jump-in-xs {
+  animation: jump-in var(--tw-animate-duration, 500ms) var(--tw-animate-easing, ease) var(--tw-animate-delay, 0s) 1 both;
+}
+
+@keyframes jump-in {
+  0% {
+    transform: scale(0%);
+  }
+
+  80% {
+    transform: scale(103%);
+  }
+
+  100% {
+    transform: scale(100%);
+  }
+}
+
+.pulse {
+  animation: pulse 1000ms ease-in-out both;
+}
+
+.fade-right {
+  animation: fade-right 1000ms ease-in-out 1 both 1ms;
+}
+
+.fade-left {
+  animation: fade-left 1000ms ease-in-out 1 both 1ms;
+}
+
+.fade-down {
+  animation: fade-down 0.8s ease-in-out forwards;
+}
+
+.fade-up {
+  animation: fade-up 0.8s ease-in-out forwards;
+}
+
+@keyframes fade-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-down {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-right {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fade-left {
+  0% {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

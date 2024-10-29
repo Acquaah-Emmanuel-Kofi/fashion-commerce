@@ -163,7 +163,7 @@ const Filters = () => {
   return (
     <Fragment>
       {sizes.length !== 0 && (
-        <div className="border-b border-dashed border-gray-200 pb-5 mb-2 mt-3">
+        <div className="border-b border-dashed border-gray-200 pb-5 mb-2 mt-3 max-w-[180px] lg:max-w-[250px] overflow-x-auto scrollbar-none">
           <SizeFilter sizes={sizes} onSelect={handleSizeSelect} />
         </div>
       )}
@@ -172,7 +172,7 @@ const Filters = () => {
         {filters.map((filter) => (
           <div
             key={filter.id}
-            className="border-b border-dashed border-gray-200 pb-2"
+            className="border-b border-dashed border-gray-200 pb-2 fade-right"
           >
             <button
               type="button"
