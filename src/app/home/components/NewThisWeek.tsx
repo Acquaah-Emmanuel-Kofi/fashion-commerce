@@ -56,8 +56,8 @@ export default function NewThisWeek({ products }: ThisWeekProductsProps) {
   }
 
   return (
-    <section id="new-this-week" className="">
-      <div className="lg:mt-24 mt-12 px-6">
+    <section id="new-this-week">
+      <div className="lg:mt-24 mt-12 px-6 fade-right">
         <h1 className="text-5xl font-bold font-beatrice">
           NEW <br /> THIS WEEK{" "}
           <sup className="text-[#000E8A] text-2xl font-bold font-sans">
@@ -75,7 +75,21 @@ export default function NewThisWeek({ products }: ThisWeekProductsProps) {
           </Link>
         </div>
 
-        <div>
+        {products.length === 0 ? (
+          <div className="h-[500px] flex flex-col justify-center items-center">
+            <h1 className="text-lg font-medium text-gray-500">
+              No new products this week. 😪
+            </h1>
+            <p className="mt-2 text-gray-500">
+              Check back soon, or explore our other collections!
+            </p>
+            <Link href="/products">
+              <button className="mt-4 px-4 py-2 bg-black text-white hover:bg-gray-800 transition-colors">
+                Browse All Products
+              </button>
+            </Link>
+          </div>
+        ) : (
           <Carousel
             visibleImages={isMobile ? 2 : 4}
             currentIndex={currentIndex}
@@ -120,7 +134,7 @@ export default function NewThisWeek({ products }: ThisWeekProductsProps) {
               </Link>
             ))}
           </Carousel>
-        </div>
+        )}
       </main>
 
       <div className="flex items-center justify-center gap-3 mt-6">
