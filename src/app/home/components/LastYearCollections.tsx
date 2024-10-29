@@ -106,7 +106,7 @@ export default function LastYearCollections() {
                 <Link
                   href={`/products/${product.id}`}
                   key={product.id}
-                  className={`w-full bg-white overflow-hidden hover:shadow-lg transition-opacity duration-700 ease-in-out ${
+                  className={`w-full bg-white overflow-hidden hover:shadow-lg hover:transition-opacity hover:duration-700 hover:ease-in-out jump-in-xs ${
                     index >= visibleCount - 3 && index < visibleCount
                       ? "opacity-100 translate-y-10"
                       : "opacity-100 translate-y-0"
