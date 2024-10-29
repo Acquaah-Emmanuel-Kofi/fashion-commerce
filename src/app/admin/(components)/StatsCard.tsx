@@ -8,7 +8,7 @@ interface StatsCardProps {
 
 const StatsCard: React.FC<StatsCardProps> = ({ title, value, percentage }) => {
   return (
-    <div className="bg-white p-4 w-full md:w-1/4 flex flex-col gap-4">
+    <div className="bg-white p-4 w-full md:w-1/4 flex flex-col gap-4 jump-xs">
       <h3 className="text-gray-500 font-beatrice">{title}</h3>
       <div className="flex items-center gap-2">
         <div className="bg-black flex justify-center items-center w-9 h-9 rounded">
