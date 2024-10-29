@@ -70,7 +70,7 @@ const OrderDetailsInfo: React.FC<IOrder> = ({
   };
 
   return (
-    <div className="p-4 bg-white">
+    <div className="p-4 bg-white fade-down">
       <div className="flex flex-col lg:flex-row justify-between lg:items-center gap-4 mb-4">
         <div>
           <h1 className="text-lg font-bold font-beatrice">
