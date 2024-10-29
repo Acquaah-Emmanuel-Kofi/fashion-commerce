@@ -7,7 +7,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { IoChevronDownOutline } from "react-icons/io5";
-import ProductPlaceholder from "../placeholders/ProductPlaceholder";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { setSelectedCollection } from "@/redux/features/collectionSlice";
 import AddToCartPlusButton from "./AddToCartPlusButton";

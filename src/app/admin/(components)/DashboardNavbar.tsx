@@ -1,5 +1,5 @@
 import React from "react";
-import { FaBell, FaUserCircle } from "react-icons/fa";
+import { FaBell } from "react-icons/fa";
 
 export default function DashboardNavbar({
   toggleSidebar,
