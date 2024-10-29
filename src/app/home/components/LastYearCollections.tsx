@@ -90,12 +90,18 @@ export default function LastYearCollections() {
         </div>
 
         {error ? (
-          <div className="text-red-500 text-center text-lg mt-10">
-            Error fetching {collection} collections
+          <div className="text-center text-lg mt-10 flex flex-col items-center gap-2">
+            <p className="text-red-500 font-semibold">
+              Oops! Something went wrong.
+            </p>
+            <p className="text-gray-500">
+              We couldn’t fetch the {collection} collections. Please try again
+              later.
+            </p>
           </div>
         ) : (
           <div className="grid lg:grid-cols-3 grid-cols-1 gap-10">
-            {products ? (
+            {products.length !== 0 ? (
               products.slice(0, visibleCount).map((product, index) => (
                 <Link
                   href={`/products/${product.id}`}
@@ -126,7 +132,7 @@ export default function LastYearCollections() {
                   {/* Product Details */}
                   <div className="p-2">
                     <h1 className="text-gray-600 text-sm lg:text-base line-clamp-1 font-beatrice">
-                      {product.types} 
+                      {product.types}
                     </h1>
                     <div className="flex items-center justify-between">
                       <p className="text-base lg:text-lg font-medium line-clamp-1 font-beatrice">
@@ -140,10 +146,18 @@ export default function LastYearCollections() {
                 </Link>
               ))
             ) : (
-              <div className="grid lg:grid-cols-3 grid-cols-1 gap-4">
-                {Array.from({ length: 3 }).map((item, index) => (
-                  <ProductPlaceholder key={`${Number(item) + index}`} />
-                ))}
+              <div className="flex flex-col items-center justify-center h-[300px] lg:h-[400px] text-center lg:col-span-3 col-span-1">
+                <h2 className="text-gray-500 text-lg font-medium">
+                  No products available in this collection. 😔
+                </h2>
+                <p className="mt-2 text-gray-500">
+                  Check back later or explore other categories!
+                </p>
+                <Link href="/products">
+                  <button className="mt-4 px-6 py-2 bg-black text-white hover:bg-gray-800 transition-colors">
+                    Browse All Products
+                  </button>
+                </Link>
               </div>
             )}
           </div>
