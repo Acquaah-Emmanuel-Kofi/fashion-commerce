@@ -159,31 +159,37 @@ export default function Hero({ products }: HeroProps) {
           </div>
         </div>
 
-        <div className="hidden lg:block lg:w-[70%] lg:ml-10 fade-right">
-          <Carousel
-            visibleImages={3}
-            currentIndex={currentIndex}
-            onNext={handleNext}
-            onPrev={handlePrev}
-          >
-            {products.map((product) => (
-              <ProductCard
-                key={product.id}
-                id={product.id}
-                images={product.images}
-                thumbnail={product.images[0]}
-                name={product.name}
-                types={product.types}
-                price={product.price}
-                showProductDetails={false}
-                description={product.description}
-                size={product.size}
-                color={product.color}
-                quantity={1}
-              />
-            ))}
-          </Carousel>
-        </div>
+        {products.length === 0 ? (
+          <div className="hidden lg:block lg:w-[70%] lg:ml-10 fade-left">
+            <h1>Oops! There are no new collections yet. 👀</h1>
+          </div>
+        ) : (
+          <div className="hidden lg:block lg:w-[70%] lg:ml-10 fade-left">
+            <Carousel
+              visibleImages={3}
+              currentIndex={currentIndex}
+              onNext={handleNext}
+              onPrev={handlePrev}
+            >
+              {products.map((product) => (
+                <ProductCard
+                  key={product.id}
+                  id={product.id}
+                  images={product.images}
+                  thumbnail={product.images[0]}
+                  name={product.name}
+                  types={product.types}
+                  price={product.price}
+                  showProductDetails={false}
+                  description={product.description}
+                  size={product.size}
+                  color={product.color}
+                  quantity={1}
+                />
+              ))}
+            </Carousel>
+          </div>
+        )}
       </div>
     </main>
   );
