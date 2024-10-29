@@ -97,7 +97,7 @@ const Table: React.FC<TableProps> = ({
             currentData.map((row, rowIndex) => (
               <tr
                 key={rowIndex}
-                className="border-t hover:shadow-md cursor-pointer"
+                className="border-t hover:shadow-md cursor-pointer fade-down"
               >
                 {columns.map((column, colIndex) => (
                   <td key={colIndex} className="py-6 px-4 font-semibold">
