@@ -23,7 +23,7 @@ const AdminProductCard: React.FC<ProductCardProps> = ({
         <Image
           src={thumbnail}
           alt={name}
-          className="w-full h-[180px] lg:h-[400px] object-cover border-2 border-[#D9D9D9]"
+          className="w-full h-[180px] lg:h-[400px] object-fill border-2 border-[#D9D9D9]"
           width={300}
           height={400}
           priority
