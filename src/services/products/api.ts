@@ -4,13 +4,13 @@ import { fetchDataFromApi } from "../api";
 export const getNewCollections = async () => {
   const response: IProducts = await fetchDataFromApi("/product/new-collection");
 
-  return response.data;
+  return response?.data;
 };
 
 export const getNewThisWeek = async () => {
   const response: IProducts = await fetchDataFromApi("/product/new-this-week");
 
-  return response.data;
+  return response?.data;
 };
 
 export const getLastYearCollections = async (
@@ -26,11 +26,11 @@ export const getLastYearCollections = async (
     `/product/filter/all?${params.toString()}`
   );
 
-  return response.data;
+  return response?.data;
 };
 
 export const getButtonTypes = async () => {
   const response: IProducts = await fetchDataFromApi("/product-type");
 
-  return response.data;
+  return response?.data;
 };
