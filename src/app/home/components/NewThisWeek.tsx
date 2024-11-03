@@ -107,9 +107,9 @@ export default function NewThisWeek({ products }: ThisWeekProductsProps) {
                   <Image
                     src={product.images[0]}
                     alt={product.name}
-                    className="w-full h-[200px] lg:h-[350px] object-cover border-2 border-[#D9D9D9]"
+                    className="w-full h-[200px] lg:h-[400px] object-fill border-2 border-[#D9D9D9]"
                     width={300}
-                    height={376}
+                    height={400}
                   />
 
                   <div className="absolute bottom-1 left-2/4 -translate-x-2/4">

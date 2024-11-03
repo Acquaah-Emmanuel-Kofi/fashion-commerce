@@ -5,7 +5,9 @@ export const fetchDataFromApi = async (endpoint: string) => {
       "https://fashion-commerce.onrender.com/api/v1";
     const url = `${baseUrl}${endpoint}`;
 
-    const response = await fetch(url, { next: { revalidate: 10 } });
+    const response = await fetch(url, {
+      cache: "no-cache",
+    });
 
     if (!response.ok) {
       throw new Error("Failed to fetch data");

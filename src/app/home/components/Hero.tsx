@@ -26,20 +26,16 @@ export default function Hero({ products }: HeroProps) {
   };
 
   useEffect(() => {
-    // Only execute this code on the client side
     if (typeof window !== "undefined") {
       const checkScreenWidth = () => {
         const width = window.innerWidth;
-        setIsMobile(width < 768); // Update state based on screen width
+        setIsMobile(width < 768); 
       };
 
-      // Initial check
       checkScreenWidth();
 
-      // Add event listener for window resize
       window.addEventListener("resize", checkScreenWidth);
 
-      // Cleanup function to remove event listener when component unmounts
       return () => {
         window.removeEventListener("resize", checkScreenWidth);
       };
@@ -57,10 +53,6 @@ export default function Hero({ products }: HeroProps) {
       setCurrentIndex(currentIndex - 1);
     }
   };
-
-  if (!products) {
-    return <div>No Products</div>;
-  }
 
   return (
     <main className="flex flex-col px-6">
@@ -153,13 +145,13 @@ export default function Hero({ products }: HeroProps) {
               />
               <CarouselNextButton
                 onNext={handleNext}
-                disabled={currentIndex >= products.length - (isMobile ? 2 : 3)}
+                disabled={currentIndex >= products?.length - (isMobile ? 2 : 3)}
               />
             </div>
           </div>
         </div>
 
-        {products.length === 0 ? (
+        {products && (products?.length === 0) ? (
           <div className="hidden lg:block lg:w-[70%] lg:ml-10 fade-left">
             <h1>Oops! There are no new collections yet. 👀</h1>
           </div>
@@ -171,7 +163,7 @@ export default function Hero({ products }: HeroProps) {
               onNext={handleNext}
               onPrev={handlePrev}
             >
-              {products.map((product) => (
+              {products?.map((product) => (
                 <ProductCard
                   key={product.id}
                   id={product.id}

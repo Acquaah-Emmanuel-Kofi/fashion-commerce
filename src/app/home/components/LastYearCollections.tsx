@@ -100,8 +100,8 @@ export default function LastYearCollections() {
           </div>
         ) : (
           <div className="grid lg:grid-cols-3 grid-cols-1 gap-10">
-            {products.length !== 0 ? (
-              products.slice(0, visibleCount).map((product, index) => (
+            {products?.length !== 0 ? (
+              products?.slice(0, visibleCount).map((product, index) => (
                 <Link
                   href={`/products/${product.id}`}
                   key={product.id}
@@ -119,9 +119,9 @@ export default function LastYearCollections() {
                     <Image
                       src={product.images[0]}
                       alt={product.name}
-                      className="w-full h-[350px] lg:h-[350px] object-cover border-2 border-[#D9D9D9]"
+                      className="w-full h-[350px] lg:h-[400px] object-fill border-2 border-[#D9D9D9]"
                       width={300}
-                      height={376}
+                      height={400}
                     />
                     <div className="absolute bottom-1 left-2/4 -translate-x-2/4">
                       <AddToCartPlusButton products={product} />
@@ -163,7 +163,7 @@ export default function LastYearCollections() {
         )}
 
         {/* "More" Button */}
-        {visibleCount < products.length && ( // Only show button if there are more products to show
+        {visibleCount < products?.length && ( // Only show button if there are more products to show
           <div className="flex justify-center items-center w-full mt-[15%] lg:mt-[5%]">
             <button
               type="button"

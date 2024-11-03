@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { IoCloseCircle } from "react-icons/io5";
 
@@ -15,14 +15,41 @@ const ImagesPreview: React.FC<ImagesPreviewProps> = ({
   name,
   onRemoveImage,
 }) => {
-  const [selectedImage, setSelectedImage] = useState<string | File>(mainImage);
+  const [selectedImage, setSelectedImage] = useState<string>("");
+  const [thumbnailURLs, setThumbnailURLs] = useState<string[]>([]);
   const [zoomStyle, setZoomStyle] = useState({
     transformOrigin: "center center",
     transform: "scale(1)",
   });
   const imageContainerRef = useRef<HTMLDivElement | null>(null);
 
-  const handleThumbnailClick = (thumbnail: string | File) => {
+  useEffect(() => {
+    if (mainImage instanceof File) {
+      const url = URL.createObjectURL(mainImage);
+      setSelectedImage(url);
+      return () => {
+        URL.revokeObjectURL(url);
+      };
+    } else {
+      setSelectedImage(mainImage);
+    }
+  }, [mainImage]);
+
+  useEffect(() => {
+    const urls = images.map((image) =>
+      typeof image === "string" ? image : URL.createObjectURL(image)
+    );
+
+    setThumbnailURLs(urls);
+
+    return () => {
+      urls.forEach((url) => {
+        if (url.startsWith("blob:")) URL.revokeObjectURL(url);
+      });
+    };
+  }, [images]);
+
+  const handleThumbnailClick = (thumbnail: string) => {
     setSelectedImage(thumbnail);
   };
 
@@ -83,11 +110,7 @@ const ImagesPreview: React.FC<ImagesPreviewProps> = ({
           <p>No Image Uploaded Yet!</p>
         ) : (
           <Image
-            src={
-              typeof selectedImage === "string"
-                ? selectedImage
-                : URL.createObjectURL(selectedImage)
-            }
+            src={selectedImage}
             alt={`${name} image`}
             width={300}
             height={300}
@@ -98,17 +121,15 @@ const ImagesPreview: React.FC<ImagesPreviewProps> = ({
       </div>
 
       <div className="flex space-x-5 mt-4">
-        {images.map((image, index) => (
+        {thumbnailURLs.map((thumbnailURL, index) => (
           <div key={index} className="relative">
             <Image
-              src={
-                typeof image === "string" ? image : URL.createObjectURL(image)
-              }
+              src={thumbnailURL}
               alt={`Thumbnail ${index}`}
               width={50}
               height={50}
               className="object-cover cursor-pointer"
-              onClick={() => handleThumbnailClick(image)}
+              onClick={() => handleThumbnailClick(thumbnailURL)}
             />
             {/* Remove Button */}
             <button
