@@ -10,27 +10,26 @@ import { fetchDataFromApi } from "@/services/api";
 import { ApiResponse } from "@/modules/interfaces/common.interface";
 import { IStats } from "@/modules/interfaces/analytics.interface";
 
-const breadcrumbItems = [
-  { label: "Dashboard", href: "" },
-];
+const breadcrumbItems = [{ label: "Dashboard", href: "" }];
 
 export default function Dashboard() {
   const [statsData, setStatsData] = useState<IStats>({
     cancelledOrders: 0,
     deliveredOrders: 0,
     pendingOrders: 0,
-    totalOrder: 0
-  })
-    
+    totalOrder: 0,
+  });
+
   useEffect(() => {
     const fetchAnalytics = async () => {
-      const query: ApiResponse<IStats> = await fetchDataFromApi("/admin/dashboard/order/analytics");
+      const query: ApiResponse<IStats> = await fetchDataFromApi(
+        "/admin/dashboard/order/analytics"
+      );
       setStatsData(query.data);
-    }
+    };
 
-    fetchAnalytics()
-  }, [])
-
+    fetchAnalytics();
+  }, []);
 
   const stats = [
     {
@@ -39,17 +38,17 @@ export default function Dashboard() {
       percentage: 0.5,
     },
     {
-      title: "Active Orders",
+      title: "Pending Orders",
       value: 100,
       percentage: 0.5,
     },
     {
-      title: "Completed Orders",
+      title: "Delivered Orders",
       value: 100,
       percentage: 0.5,
     },
     {
-      title: "Return Orders",
+      title: "Cancelled Orders",
       value: 100,
       percentage: 0.5,
     },
