@@ -1,15 +1,37 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import StatsCard from "../../(components)/StatsCard";
 import RecentOrders from "./components/RecentOrders";
 import Breadcrumb from "@/app/shared/components/Breadcrumb";
 import HeaderTitle from "../../(components)/HeaderTitle";
 import Graph from "./components/Graph";
+import { fetchDataFromApi } from "@/services/api";
+import { ApiResponse } from "@/modules/interfaces/common.interface";
+import { IStats } from "@/modules/interfaces/analytics.interface";
 
 const breadcrumbItems = [
   { label: "Dashboard", href: "" },
 ];
 
 export default function Dashboard() {
+  const [statsData, setStatsData] = useState<IStats>({
+    cancelledOrders: 0,
+    deliveredOrders: 0,
+    pendingOrders: 0,
+    totalOrder: 0
+  })
+    
+  useEffect(() => {
+    const fetchAnalytics = async () => {
+      const query: ApiResponse<IStats> = await fetchDataFromApi("/admin/dashboard/order/analytics");
+      setStatsData(query.data);
+    }
+
+    fetchAnalytics()
+  }, [])
+
+
   const stats = [
     {
       title: "Total Orders",
