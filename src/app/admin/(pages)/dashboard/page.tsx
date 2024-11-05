@@ -10,6 +10,7 @@ import { fetchDataFromApi } from "@/services/api";
 import { ApiResponse } from "@/modules/interfaces/common.interface";
 import { IStats } from "@/modules/interfaces/analytics.interface";
 import { getPreviousAndCurrentDate } from "@/app/shared/helpers/functions.helper";
+import toast from "react-hot-toast";
 
 const breadcrumbItems = [{ label: "Dashboard", href: "" }];
 
@@ -21,16 +22,26 @@ export default function Dashboard() {
     pendingOrders: 0,
     totalOrder: 0,
   });
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    const fetchAnalytics = async () => {
-      const query: ApiResponse<IStats> = await fetchDataFromApi(
-        "/admin/dashboard/order/analytics"
-      );
-      setStatsData(query.data);
-    };
+    setIsLoading(true);
 
-    fetchAnalytics();
+    try {
+      const fetchAnalytics = async () => {
+        const query: ApiResponse<IStats> = await fetchDataFromApi(
+          "/admin/dashboard/order/analytics"
+        );
+        setStatsData(query.data);
+        setIsLoading(false);
+      };
+
+      fetchAnalytics();
+    } catch (error) {
+      setIsLoading(false);
+
+      toast.error(`Something went wrong. ${error}`);
+    }
   }, []);
 
   const stats = [
@@ -75,6 +86,7 @@ export default function Dashboard() {
             title={stat.title}
             value={stat.value}
             percentage={stat.percentage}
+            isLoading={isLoading}
           />
         ))}
       </div>
