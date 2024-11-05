@@ -14,6 +14,7 @@ import {
 import { fetchDataFromApi } from "@/services/api";
 import { ApiResponse } from "@/modules/interfaces/common.interface";
 import { IAnalytics } from "@/modules/interfaces/analytics.interface";
+import toast from "react-hot-toast";
 
 ChartJS.register(
   LineElement,
@@ -29,15 +30,19 @@ const Graph = () => {
   const [salesData, setSalesData] = useState<number[]>([]);
 
   useEffect(() => {
-    const fetchAnalytics = async () => {
-      const query: ApiResponse<IAnalytics> = await fetchDataFromApi(
-        "/admin/dashboard/order/graph-analytics"
-      );
-      setLabels(query.data.labels);
-      setSalesData(query.data.data);
-    };
+    try {
+      const fetchAnalytics = async () => {
+        const query: ApiResponse<IAnalytics> = await fetchDataFromApi(
+          "/admin/dashboard/order/graph-analytics"
+        );
+        setLabels(query.data.labels);
+        setSalesData(query.data.data);
+      };
 
-    fetchAnalytics();
+      fetchAnalytics();
+    } catch (error) {
+      toast.error(`Something went wrong. ${error}`);
+    }
   }, []);
 
   const data = {
