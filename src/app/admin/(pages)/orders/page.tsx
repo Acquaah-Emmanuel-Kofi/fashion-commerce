@@ -5,6 +5,7 @@ import CustomSelect from "@/app/shared/components/CustomSelect";
 import React, { useState } from "react";
 import RecentPurchases from "./components/RecentPurchases";
 import HeaderTitle from "../../(components)/HeaderTitle";
+import { getPreviousAndCurrentDate } from "@/app/shared/helpers/functions.helper";
 
 const breadcrumbItems = [{ label: "Orders List", href: "" }];
 
@@ -29,7 +30,7 @@ export default function Orders() {
         <div className="flex justify-between items-center">
           <Breadcrumb items={breadcrumbItems} />
           <p className="font-beatrice text-sm font-semibold">
-            Oct 11,2023 - Nov 11,2022
+            {getPreviousAndCurrentDate()}
           </p>
         </div>
       </header>

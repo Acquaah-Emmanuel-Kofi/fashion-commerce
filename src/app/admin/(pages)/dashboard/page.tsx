@@ -9,6 +9,7 @@ import Graph from "./components/Graph";
 import { fetchDataFromApi } from "@/services/api";
 import { ApiResponse } from "@/modules/interfaces/common.interface";
 import { IStats } from "@/modules/interfaces/analytics.interface";
+import { getPreviousAndCurrentDate } from "@/app/shared/helpers/functions.helper";
 
 const breadcrumbItems = [{ label: "Dashboard", href: "" }];
 
@@ -62,7 +63,7 @@ export default function Dashboard() {
         <div className="flex justify-between items-center">
           <Breadcrumb items={breadcrumbItems} />
           <p className="font-beatrice text-sm font-semibold">
-            Oct 11,2023 - Nov 11,2022
+            {getPreviousAndCurrentDate()}
           </p>
         </div>
       </header>
