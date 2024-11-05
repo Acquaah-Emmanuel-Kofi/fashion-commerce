@@ -46,7 +46,7 @@ const StatsCard: React.FC<StatsCardProps> = ({
             <div className="h-2 w-3/12 bg-gray-200 rounded-md animate-pulse"></div>
           </div>
         ) : (
-          <p className="text-2xl font-bold">{padWithZero(value)}</p>
+          <p className="text-2xl font-bold truncate">GHS{value.toFixed(2)}</p>
         )}
       </div>
       {isLoading ? (
