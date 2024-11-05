@@ -6,3 +6,7 @@ export const formatDate = (dateString: string): string => {
     year: 'numeric'
   })?.format(date);
 };
+
+export const padWithZero = (number: number) => {
+  return number.toString().padStart(2, "0");
+}
