@@ -13,6 +13,7 @@ import { IStats } from "@/modules/interfaces/analytics.interface";
 const breadcrumbItems = [{ label: "Dashboard", href: "" }];
 
 export default function Dashboard() {
+  const PERCENTAGE = 100;
   const [statsData, setStatsData] = useState<IStats>({
     cancelledOrders: 0,
     deliveredOrders: 0,
@@ -35,25 +36,25 @@ export default function Dashboard() {
     {
       title: "Total Orders",
       value: statsData.totalOrder,
-      percentage: 0.5,
+      percentage: statsData.totalOrder / PERCENTAGE,
     },
     {
       title: "Pending Orders",
       value: statsData.pendingOrders,
-      percentage: 0.5,
+      percentage: statsData.pendingOrders / PERCENTAGE,
     },
     {
       title: "Delivered Orders",
       value: statsData.deliveredOrders,
-      percentage: 0.5,
+      percentage: statsData.deliveredOrders / PERCENTAGE,
     },
     {
       title: "Cancelled Orders",
       value: statsData.cancelledOrders,
-      percentage: 0.5,
+      percentage: statsData.cancelledOrders / PERCENTAGE,
     },
   ];
-  
+
   return (
     <div className="space-y-6">
       <header>
