@@ -34,25 +34,26 @@ export default function Dashboard() {
   const stats = [
     {
       title: "Total Orders",
-      value: 100,
+      value: statsData.totalOrder,
       percentage: 0.5,
     },
     {
       title: "Pending Orders",
-      value: 100,
+      value: statsData.pendingOrders,
       percentage: 0.5,
     },
     {
       title: "Delivered Orders",
-      value: 100,
+      value: statsData.deliveredOrders,
       percentage: 0.5,
     },
     {
       title: "Cancelled Orders",
-      value: 100,
+      value: statsData.cancelledOrders,
       percentage: 0.5,
     },
   ];
+  
   return (
     <div className="space-y-6">
       <header>
