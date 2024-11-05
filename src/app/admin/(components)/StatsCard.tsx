@@ -1,4 +1,3 @@
-import { padWithZero } from "@/app/shared/helpers/functions.helper";
 import React from "react";
 
 interface StatsCardProps {
