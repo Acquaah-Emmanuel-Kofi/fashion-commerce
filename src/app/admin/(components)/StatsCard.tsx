@@ -1,3 +1,4 @@
+import { padWithZero } from "@/app/shared/helpers/functions.helper";
 import React from "react";
 
 interface StatsCardProps {
@@ -32,7 +33,7 @@ const StatsCard: React.FC<StatsCardProps> = ({ title, value, percentage }) => {
             />
           </svg>
         </div>
-        <p className="text-2xl font-bold">GHS{value.toFixed(2)}</p>
+        <p className="text-2xl font-bold">{padWithZero(value)}</p>
       </div>
       <span className="text-green-500">{percentage}%</span>
     </div>
