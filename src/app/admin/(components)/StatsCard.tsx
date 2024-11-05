@@ -4,9 +4,15 @@ interface StatsCardProps {
   title: string;
   value: number;
   percentage: number;
+  isLoading: boolean;
 }
 
-const StatsCard: React.FC<StatsCardProps> = ({ title, value, percentage }) => {
+const StatsCard: React.FC<StatsCardProps> = ({
+  title,
+  value,
+  percentage,
+  isLoading,
+}) => {
   return (
     <div className="bg-white p-4 w-full md:w-1/4 flex flex-col gap-4 jump-xs">
       <h3 className="text-gray-500 font-beatrice">{title}</h3>
@@ -32,9 +38,21 @@ const StatsCard: React.FC<StatsCardProps> = ({ title, value, percentage }) => {
             />
           </svg>
         </div>
-        <p className="text-2xl font-bold">GHS{value.toFixed(2)}</p>
+        {isLoading ? (
+          <div className="w-9 space-y-1">
+            <div className="h-2 w-full bg-gray-200 rounded-md animate-pulse"></div>
+            <div className="h-2 w-2/4 bg-gray-200 rounded-md animate-pulse"></div>
+            <div className="h-2 w-3/12 bg-gray-200 rounded-md animate-pulse"></div>
+          </div>
+        ) : (
+          <p className="text-2xl font-bold truncate">GHS{value.toFixed(2)}</p>
+        )}
       </div>
-      <span className="text-green-500">{percentage}%</span>
+      {isLoading ? (
+        <span className="h-4 w-8 bg-green-200 rounded-md animate-pulse"></span>
+      ) : (
+        <span className="text-green-500">{percentage}%</span>
+      )}
     </div>
   );
 };

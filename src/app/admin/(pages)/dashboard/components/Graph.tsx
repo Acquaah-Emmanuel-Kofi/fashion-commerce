@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -11,6 +11,10 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import { fetchDataFromApi } from "@/services/api";
+import { ApiResponse } from "@/modules/interfaces/common.interface";
+import { IAnalytics } from "@/modules/interfaces/analytics.interface";
+import toast from "react-hot-toast";
 
 ChartJS.register(
   LineElement,
@@ -22,12 +26,31 @@ ChartJS.register(
 );
 
 const Graph = () => {
+  const [labels, setLabels] = useState<string[]>([]);
+  const [salesData, setSalesData] = useState<number[]>([]);
+
+  useEffect(() => {
+    try {
+      const fetchAnalytics = async () => {
+        const query: ApiResponse<IAnalytics> = await fetchDataFromApi(
+          "/admin/dashboard/order/graph-analytics"
+        );
+        setLabels(query.data.labels);
+        setSalesData(query.data.data);
+      };
+
+      fetchAnalytics();
+    } catch (error) {
+      toast.error(`Something went wrong. ${error}`);
+    }
+  }, []);
+
   const data = {
-    labels: ["Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    labels,
     datasets: [
       {
         label: "Sale Graph",
-        data: [100, 120, 180, 220, 350, 400],
+        data: salesData,
         borderColor: "#000000",
         backgroundColor: "rgba(0, 123, 255, 0.1)",
         fill: true,
