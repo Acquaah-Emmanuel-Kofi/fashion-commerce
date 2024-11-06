@@ -82,7 +82,7 @@ const Graph = () => {
       y: {
         title: {
           display: true,
-          text: `Sales (${localStorage.getItem(USER_CURRENCY) || "GHS"})`,
+          text: `Sales (${localStorage.getItem(USER_CURRENCY) ?? "GHS"})`,
         },
       },
     },
