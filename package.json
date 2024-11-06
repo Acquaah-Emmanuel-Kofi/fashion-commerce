@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@erexstudio/detect-country-currency": "^1.0.6",
     "@reduxjs/toolkit": "^2.2.7",
     "chart.js": "^4.4.4",
     "next": "14.2.13",
