@@ -1,3 +1,6 @@
+"use client";
+
+import CurrencyDisplay from "@/app/shared/components/CurrencyDisplay";
 import React from "react";
 
 export default function OrderTotalSummary({
@@ -16,24 +19,33 @@ export default function OrderTotalSummary({
       <h2 className="font-semibold font-beatrice">Order Total Summary</h2>
       <div className="flex justify-between w-full ">
         <p className="text-base font-beatrice">Subtotal</p>
-        <p className="font-semibold text-base">GHS{subTotal?.toFixed(2)}</p>
+        <CurrencyDisplay
+          amount={subTotal}
+          className="font-semibold text-base"
+        />
       </div>
 
       <div className="flex justify-between w-full ">
         <p className="text-base font-beatrice">Shipping</p>
-        <p className="font-semibold text-base">GHS{shippingCost?.toFixed(2)}</p>
+        <CurrencyDisplay
+          amount={shippingCost}
+          className="font-semibold text-base"
+        />
       </div>
 
       <div className="flex justify-between w-full ">
         <p className="text-base font-beatrice">Tax</p>
-        <p className="font-semibold text-base">GHS{tax?.toFixed(2)}</p>
+        <CurrencyDisplay amount={tax} className="font-semibold text-base" />
       </div>
 
       <div className="border border-dashed border-gray-200"></div>
 
       <div className="flex justify-between w-full ">
         <p className="text-xl font-semibold font-beatrice">Total</p>
-        <p className="font-semibold text-xl">GHS{totalAmount?.toFixed(2)}</p>
+        <CurrencyDisplay
+          amount={totalAmount}
+          className="font-semibold text-base"
+        />
       </div>
     </div>
   );

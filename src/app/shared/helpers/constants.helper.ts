@@ -39,3 +39,5 @@ export const validatePhoneNumber = (phone: string) => {
   const phoneRegex = /^\d{10,15}$/;
   return phoneRegex.test(phone);
 };
+
+export const USER_CURRENCY = "commerce_user_currency"

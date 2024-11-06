@@ -1,4 +1,5 @@
 import Table from "@/app/admin/(components)/Table";
+import CurrencyDisplay from "@/app/shared/components/CurrencyDisplay";
 import { IOrderProduct } from "@/modules/interfaces/order.interface";
 import React from "react";
 
@@ -19,7 +20,12 @@ const OrderProducts: React.FC<IProps> = ({ products }) => {
       product: item.product.name,
       productId: `#${item.product.id}`,
       quantity: item.quantity,
-      total: `GHS${Number(item.product.price) * item.quantity}`,
+      total: (
+        <CurrencyDisplay
+          amount={Number(item.product.price) * item.quantity}
+          className="font-semibold"
+        />
+      ),
     };
   });
 

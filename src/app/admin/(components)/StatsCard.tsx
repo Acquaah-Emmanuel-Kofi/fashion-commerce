@@ -1,3 +1,4 @@
+import CurrencyDisplay from "@/app/shared/components/CurrencyDisplay";
 import React from "react";
 
 interface StatsCardProps {
@@ -39,13 +40,15 @@ const StatsCard: React.FC<StatsCardProps> = ({
           </svg>
         </div>
         {isLoading ? (
-          <div className="w-9 space-y-1">
+          <div className="w-24 space-y-1">
             <div className="h-2 w-full bg-gray-200 rounded-md animate-pulse"></div>
             <div className="h-2 w-2/4 bg-gray-200 rounded-md animate-pulse"></div>
-            <div className="h-2 w-3/12 bg-gray-200 rounded-md animate-pulse"></div>
           </div>
         ) : (
-          <p className="text-2xl font-bold truncate">GHS{value.toFixed(2)}</p>
+          <CurrencyDisplay
+            amount={value}
+            className="text-2xl font-bold"
+          />
         )}
       </div>
       {isLoading ? (
