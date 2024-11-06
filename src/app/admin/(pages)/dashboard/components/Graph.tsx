@@ -15,6 +15,7 @@ import { fetchDataFromApi } from "@/services/api";
 import { ApiResponse } from "@/modules/interfaces/common.interface";
 import { IAnalytics } from "@/modules/interfaces/analytics.interface";
 import toast from "react-hot-toast";
+import { USER_CURRENCY } from "@/app/shared/helpers/constants.helper";
 
 ChartJS.register(
   LineElement,
@@ -81,7 +82,7 @@ const Graph = () => {
       y: {
         title: {
           display: true,
-          text: "Sales (GHS)",
+          text: `Sales (${localStorage.getItem(USER_CURRENCY) || "GHS"})`,
         },
       },
     },

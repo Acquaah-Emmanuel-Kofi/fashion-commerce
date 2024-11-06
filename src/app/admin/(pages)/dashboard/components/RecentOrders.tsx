@@ -6,6 +6,7 @@ import { useOrders } from "@/hooks/useOrders";
 import { IOrder } from "@/modules/interfaces/order.interface";
 import { formatDate } from "@/app/shared/helpers/functions.helper";
 import TableSkeletonPlaceholder from "@/app/admin/(components)/TableSkeletonPlaceholder";
+import CurrencyDisplay from "@/app/shared/components/CurrencyDisplay";
 
 const RecentOrders = () => {
   const { orders, loading, error } = useOrders();
@@ -32,7 +33,9 @@ const RecentOrders = () => {
       date: formatDate(order.dateCreated),
       customer: `${order.shippingAddress.firstname} ${order.shippingAddress.lastname}`,
       status: order.orderStatus,
-      amount: `GHS${totalAmount.toFixed(2)}`,
+      amount: (
+        <CurrencyDisplay amount={totalAmount} className="font-semibold" />
+      ),
     };
   });
 
