@@ -45,7 +45,10 @@ const StatsCard: React.FC<StatsCardProps> = ({
             <div className="h-2 w-2/4 bg-gray-200 rounded-md animate-pulse"></div>
           </div>
         ) : (
-          <CurrencyDisplay amount={value} />
+          <CurrencyDisplay
+            amount={value}
+            className="text-2xl font-bold"
+          />
         )}
       </div>
       {isLoading ? (
