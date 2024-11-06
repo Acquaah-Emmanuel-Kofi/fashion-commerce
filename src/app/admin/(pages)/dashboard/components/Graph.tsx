@@ -29,8 +29,14 @@ ChartJS.register(
 const Graph = () => {
   const [labels, setLabels] = useState<string[]>([]);
   const [salesData, setSalesData] = useState<number[]>([]);
+  const [currency, setCurrency] = useState<string | null>(null);
 
   useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storedValue = localStorage.getItem(USER_CURRENCY);
+      setCurrency(storedValue);
+    }
+
     try {
       const fetchAnalytics = async () => {
         const query: ApiResponse<IAnalytics> = await fetchDataFromApi(
@@ -82,7 +88,7 @@ const Graph = () => {
       y: {
         title: {
           display: true,
-          text: `Sales (${localStorage.getItem(USER_CURRENCY) ?? "GHS"})`,
+          text: `Sales (${currency || "GHS"})`,
         },
       },
     },
