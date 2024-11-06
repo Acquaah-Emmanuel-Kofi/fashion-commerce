@@ -3,9 +3,13 @@ import React from "react";
 
 interface CurrencyDisplayProps {
   amount: number;
+  className?: string;
 }
 
-const CurrencyDisplay: React.FC<CurrencyDisplayProps> = ({ amount }) => {
+const CurrencyDisplay: React.FC<CurrencyDisplayProps> = ({
+  amount,
+  className,
+}) => {
   const { currency, loading } = useCurrency();
 
   if (loading)
@@ -18,11 +22,13 @@ const CurrencyDisplay: React.FC<CurrencyDisplayProps> = ({ amount }) => {
     );
 
   return (
-    <span className="text-2xl font-bold truncate">
+    <span className={`truncate ${className}`}>
       {new Intl.NumberFormat("en-US", {
         style: "currency",
         currency,
-      }).format(amount)}
+      })
+        .format(amount)
+        .replace(/\s/g, "")}
     </span>
   );
 };
