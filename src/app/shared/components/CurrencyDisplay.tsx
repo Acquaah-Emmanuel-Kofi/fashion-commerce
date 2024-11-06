@@ -1,3 +1,5 @@
+"use client";
+
 import { useCurrency } from "@/hooks/useCurrency";
 import React from "react";
 

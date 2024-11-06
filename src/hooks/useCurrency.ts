@@ -1,3 +1,5 @@
+"use client";
+
 import { USER_CURRENCY } from "@/app/shared/helpers/constants.helper";
 import { useState, useEffect } from "react";
 
